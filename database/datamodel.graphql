@@ -6,4 +6,28 @@ type User {
 
   createdAt: DateTime!
   updatedAt: DateTime!
+
+  wallets: [Wallet!]!
+}
+
+type Wallet {
+  id: ID! @unique
+  name: String!
+  description: String
+  transactions: [Transaction!]! @relation(name: "WalletTransactions")
+}
+
+type Transaction {
+  id: ID! @unique
+  wallet: Wallet! @relation(name: "WalletTransactions")
+  value: Int!
+  type: TRANSACTION_TYPE!
+  performedAt: DateTime!
+  description: String
+  tags: [String!]
+}
+
+enum TRANSACTION_TYPE {
+  EXPENSE
+  INCOME
 }

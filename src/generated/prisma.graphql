@@ -1,7 +1,15 @@
 # source: http://localhost:4466
-# timestamp: Tue Jun 26 2018 00:03:08 GMT-0300 (Brasilia Standard Time)
+# timestamp: Tue Jun 26 2018 08:48:44 GMT-0300 (-03)
+
+type AggregateTransaction {
+  count: Int!
+}
 
 type AggregateUser {
+  count: Int!
+}
+
+type AggregateWallet {
   count: Int!
 }
 
@@ -20,11 +28,23 @@ scalar Long
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
+  createWallet(data: WalletCreateInput!): Wallet!
+  createTransaction(data: TransactionCreateInput!): Transaction!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateWallet(data: WalletUpdateInput!, where: WalletWhereUniqueInput!): Wallet
+  updateTransaction(data: TransactionUpdateInput!, where: TransactionWhereUniqueInput!): Transaction
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteWallet(where: WalletWhereUniqueInput!): Wallet
+  deleteTransaction(where: TransactionWhereUniqueInput!): Transaction
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertWallet(where: WalletWhereUniqueInput!, create: WalletCreateInput!, update: WalletUpdateInput!): Wallet!
+  upsertTransaction(where: TransactionWhereUniqueInput!, create: TransactionCreateInput!, update: TransactionUpdateInput!): Transaction!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyWallets(data: WalletUpdateInput!, where: WalletWhereInput): BatchPayload!
+  updateManyTransactions(data: TransactionUpdateInput!, where: TransactionWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyWallets(where: WalletWhereInput): BatchPayload!
+  deleteManyTransactions(where: TransactionWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -56,8 +76,14 @@ type PageInfo {
 
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  wallets(where: WalletWhereInput, orderBy: WalletOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Wallet]!
+  transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction]!
   user(where: UserWhereUniqueInput!): User
+  wallet(where: WalletWhereUniqueInput!): Wallet
+  transaction(where: TransactionWhereUniqueInput!): Transaction
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  walletsConnection(where: WalletWhereInput, orderBy: WalletOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WalletConnection!
+  transactionsConnection(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TransactionConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -68,6 +94,324 @@ type Query {
 
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  wallet(where: WalletSubscriptionWhereInput): WalletSubscriptionPayload
+  transaction(where: TransactionSubscriptionWhereInput): TransactionSubscriptionPayload
+}
+
+type Transaction implements Node {
+  id: ID!
+  wallet(where: WalletWhereInput): Wallet!
+  value: Int!
+  type: TRANSACTION_TYPE!
+  performedAt: DateTime!
+  description: String
+  tags: [String!]
+}
+
+enum TRANSACTION_TYPE {
+  EXPENSE
+  INCOME
+}
+
+"""A connection to a list of items."""
+type TransactionConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [TransactionEdge]!
+  aggregate: AggregateTransaction!
+}
+
+input TransactionCreateInput {
+  value: Int!
+  type: TRANSACTION_TYPE!
+  performedAt: DateTime!
+  description: String
+  tags: TransactionCreatetagsInput
+  wallet: WalletCreateOneWithoutTransactionsInput!
+}
+
+input TransactionCreateManyWithoutWalletInput {
+  create: [TransactionCreateWithoutWalletInput!]
+  connect: [TransactionWhereUniqueInput!]
+}
+
+input TransactionCreatetagsInput {
+  set: [String!]
+}
+
+input TransactionCreateWithoutWalletInput {
+  value: Int!
+  type: TRANSACTION_TYPE!
+  performedAt: DateTime!
+  description: String
+  tags: TransactionCreatetagsInput
+}
+
+"""An edge in a connection."""
+type TransactionEdge {
+  """The item at the end of the edge."""
+  node: Transaction!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum TransactionOrderByInput {
+  id_ASC
+  id_DESC
+  value_ASC
+  value_DESC
+  type_ASC
+  type_DESC
+  performedAt_ASC
+  performedAt_DESC
+  description_ASC
+  description_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type TransactionPreviousValues {
+  id: ID!
+  value: Int!
+  type: TRANSACTION_TYPE!
+  performedAt: DateTime!
+  description: String
+  tags: [String!]
+}
+
+type TransactionSubscriptionPayload {
+  mutation: MutationType!
+  node: Transaction
+  updatedFields: [String!]
+  previousValues: TransactionPreviousValues
+}
+
+input TransactionSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TransactionSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TransactionSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TransactionSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: TransactionWhereInput
+}
+
+input TransactionUpdateInput {
+  value: Int
+  type: TRANSACTION_TYPE
+  performedAt: DateTime
+  description: String
+  tags: TransactionUpdatetagsInput
+  wallet: WalletUpdateOneWithoutTransactionsInput
+}
+
+input TransactionUpdateManyWithoutWalletInput {
+  create: [TransactionCreateWithoutWalletInput!]
+  connect: [TransactionWhereUniqueInput!]
+  disconnect: [TransactionWhereUniqueInput!]
+  delete: [TransactionWhereUniqueInput!]
+  update: [TransactionUpdateWithWhereUniqueWithoutWalletInput!]
+  upsert: [TransactionUpsertWithWhereUniqueWithoutWalletInput!]
+}
+
+input TransactionUpdatetagsInput {
+  set: [String!]
+}
+
+input TransactionUpdateWithoutWalletDataInput {
+  value: Int
+  type: TRANSACTION_TYPE
+  performedAt: DateTime
+  description: String
+  tags: TransactionUpdatetagsInput
+}
+
+input TransactionUpdateWithWhereUniqueWithoutWalletInput {
+  where: TransactionWhereUniqueInput!
+  data: TransactionUpdateWithoutWalletDataInput!
+}
+
+input TransactionUpsertWithWhereUniqueWithoutWalletInput {
+  where: TransactionWhereUniqueInput!
+  update: TransactionUpdateWithoutWalletDataInput!
+  create: TransactionCreateWithoutWalletInput!
+}
+
+input TransactionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TransactionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TransactionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TransactionWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  value: Int
+
+  """All values that are not equal to given value."""
+  value_not: Int
+
+  """All values that are contained in given list."""
+  value_in: [Int!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [Int!]
+
+  """All values less than the given value."""
+  value_lt: Int
+
+  """All values less than or equal the given value."""
+  value_lte: Int
+
+  """All values greater than the given value."""
+  value_gt: Int
+
+  """All values greater than or equal the given value."""
+  value_gte: Int
+  type: TRANSACTION_TYPE
+
+  """All values that are not equal to given value."""
+  type_not: TRANSACTION_TYPE
+
+  """All values that are contained in given list."""
+  type_in: [TRANSACTION_TYPE!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [TRANSACTION_TYPE!]
+  performedAt: DateTime
+
+  """All values that are not equal to given value."""
+  performedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  performedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  performedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  performedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  performedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  performedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  performedAt_gte: DateTime
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  wallet: WalletWhereInput
+}
+
+input TransactionWhereUniqueInput {
+  id: ID
 }
 
 type User implements Node {
@@ -77,6 +421,7 @@ type User implements Node {
   password: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  wallets(where: WalletWhereInput, orderBy: WalletOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Wallet!]
 }
 
 """A connection to a list of items."""
@@ -93,6 +438,7 @@ input UserCreateInput {
   name: String!
   email: String!
   password: String!
+  wallets: WalletCreateManyInput
 }
 
 """An edge in a connection."""
@@ -171,6 +517,7 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
+  wallets: WalletUpdateManyInput
 }
 
 input UserWhereInput {
@@ -386,9 +733,305 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  wallets_every: WalletWhereInput
+  wallets_some: WalletWhereInput
+  wallets_none: WalletWhereInput
 }
 
 input UserWhereUniqueInput {
   id: ID
   email: String
+}
+
+type Wallet implements Node {
+  id: ID!
+  name: String!
+  description: String
+  transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction!]
+}
+
+"""A connection to a list of items."""
+type WalletConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [WalletEdge]!
+  aggregate: AggregateWallet!
+}
+
+input WalletCreateInput {
+  name: String!
+  description: String
+  transactions: TransactionCreateManyWithoutWalletInput
+}
+
+input WalletCreateManyInput {
+  create: [WalletCreateInput!]
+  connect: [WalletWhereUniqueInput!]
+}
+
+input WalletCreateOneWithoutTransactionsInput {
+  create: WalletCreateWithoutTransactionsInput
+  connect: WalletWhereUniqueInput
+}
+
+input WalletCreateWithoutTransactionsInput {
+  name: String!
+  description: String
+}
+
+"""An edge in a connection."""
+type WalletEdge {
+  """The item at the end of the edge."""
+  node: Wallet!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum WalletOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  description_ASC
+  description_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type WalletPreviousValues {
+  id: ID!
+  name: String!
+  description: String
+}
+
+type WalletSubscriptionPayload {
+  mutation: MutationType!
+  node: Wallet
+  updatedFields: [String!]
+  previousValues: WalletPreviousValues
+}
+
+input WalletSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [WalletSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [WalletSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [WalletSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: WalletWhereInput
+}
+
+input WalletUpdateDataInput {
+  name: String
+  description: String
+  transactions: TransactionUpdateManyWithoutWalletInput
+}
+
+input WalletUpdateInput {
+  name: String
+  description: String
+  transactions: TransactionUpdateManyWithoutWalletInput
+}
+
+input WalletUpdateManyInput {
+  create: [WalletCreateInput!]
+  connect: [WalletWhereUniqueInput!]
+  disconnect: [WalletWhereUniqueInput!]
+  delete: [WalletWhereUniqueInput!]
+  update: [WalletUpdateWithWhereUniqueNestedInput!]
+  upsert: [WalletUpsertWithWhereUniqueNestedInput!]
+}
+
+input WalletUpdateOneWithoutTransactionsInput {
+  create: WalletCreateWithoutTransactionsInput
+  connect: WalletWhereUniqueInput
+  delete: Boolean
+  update: WalletUpdateWithoutTransactionsDataInput
+  upsert: WalletUpsertWithoutTransactionsInput
+}
+
+input WalletUpdateWithoutTransactionsDataInput {
+  name: String
+  description: String
+}
+
+input WalletUpdateWithWhereUniqueNestedInput {
+  where: WalletWhereUniqueInput!
+  data: WalletUpdateDataInput!
+}
+
+input WalletUpsertWithoutTransactionsInput {
+  update: WalletUpdateWithoutTransactionsDataInput!
+  create: WalletCreateWithoutTransactionsInput!
+}
+
+input WalletUpsertWithWhereUniqueNestedInput {
+  where: WalletWhereUniqueInput!
+  update: WalletUpdateDataInput!
+  create: WalletCreateInput!
+}
+
+input WalletWhereInput {
+  """Logical AND on all given filters."""
+  AND: [WalletWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [WalletWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [WalletWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  transactions_every: TransactionWhereInput
+  transactions_some: TransactionWhereInput
+  transactions_none: TransactionWhereInput
+}
+
+input WalletWhereUniqueInput {
+  id: ID
 }
