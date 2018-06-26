@@ -1,0 +1,16 @@
+mutation {
+  user: createUser(
+    data: {
+      name: "John Doe"
+      email: "johndoe@example.com"
+      password: "johndoe123"
+      wallet: {
+        create: {
+          name: "Bank Account"
+        }
+      }
+    }
+  ) {
+    id
+  }
+}
