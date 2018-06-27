@@ -8,6 +8,9 @@
     "rootDir": "src",
     "noImplicitAny": false,
     "outDir": "dist",
+    "plugins": [
+      { "name": "ts-graphql-plugin" }
+    ],
     "lib": ["esnext"]
   }
 }

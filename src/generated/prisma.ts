@@ -508,7 +508,18 @@ input UserCreateInput {
   name: String!
   email: String!
   password: String!
-  wallets: WalletCreateManyInput
+  wallets: WalletCreateManyWithoutUserInput
+}
+
+input UserCreateOneWithoutWalletsInput {
+  create: UserCreateWithoutWalletsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutWalletsInput {
+  name: String!
+  email: String!
+  password: String!
 }
 
 """An edge in a connection."""
@@ -587,7 +598,26 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
-  wallets: WalletUpdateManyInput
+  wallets: WalletUpdateManyWithoutUserInput
+}
+
+input UserUpdateOneWithoutWalletsInput {
+  create: UserCreateWithoutWalletsInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutWalletsDataInput
+  upsert: UserUpsertWithoutWalletsInput
+}
+
+input UserUpdateWithoutWalletsDataInput {
+  name: String
+  email: String
+  password: String
+}
+
+input UserUpsertWithoutWalletsInput {
+  update: UserUpdateWithoutWalletsDataInput!
+  create: UserCreateWithoutWalletsInput!
 }
 
 input UserWhereInput {
@@ -815,6 +845,7 @@ input UserWhereUniqueInput {
 
 type Wallet implements Node {
   id: ID!
+  user(where: UserWhereInput): User!
   name: String!
   description: String
   transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction!]
@@ -833,11 +864,12 @@ type WalletConnection {
 input WalletCreateInput {
   name: String!
   description: String
+  user: UserCreateOneWithoutWalletsInput!
   transactions: TransactionCreateManyWithoutWalletInput
 }
 
-input WalletCreateManyInput {
-  create: [WalletCreateInput!]
+input WalletCreateManyWithoutUserInput {
+  create: [WalletCreateWithoutUserInput!]
   connect: [WalletWhereUniqueInput!]
 }
 
@@ -849,6 +881,13 @@ input WalletCreateOneWithoutTransactionsInput {
 input WalletCreateWithoutTransactionsInput {
   name: String!
   description: String
+  user: UserCreateOneWithoutWalletsInput!
+}
+
+input WalletCreateWithoutUserInput {
+  name: String!
+  description: String
+  transactions: TransactionCreateManyWithoutWalletInput
 }
 
 """An edge in a connection."""
@@ -918,25 +957,20 @@ input WalletSubscriptionWhereInput {
   node: WalletWhereInput
 }
 
-input WalletUpdateDataInput {
-  name: String
-  description: String
-  transactions: TransactionUpdateManyWithoutWalletInput
-}
-
 input WalletUpdateInput {
   name: String
   description: String
+  user: UserUpdateOneWithoutWalletsInput
   transactions: TransactionUpdateManyWithoutWalletInput
 }
 
-input WalletUpdateManyInput {
-  create: [WalletCreateInput!]
+input WalletUpdateManyWithoutUserInput {
+  create: [WalletCreateWithoutUserInput!]
   connect: [WalletWhereUniqueInput!]
   disconnect: [WalletWhereUniqueInput!]
   delete: [WalletWhereUniqueInput!]
-  update: [WalletUpdateWithWhereUniqueNestedInput!]
-  upsert: [WalletUpsertWithWhereUniqueNestedInput!]
+  update: [WalletUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [WalletUpsertWithWhereUniqueWithoutUserInput!]
 }
 
 input WalletUpdateOneWithoutTransactionsInput {
@@ -950,11 +984,18 @@ input WalletUpdateOneWithoutTransactionsInput {
 input WalletUpdateWithoutTransactionsDataInput {
   name: String
   description: String
+  user: UserUpdateOneWithoutWalletsInput
 }
 
-input WalletUpdateWithWhereUniqueNestedInput {
+input WalletUpdateWithoutUserDataInput {
+  name: String
+  description: String
+  transactions: TransactionUpdateManyWithoutWalletInput
+}
+
+input WalletUpdateWithWhereUniqueWithoutUserInput {
   where: WalletWhereUniqueInput!
-  data: WalletUpdateDataInput!
+  data: WalletUpdateWithoutUserDataInput!
 }
 
 input WalletUpsertWithoutTransactionsInput {
@@ -962,10 +1003,10 @@ input WalletUpsertWithoutTransactionsInput {
   create: WalletCreateWithoutTransactionsInput!
 }
 
-input WalletUpsertWithWhereUniqueNestedInput {
+input WalletUpsertWithWhereUniqueWithoutUserInput {
   where: WalletWhereUniqueInput!
-  update: WalletUpdateDataInput!
-  create: WalletCreateInput!
+  update: WalletUpdateWithoutUserDataInput!
+  create: WalletCreateWithoutUserInput!
 }
 
 input WalletWhereInput {
@@ -1097,6 +1138,7 @@ input WalletWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
+  user: UserWhereInput
   transactions_every: TransactionWhereInput
   transactions_some: TransactionWhereInput
   transactions_none: TransactionWhereInput
@@ -1159,9 +1201,11 @@ export type MutationType =   'CREATED' |
   'UPDATED' |
   'DELETED'
 
-export interface TransactionCreateManyWithoutWalletInput {
-  create?: TransactionCreateWithoutWalletInput[] | TransactionCreateWithoutWalletInput
-  connect?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
+export interface WalletCreateInput {
+  name: String
+  description?: String
+  user: UserCreateOneWithoutWalletsInput
+  transactions?: TransactionCreateManyWithoutWalletInput
 }
 
 export interface UserWhereInput {
@@ -1249,13 +1293,13 @@ export interface TransactionUpdatetagsInput {
   set?: String[] | String
 }
 
-export interface WalletUpdateManyInput {
-  create?: WalletCreateInput[] | WalletCreateInput
-  connect?: WalletWhereUniqueInput[] | WalletWhereUniqueInput
-  disconnect?: WalletWhereUniqueInput[] | WalletWhereUniqueInput
-  delete?: WalletWhereUniqueInput[] | WalletWhereUniqueInput
-  update?: WalletUpdateWithWhereUniqueNestedInput[] | WalletUpdateWithWhereUniqueNestedInput
-  upsert?: WalletUpsertWithWhereUniqueNestedInput[] | WalletUpsertWithWhereUniqueNestedInput
+export interface TransactionUpdateManyWithoutWalletInput {
+  create?: TransactionCreateWithoutWalletInput[] | TransactionCreateWithoutWalletInput
+  connect?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
+  disconnect?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
+  delete?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
+  update?: TransactionUpdateWithWhereUniqueWithoutWalletInput[] | TransactionUpdateWithWhereUniqueWithoutWalletInput
+  upsert?: TransactionUpsertWithWhereUniqueWithoutWalletInput[] | TransactionUpsertWithWhereUniqueWithoutWalletInput
 }
 
 export interface TransactionUpdateWithoutWalletDataInput {
@@ -1271,9 +1315,11 @@ export interface WalletCreateOneWithoutTransactionsInput {
   connect?: WalletWhereUniqueInput
 }
 
-export interface TransactionUpdateWithWhereUniqueWithoutWalletInput {
-  where: TransactionWhereUniqueInput
-  data: TransactionUpdateWithoutWalletDataInput
+export interface UserCreateInput {
+  name: String
+  email: String
+  password: String
+  wallets?: WalletCreateManyWithoutUserInput
 }
 
 export interface WalletSubscriptionWhereInput {
@@ -1287,13 +1333,9 @@ export interface WalletSubscriptionWhereInput {
   node?: WalletWhereInput
 }
 
-export interface TransactionUpdateManyWithoutWalletInput {
-  create?: TransactionCreateWithoutWalletInput[] | TransactionCreateWithoutWalletInput
-  connect?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
-  disconnect?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
-  delete?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
-  update?: TransactionUpdateWithWhereUniqueWithoutWalletInput[] | TransactionUpdateWithWhereUniqueWithoutWalletInput
-  upsert?: TransactionUpsertWithWhereUniqueWithoutWalletInput[] | TransactionUpsertWithWhereUniqueWithoutWalletInput
+export interface WalletCreateManyWithoutUserInput {
+  create?: WalletCreateWithoutUserInput[] | WalletCreateWithoutUserInput
+  connect?: WalletWhereUniqueInput[] | WalletWhereUniqueInput
 }
 
 export interface WalletUpsertWithoutTransactionsInput {
@@ -1301,31 +1343,33 @@ export interface WalletUpsertWithoutTransactionsInput {
   create: WalletCreateWithoutTransactionsInput
 }
 
-export interface WalletUpdateDataInput {
-  name?: String
+export interface WalletCreateWithoutUserInput {
+  name: String
   description?: String
-  transactions?: TransactionUpdateManyWithoutWalletInput
+  transactions?: TransactionCreateManyWithoutWalletInput
 }
 
 export interface WalletWhereUniqueInput {
   id?: ID_Input
 }
 
-export interface UserCreateInput {
-  name: String
-  email: String
-  password: String
-  wallets?: WalletCreateManyInput
+export interface TransactionCreateManyWithoutWalletInput {
+  create?: TransactionCreateWithoutWalletInput[] | TransactionCreateWithoutWalletInput
+  connect?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
 }
 
 export interface WalletUpdateWithoutTransactionsDataInput {
   name?: String
   description?: String
+  user?: UserUpdateOneWithoutWalletsInput
 }
 
-export interface WalletCreateManyInput {
-  create?: WalletCreateInput[] | WalletCreateInput
-  connect?: WalletWhereUniqueInput[] | WalletWhereUniqueInput
+export interface TransactionCreateWithoutWalletInput {
+  value: Int
+  type: TRANSACTION_TYPE
+  performedAt: DateTime
+  description?: String
+  tags?: TransactionCreatetagsInput
 }
 
 export interface TransactionUpdateInput {
@@ -1337,71 +1381,109 @@ export interface TransactionUpdateInput {
   wallet?: WalletUpdateOneWithoutTransactionsInput
 }
 
-export interface WalletCreateInput {
-  name: String
+export interface TransactionCreatetagsInput {
+  set?: String[] | String
+}
+
+export interface UserUpdateWithoutWalletsDataInput {
+  name?: String
+  email?: String
+  password?: String
+}
+
+export interface TransactionUpdateWithWhereUniqueWithoutWalletInput {
+  where: TransactionWhereUniqueInput
+  data: TransactionUpdateWithoutWalletDataInput
+}
+
+export interface WalletUpdateInput {
+  name?: String
   description?: String
-  transactions?: TransactionCreateManyWithoutWalletInput
+  user?: UserUpdateOneWithoutWalletsInput
+  transactions?: TransactionUpdateManyWithoutWalletInput
 }
 
-export interface WalletUpsertWithWhereUniqueNestedInput {
-  where: WalletWhereUniqueInput
-  update: WalletUpdateDataInput
-  create: WalletCreateInput
+export interface UserCreateOneWithoutWalletsInput {
+  create?: UserCreateWithoutWalletsInput
+  connect?: UserWhereUniqueInput
 }
 
-export interface WalletUpdateWithWhereUniqueNestedInput {
-  where: WalletWhereUniqueInput
-  data: WalletUpdateDataInput
+export interface TransactionUpsertWithWhereUniqueWithoutWalletInput {
+  where: TransactionWhereUniqueInput
+  update: TransactionUpdateWithoutWalletDataInput
+  create: TransactionCreateWithoutWalletInput
 }
 
-export interface TransactionSubscriptionWhereInput {
-  AND?: TransactionSubscriptionWhereInput[] | TransactionSubscriptionWhereInput
-  OR?: TransactionSubscriptionWhereInput[] | TransactionSubscriptionWhereInput
-  NOT?: TransactionSubscriptionWhereInput[] | TransactionSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: TransactionWhereInput
+export interface UserCreateWithoutWalletsInput {
+  name: String
+  email: String
+  password: String
 }
 
-export interface TransactionCreateWithoutWalletInput {
+export interface WalletWhereInput {
+  AND?: WalletWhereInput[] | WalletWhereInput
+  OR?: WalletWhereInput[] | WalletWhereInput
+  NOT?: WalletWhereInput[] | WalletWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  name?: String
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+  description?: String
+  description_not?: String
+  description_in?: String[] | String
+  description_not_in?: String[] | String
+  description_lt?: String
+  description_lte?: String
+  description_gt?: String
+  description_gte?: String
+  description_contains?: String
+  description_not_contains?: String
+  description_starts_with?: String
+  description_not_starts_with?: String
+  description_ends_with?: String
+  description_not_ends_with?: String
+  user?: UserWhereInput
+  transactions_every?: TransactionWhereInput
+  transactions_some?: TransactionWhereInput
+  transactions_none?: TransactionWhereInput
+}
+
+export interface TransactionCreateInput {
   value: Int
   type: TRANSACTION_TYPE
   performedAt: DateTime
   description?: String
   tags?: TransactionCreatetagsInput
+  wallet: WalletCreateOneWithoutTransactionsInput
 }
 
-export interface UserSubscriptionWhereInput {
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: UserWhereInput
-}
-
-export interface TransactionCreatetagsInput {
-  set?: String[] | String
-}
-
-export interface TransactionWhereUniqueInput {
+export interface UserWhereUniqueInput {
   id?: ID_Input
-}
-
-export interface UserUpdateInput {
-  name?: String
   email?: String
-  password?: String
-  wallets?: WalletUpdateManyInput
-}
-
-export interface WalletCreateWithoutTransactionsInput {
-  name: String
-  description?: String
 }
 
 export interface TransactionWhereInput {
@@ -1459,15 +1541,6 @@ export interface TransactionWhereInput {
   wallet?: WalletWhereInput
 }
 
-export interface TransactionCreateInput {
-  value: Int
-  type: TRANSACTION_TYPE
-  performedAt: DateTime
-  description?: String
-  tags?: TransactionCreatetagsInput
-  wallet: WalletCreateOneWithoutTransactionsInput
-}
-
 export interface WalletUpdateOneWithoutTransactionsInput {
   create?: WalletCreateWithoutTransactionsInput
   connect?: WalletWhereUniqueInput
@@ -1476,72 +1549,82 @@ export interface WalletUpdateOneWithoutTransactionsInput {
   upsert?: WalletUpsertWithoutTransactionsInput
 }
 
-export interface UserWhereUniqueInput {
-  id?: ID_Input
-  email?: String
-}
-
-export interface WalletWhereInput {
-  AND?: WalletWhereInput[] | WalletWhereInput
-  OR?: WalletWhereInput[] | WalletWhereInput
-  NOT?: WalletWhereInput[] | WalletWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  name?: String
-  name_not?: String
-  name_in?: String[] | String
-  name_not_in?: String[] | String
-  name_lt?: String
-  name_lte?: String
-  name_gt?: String
-  name_gte?: String
-  name_contains?: String
-  name_not_contains?: String
-  name_starts_with?: String
-  name_not_starts_with?: String
-  name_ends_with?: String
-  name_not_ends_with?: String
+export interface WalletCreateWithoutTransactionsInput {
+  name: String
   description?: String
-  description_not?: String
-  description_in?: String[] | String
-  description_not_in?: String[] | String
-  description_lt?: String
-  description_lte?: String
-  description_gt?: String
-  description_gte?: String
-  description_contains?: String
-  description_not_contains?: String
-  description_starts_with?: String
-  description_not_starts_with?: String
-  description_ends_with?: String
-  description_not_ends_with?: String
-  transactions_every?: TransactionWhereInput
-  transactions_some?: TransactionWhereInput
-  transactions_none?: TransactionWhereInput
+  user: UserCreateOneWithoutWalletsInput
 }
 
-export interface TransactionUpsertWithWhereUniqueWithoutWalletInput {
-  where: TransactionWhereUniqueInput
-  update: TransactionUpdateWithoutWalletDataInput
-  create: TransactionCreateWithoutWalletInput
+export interface UserUpdateOneWithoutWalletsInput {
+  create?: UserCreateWithoutWalletsInput
+  connect?: UserWhereUniqueInput
+  delete?: Boolean
+  update?: UserUpdateWithoutWalletsDataInput
+  upsert?: UserUpsertWithoutWalletsInput
 }
 
-export interface WalletUpdateInput {
+export interface WalletUpdateWithoutUserDataInput {
   name?: String
   description?: String
   transactions?: TransactionUpdateManyWithoutWalletInput
+}
+
+export interface WalletUpdateWithWhereUniqueWithoutUserInput {
+  where: WalletWhereUniqueInput
+  data: WalletUpdateWithoutUserDataInput
+}
+
+export interface WalletUpdateManyWithoutUserInput {
+  create?: WalletCreateWithoutUserInput[] | WalletCreateWithoutUserInput
+  connect?: WalletWhereUniqueInput[] | WalletWhereUniqueInput
+  disconnect?: WalletWhereUniqueInput[] | WalletWhereUniqueInput
+  delete?: WalletWhereUniqueInput[] | WalletWhereUniqueInput
+  update?: WalletUpdateWithWhereUniqueWithoutUserInput[] | WalletUpdateWithWhereUniqueWithoutUserInput
+  upsert?: WalletUpsertWithWhereUniqueWithoutUserInput[] | WalletUpsertWithWhereUniqueWithoutUserInput
+}
+
+export interface UserUpdateInput {
+  name?: String
+  email?: String
+  password?: String
+  wallets?: WalletUpdateManyWithoutUserInput
+}
+
+export interface WalletUpsertWithWhereUniqueWithoutUserInput {
+  where: WalletWhereUniqueInput
+  update: WalletUpdateWithoutUserDataInput
+  create: WalletCreateWithoutUserInput
+}
+
+export interface UserUpsertWithoutWalletsInput {
+  update: UserUpdateWithoutWalletsDataInput
+  create: UserCreateWithoutWalletsInput
+}
+
+export interface TransactionWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface UserSubscriptionWhereInput {
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: UserWhereInput
+}
+
+export interface TransactionSubscriptionWhereInput {
+  AND?: TransactionSubscriptionWhereInput[] | TransactionSubscriptionWhereInput
+  OR?: TransactionSubscriptionWhereInput[] | TransactionSubscriptionWhereInput
+  NOT?: TransactionSubscriptionWhereInput[] | TransactionSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: TransactionWhereInput
 }
 
 /*
@@ -1574,6 +1657,7 @@ export interface PageInfo {
 
 export interface Wallet extends Node {
   id: ID_Output
+  user: User
   name: String
   description?: String
   transactions?: Transaction[]

@@ -4,7 +4,7 @@ mutation {
       name: "John Doe"
       email: "johndoe@example.com"
       password: "johndoe123"
-      wallet: {
+      wallets: {
         create: {
           name: "Bank Account"
         }

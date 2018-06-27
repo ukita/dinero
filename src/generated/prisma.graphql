@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Tue Jun 26 2018 08:48:44 GMT-0300 (-03)
+# timestamp: Tue Jun 26 2018 13:04:16 GMT-0300 (Brasilia Standard Time)
 
 type AggregateTransaction {
   count: Int!
@@ -438,7 +438,18 @@ input UserCreateInput {
   name: String!
   email: String!
   password: String!
-  wallets: WalletCreateManyInput
+  wallets: WalletCreateManyWithoutUserInput
+}
+
+input UserCreateOneWithoutWalletsInput {
+  create: UserCreateWithoutWalletsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutWalletsInput {
+  name: String!
+  email: String!
+  password: String!
 }
 
 """An edge in a connection."""
@@ -517,7 +528,26 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
-  wallets: WalletUpdateManyInput
+  wallets: WalletUpdateManyWithoutUserInput
+}
+
+input UserUpdateOneWithoutWalletsInput {
+  create: UserCreateWithoutWalletsInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutWalletsDataInput
+  upsert: UserUpsertWithoutWalletsInput
+}
+
+input UserUpdateWithoutWalletsDataInput {
+  name: String
+  email: String
+  password: String
+}
+
+input UserUpsertWithoutWalletsInput {
+  update: UserUpdateWithoutWalletsDataInput!
+  create: UserCreateWithoutWalletsInput!
 }
 
 input UserWhereInput {
@@ -745,6 +775,7 @@ input UserWhereUniqueInput {
 
 type Wallet implements Node {
   id: ID!
+  user(where: UserWhereInput): User!
   name: String!
   description: String
   transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction!]
@@ -763,11 +794,12 @@ type WalletConnection {
 input WalletCreateInput {
   name: String!
   description: String
+  user: UserCreateOneWithoutWalletsInput!
   transactions: TransactionCreateManyWithoutWalletInput
 }
 
-input WalletCreateManyInput {
-  create: [WalletCreateInput!]
+input WalletCreateManyWithoutUserInput {
+  create: [WalletCreateWithoutUserInput!]
   connect: [WalletWhereUniqueInput!]
 }
 
@@ -779,6 +811,13 @@ input WalletCreateOneWithoutTransactionsInput {
 input WalletCreateWithoutTransactionsInput {
   name: String!
   description: String
+  user: UserCreateOneWithoutWalletsInput!
+}
+
+input WalletCreateWithoutUserInput {
+  name: String!
+  description: String
+  transactions: TransactionCreateManyWithoutWalletInput
 }
 
 """An edge in a connection."""
@@ -848,25 +887,20 @@ input WalletSubscriptionWhereInput {
   node: WalletWhereInput
 }
 
-input WalletUpdateDataInput {
-  name: String
-  description: String
-  transactions: TransactionUpdateManyWithoutWalletInput
-}
-
 input WalletUpdateInput {
   name: String
   description: String
+  user: UserUpdateOneWithoutWalletsInput
   transactions: TransactionUpdateManyWithoutWalletInput
 }
 
-input WalletUpdateManyInput {
-  create: [WalletCreateInput!]
+input WalletUpdateManyWithoutUserInput {
+  create: [WalletCreateWithoutUserInput!]
   connect: [WalletWhereUniqueInput!]
   disconnect: [WalletWhereUniqueInput!]
   delete: [WalletWhereUniqueInput!]
-  update: [WalletUpdateWithWhereUniqueNestedInput!]
-  upsert: [WalletUpsertWithWhereUniqueNestedInput!]
+  update: [WalletUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [WalletUpsertWithWhereUniqueWithoutUserInput!]
 }
 
 input WalletUpdateOneWithoutTransactionsInput {
@@ -880,11 +914,18 @@ input WalletUpdateOneWithoutTransactionsInput {
 input WalletUpdateWithoutTransactionsDataInput {
   name: String
   description: String
+  user: UserUpdateOneWithoutWalletsInput
 }
 
-input WalletUpdateWithWhereUniqueNestedInput {
+input WalletUpdateWithoutUserDataInput {
+  name: String
+  description: String
+  transactions: TransactionUpdateManyWithoutWalletInput
+}
+
+input WalletUpdateWithWhereUniqueWithoutUserInput {
   where: WalletWhereUniqueInput!
-  data: WalletUpdateDataInput!
+  data: WalletUpdateWithoutUserDataInput!
 }
 
 input WalletUpsertWithoutTransactionsInput {
@@ -892,10 +933,10 @@ input WalletUpsertWithoutTransactionsInput {
   create: WalletCreateWithoutTransactionsInput!
 }
 
-input WalletUpsertWithWhereUniqueNestedInput {
+input WalletUpsertWithWhereUniqueWithoutUserInput {
   where: WalletWhereUniqueInput!
-  update: WalletUpdateDataInput!
-  create: WalletCreateInput!
+  update: WalletUpdateWithoutUserDataInput!
+  create: WalletCreateWithoutUserInput!
 }
 
 input WalletWhereInput {
@@ -1027,6 +1068,7 @@ input WalletWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
+  user: UserWhereInput
   transactions_every: TransactionWhereInput
   transactions_some: TransactionWhereInput
   transactions_none: TransactionWhereInput

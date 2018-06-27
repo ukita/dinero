@@ -12,6 +12,7 @@ type User {
 
 type Wallet {
   id: ID! @unique
+  user: User!
   name: String!
   description: String
   transactions: [Transaction!]! @relation(name: "WalletTransactions")

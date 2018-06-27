@@ -1,4 +1,4 @@
-# import Post from "./generated/prisma.graphql"
+# import TRANSACTION_TYPE from "./generated/prisma.graphql"
 
 type Query {
   me: User
@@ -7,6 +7,15 @@ type Query {
 type Mutation {
   signup(name: String!, email: String!, password: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
+  addWallet(name: String!, description: String): Wallet!
+  addTransaction(
+    walletId: ID!,
+    value: Float!,
+    type: TRANSACTION_TYPE!,
+    description: String,
+    tags: [String!],
+    performedAt: DateTime!
+  ): Transaction!
 }
 
 type AuthPayload {
@@ -18,6 +27,24 @@ type User {
   id: ID!
   name: String!
   email: String!
+  wallets: [Wallet!]!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type Wallet {
+  id: ID!
+  name: String!
+  description: String!
+  amount: Float!
+  transactions: [Transaction!]!
+}
+
+type Transaction {
+  id: ID!
+  value: Float!
+  type: TRANSACTION_TYPE!
+  description: String
+  tags: [String!]
+  performedAt: DateTime!
 }
