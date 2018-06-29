@@ -1,7 +1,9 @@
-# import TRANSACTION_TYPE from "./generated/prisma.graphql"
+# import * from "./generated/prisma.graphql"
 
 type Query {
   me: User
+  wallet(id: ID!): Wallet
+  wallets: [Wallet!]!
 }
 
 type Mutation {
