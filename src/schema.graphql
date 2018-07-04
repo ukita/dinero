@@ -1,9 +1,7 @@
 # import * from "./generated/prisma.graphql"
 
 type Query {
-  me: User
-  wallet(id: ID!): Wallet
-  wallets: [Wallet!]!
+  viewer: Viewer
 }
 
 type Mutation {
@@ -18,6 +16,11 @@ type Mutation {
     tags: [String!],
     performedAt: DateTime!
   ): Transaction!
+}
+
+type Viewer {
+  me: User!
+  wallets(id: String): [Wallet!]!
 }
 
 type AuthPayload {

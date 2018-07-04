@@ -5,6 +5,7 @@ import Mutation from './Mutation'
 import { AuthPayload } from './AuthPayload'
 import { Wallet } from './Wallet'
 import { Transaction } from './Transaction'
+import { Viewer } from './Viewer'
 
 export const resolvers: any = {
   Query,
@@ -13,7 +14,8 @@ export const resolvers: any = {
 
   AuthPayload,
   Wallet,
-  Transaction
+  Transaction,
+  Viewer
 }
 
 export const fragmentReplacements = extractFragmentReplacements(resolvers)
