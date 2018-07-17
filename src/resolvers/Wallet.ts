@@ -1,22 +1,29 @@
 import { Context } from '../utils'
+import { Transaction } from '../generated/prisma'
+
+const sumTransactions = (transactions: Transaction[]) =>
+  transactions.reduce((sum, { value }) => sum + value, 0)
 
 export const Wallet = {
-
-  amount: {
-    fragment: `fragment Amount on Wallet { id }`,
+  income: {
+    fragment: `fragment Income on Wallet { id }`,
     resolve: async ({ id }, args, ctx: Context, info) => {
       const transactions = await ctx.db.query.transactions({
-        where: { wallet: { id } }
+        where: { wallet: { id }, type: 'INCOME' }
       })
 
-      const amount = transactions.reduce((sum, { type, value }) => {
-        const multiplier = type === 'INCOME' ? 1 : -1
+      return sumTransactions(transactions) / 100
+    }
+  },
 
-        return sum + (value * multiplier)
-      }, 0)
+  expense: {
+    fragment: `fragment Expense on Wallet { id }`,
+    resolve: async ({ id }, args, ctx: Context, info) => {
+      const transactions = await ctx.db.query.transactions({
+        where: { wallet: { id }, type: 'EXPENSE' }
+      })
 
-      return amount / 100
+      return sumTransactions(transactions) / 100
     }
   }
-
 }

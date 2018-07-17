@@ -40,8 +40,9 @@ type User {
 type Wallet {
   id: ID!
   name: String!
-  description: String!
-  amount: Float!
+  description: String
+  income: Float!
+  expense: Float!
   transactions: [Transaction!]!
 }
 
