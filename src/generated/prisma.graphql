@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Tue Jun 26 2018 13:04:16 GMT-0300 (Brasilia Standard Time)
+# timestamp: Mon Dec 03 2018 19:57:15 GMT-0200 (Brasilia Summer Time)
 
 type AggregateTransaction {
   count: Int!
@@ -39,9 +39,9 @@ type Mutation {
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertWallet(where: WalletWhereUniqueInput!, create: WalletCreateInput!, update: WalletUpdateInput!): Wallet!
   upsertTransaction(where: TransactionWhereUniqueInput!, create: TransactionCreateInput!, update: TransactionUpdateInput!): Transaction!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
-  updateManyWallets(data: WalletUpdateInput!, where: WalletWhereInput): BatchPayload!
-  updateManyTransactions(data: TransactionUpdateInput!, where: TransactionWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyWallets(data: WalletUpdateManyMutationInput!, where: WalletWhereInput): BatchPayload!
+  updateManyTransactions(data: TransactionUpdateManyMutationInput!, where: TransactionWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyWallets(where: WalletWhereInput): BatchPayload!
   deleteManyTransactions(where: TransactionWhereInput): BatchPayload!
@@ -100,12 +100,12 @@ type Subscription {
 
 type Transaction implements Node {
   id: ID!
-  wallet(where: WalletWhereInput): Wallet!
+  wallet: Wallet!
   value: Int!
   type: TRANSACTION_TYPE!
   performedAt: DateTime!
   description: String
-  tags: [String!]
+  tags: [String!]!
 }
 
 enum TRANSACTION_TYPE {
@@ -181,7 +181,152 @@ type TransactionPreviousValues {
   type: TRANSACTION_TYPE!
   performedAt: DateTime!
   description: String
-  tags: [String!]
+  tags: [String!]!
+}
+
+input TransactionScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TransactionScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TransactionScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TransactionScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  value: Int
+
+  """All values that are not equal to given value."""
+  value_not: Int
+
+  """All values that are contained in given list."""
+  value_in: [Int!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [Int!]
+
+  """All values less than the given value."""
+  value_lt: Int
+
+  """All values less than or equal the given value."""
+  value_lte: Int
+
+  """All values greater than the given value."""
+  value_gt: Int
+
+  """All values greater than or equal the given value."""
+  value_gte: Int
+  type: TRANSACTION_TYPE
+
+  """All values that are not equal to given value."""
+  type_not: TRANSACTION_TYPE
+
+  """All values that are contained in given list."""
+  type_in: [TRANSACTION_TYPE!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [TRANSACTION_TYPE!]
+  performedAt: DateTime
+
+  """All values that are not equal to given value."""
+  performedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  performedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  performedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  performedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  performedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  performedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  performedAt_gte: DateTime
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
 }
 
 type TransactionSubscriptionPayload {
@@ -229,7 +374,23 @@ input TransactionUpdateInput {
   performedAt: DateTime
   description: String
   tags: TransactionUpdatetagsInput
-  wallet: WalletUpdateOneWithoutTransactionsInput
+  wallet: WalletUpdateOneRequiredWithoutTransactionsInput
+}
+
+input TransactionUpdateManyDataInput {
+  value: Int
+  type: TRANSACTION_TYPE
+  performedAt: DateTime
+  description: String
+  tags: TransactionUpdatetagsInput
+}
+
+input TransactionUpdateManyMutationInput {
+  value: Int
+  type: TRANSACTION_TYPE
+  performedAt: DateTime
+  description: String
+  tags: TransactionUpdatetagsInput
 }
 
 input TransactionUpdateManyWithoutWalletInput {
@@ -238,7 +399,14 @@ input TransactionUpdateManyWithoutWalletInput {
   disconnect: [TransactionWhereUniqueInput!]
   delete: [TransactionWhereUniqueInput!]
   update: [TransactionUpdateWithWhereUniqueWithoutWalletInput!]
+  updateMany: [TransactionUpdateManyWithWhereNestedInput!]
+  deleteMany: [TransactionScalarWhereInput!]
   upsert: [TransactionUpsertWithWhereUniqueWithoutWalletInput!]
+}
+
+input TransactionUpdateManyWithWhereNestedInput {
+  where: TransactionScalarWhereInput!
+  data: TransactionUpdateManyDataInput!
 }
 
 input TransactionUpdatetagsInput {
@@ -531,10 +699,15 @@ input UserUpdateInput {
   wallets: WalletUpdateManyWithoutUserInput
 }
 
-input UserUpdateOneWithoutWalletsInput {
+input UserUpdateManyMutationInput {
+  name: String
+  email: String
+  password: String
+}
+
+input UserUpdateOneRequiredWithoutWalletsInput {
   create: UserCreateWithoutWalletsInput
   connect: UserWhereUniqueInput
-  delete: Boolean
   update: UserUpdateWithoutWalletsDataInput
   upsert: UserUpsertWithoutWalletsInput
 }
@@ -775,7 +948,7 @@ input UserWhereUniqueInput {
 
 type Wallet implements Node {
   id: ID!
-  user(where: UserWhereInput): User!
+  user: User!
   name: String!
   description: String
   transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction!]
@@ -848,6 +1021,137 @@ type WalletPreviousValues {
   description: String
 }
 
+input WalletScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [WalletScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [WalletScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [WalletScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+}
+
 type WalletSubscriptionPayload {
   mutation: MutationType!
   node: Wallet
@@ -890,8 +1194,18 @@ input WalletSubscriptionWhereInput {
 input WalletUpdateInput {
   name: String
   description: String
-  user: UserUpdateOneWithoutWalletsInput
+  user: UserUpdateOneRequiredWithoutWalletsInput
   transactions: TransactionUpdateManyWithoutWalletInput
+}
+
+input WalletUpdateManyDataInput {
+  name: String
+  description: String
+}
+
+input WalletUpdateManyMutationInput {
+  name: String
+  description: String
 }
 
 input WalletUpdateManyWithoutUserInput {
@@ -900,13 +1214,19 @@ input WalletUpdateManyWithoutUserInput {
   disconnect: [WalletWhereUniqueInput!]
   delete: [WalletWhereUniqueInput!]
   update: [WalletUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [WalletUpdateManyWithWhereNestedInput!]
+  deleteMany: [WalletScalarWhereInput!]
   upsert: [WalletUpsertWithWhereUniqueWithoutUserInput!]
 }
 
-input WalletUpdateOneWithoutTransactionsInput {
+input WalletUpdateManyWithWhereNestedInput {
+  where: WalletScalarWhereInput!
+  data: WalletUpdateManyDataInput!
+}
+
+input WalletUpdateOneRequiredWithoutTransactionsInput {
   create: WalletCreateWithoutTransactionsInput
   connect: WalletWhereUniqueInput
-  delete: Boolean
   update: WalletUpdateWithoutTransactionsDataInput
   upsert: WalletUpsertWithoutTransactionsInput
 }
@@ -914,7 +1234,7 @@ input WalletUpdateOneWithoutTransactionsInput {
 input WalletUpdateWithoutTransactionsDataInput {
   name: String
   description: String
-  user: UserUpdateOneWithoutWalletsInput
+  user: UserUpdateOneRequiredWithoutWalletsInput
 }
 
 input WalletUpdateWithoutUserDataInput {

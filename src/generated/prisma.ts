@@ -7,40 +7,40 @@ export interface Query {
     users: <T = User[]>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     wallets: <T = Wallet[]>(args: { where?: WalletWhereInput, orderBy?: WalletOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     transactions: <T = Transaction[]>(args: { where?: TransactionWhereInput, orderBy?: TransactionOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    wallet: <T = Wallet | null>(args: { where: WalletWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    transaction: <T = Transaction | null>(args: { where: TransactionWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    user: <T = User>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    wallet: <T = Wallet>(args: { where: WalletWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    transaction: <T = Transaction>(args: { where: TransactionWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     usersConnection: <T = UserConnection>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     walletsConnection: <T = WalletConnection>(args: { where?: WalletWhereInput, orderBy?: WalletOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     transactionsConnection: <T = TransactionConnection>(args: { where?: TransactionWhereInput, orderBy?: TransactionOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+    node: <T = Node>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> 
   }
 
 export interface Mutation {
     createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createWallet: <T = Wallet>(args: { data: WalletCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createTransaction: <T = Transaction>(args: { data: TransactionCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateWallet: <T = Wallet | null>(args: { data: WalletUpdateInput, where: WalletWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateTransaction: <T = Transaction | null>(args: { data: TransactionUpdateInput, where: TransactionWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteWallet: <T = Wallet | null>(args: { where: WalletWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteTransaction: <T = Transaction | null>(args: { where: TransactionWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateUser: <T = User>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateWallet: <T = Wallet>(args: { data: WalletUpdateInput, where: WalletWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateTransaction: <T = Transaction>(args: { data: TransactionUpdateInput, where: TransactionWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteUser: <T = User>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteWallet: <T = Wallet>(args: { where: WalletWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteTransaction: <T = Transaction>(args: { where: TransactionWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertWallet: <T = Wallet>(args: { where: WalletWhereUniqueInput, create: WalletCreateInput, update: WalletUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertTransaction: <T = Transaction>(args: { where: TransactionWhereUniqueInput, create: TransactionCreateInput, update: TransactionUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateInput, where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyWallets: <T = BatchPayload>(args: { data: WalletUpdateInput, where?: WalletWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyTransactions: <T = BatchPayload>(args: { data: TransactionUpdateInput, where?: TransactionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyMutationInput, where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyWallets: <T = BatchPayload>(args: { data: WalletUpdateManyMutationInput, where?: WalletWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyTransactions: <T = BatchPayload>(args: { data: TransactionUpdateManyMutationInput, where?: TransactionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyWallets: <T = BatchPayload>(args: { where?: WalletWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyTransactions: <T = BatchPayload>(args: { where?: TransactionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Subscription {
-    user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    wallet: <T = WalletSubscriptionPayload | null>(args: { where?: WalletSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    transaction: <T = TransactionSubscriptionPayload | null>(args: { where?: TransactionSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> 
+    user: <T = UserSubscriptionPayload>(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    wallet: <T = WalletSubscriptionPayload>(args: { where?: WalletSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    transaction: <T = TransactionSubscriptionPayload>(args: { where?: TransactionSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
   }
 
 export interface Exists {
@@ -109,9 +109,9 @@ type Mutation {
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertWallet(where: WalletWhereUniqueInput!, create: WalletCreateInput!, update: WalletUpdateInput!): Wallet!
   upsertTransaction(where: TransactionWhereUniqueInput!, create: TransactionCreateInput!, update: TransactionUpdateInput!): Transaction!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
-  updateManyWallets(data: WalletUpdateInput!, where: WalletWhereInput): BatchPayload!
-  updateManyTransactions(data: TransactionUpdateInput!, where: TransactionWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyWallets(data: WalletUpdateManyMutationInput!, where: WalletWhereInput): BatchPayload!
+  updateManyTransactions(data: TransactionUpdateManyMutationInput!, where: TransactionWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyWallets(where: WalletWhereInput): BatchPayload!
   deleteManyTransactions(where: TransactionWhereInput): BatchPayload!
@@ -170,12 +170,12 @@ type Subscription {
 
 type Transaction implements Node {
   id: ID!
-  wallet(where: WalletWhereInput): Wallet!
+  wallet: Wallet!
   value: Int!
   type: TRANSACTION_TYPE!
   performedAt: DateTime!
   description: String
-  tags: [String!]
+  tags: [String!]!
 }
 
 enum TRANSACTION_TYPE {
@@ -251,7 +251,152 @@ type TransactionPreviousValues {
   type: TRANSACTION_TYPE!
   performedAt: DateTime!
   description: String
-  tags: [String!]
+  tags: [String!]!
+}
+
+input TransactionScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TransactionScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TransactionScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TransactionScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  value: Int
+
+  """All values that are not equal to given value."""
+  value_not: Int
+
+  """All values that are contained in given list."""
+  value_in: [Int!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [Int!]
+
+  """All values less than the given value."""
+  value_lt: Int
+
+  """All values less than or equal the given value."""
+  value_lte: Int
+
+  """All values greater than the given value."""
+  value_gt: Int
+
+  """All values greater than or equal the given value."""
+  value_gte: Int
+  type: TRANSACTION_TYPE
+
+  """All values that are not equal to given value."""
+  type_not: TRANSACTION_TYPE
+
+  """All values that are contained in given list."""
+  type_in: [TRANSACTION_TYPE!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [TRANSACTION_TYPE!]
+  performedAt: DateTime
+
+  """All values that are not equal to given value."""
+  performedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  performedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  performedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  performedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  performedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  performedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  performedAt_gte: DateTime
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
 }
 
 type TransactionSubscriptionPayload {
@@ -299,7 +444,23 @@ input TransactionUpdateInput {
   performedAt: DateTime
   description: String
   tags: TransactionUpdatetagsInput
-  wallet: WalletUpdateOneWithoutTransactionsInput
+  wallet: WalletUpdateOneRequiredWithoutTransactionsInput
+}
+
+input TransactionUpdateManyDataInput {
+  value: Int
+  type: TRANSACTION_TYPE
+  performedAt: DateTime
+  description: String
+  tags: TransactionUpdatetagsInput
+}
+
+input TransactionUpdateManyMutationInput {
+  value: Int
+  type: TRANSACTION_TYPE
+  performedAt: DateTime
+  description: String
+  tags: TransactionUpdatetagsInput
 }
 
 input TransactionUpdateManyWithoutWalletInput {
@@ -308,7 +469,14 @@ input TransactionUpdateManyWithoutWalletInput {
   disconnect: [TransactionWhereUniqueInput!]
   delete: [TransactionWhereUniqueInput!]
   update: [TransactionUpdateWithWhereUniqueWithoutWalletInput!]
+  updateMany: [TransactionUpdateManyWithWhereNestedInput!]
+  deleteMany: [TransactionScalarWhereInput!]
   upsert: [TransactionUpsertWithWhereUniqueWithoutWalletInput!]
+}
+
+input TransactionUpdateManyWithWhereNestedInput {
+  where: TransactionScalarWhereInput!
+  data: TransactionUpdateManyDataInput!
 }
 
 input TransactionUpdatetagsInput {
@@ -601,10 +769,15 @@ input UserUpdateInput {
   wallets: WalletUpdateManyWithoutUserInput
 }
 
-input UserUpdateOneWithoutWalletsInput {
+input UserUpdateManyMutationInput {
+  name: String
+  email: String
+  password: String
+}
+
+input UserUpdateOneRequiredWithoutWalletsInput {
   create: UserCreateWithoutWalletsInput
   connect: UserWhereUniqueInput
-  delete: Boolean
   update: UserUpdateWithoutWalletsDataInput
   upsert: UserUpsertWithoutWalletsInput
 }
@@ -845,7 +1018,7 @@ input UserWhereUniqueInput {
 
 type Wallet implements Node {
   id: ID!
-  user(where: UserWhereInput): User!
+  user: User!
   name: String!
   description: String
   transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction!]
@@ -918,6 +1091,137 @@ type WalletPreviousValues {
   description: String
 }
 
+input WalletScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [WalletScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [WalletScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [WalletScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+}
+
 type WalletSubscriptionPayload {
   mutation: MutationType!
   node: Wallet
@@ -960,8 +1264,18 @@ input WalletSubscriptionWhereInput {
 input WalletUpdateInput {
   name: String
   description: String
-  user: UserUpdateOneWithoutWalletsInput
+  user: UserUpdateOneRequiredWithoutWalletsInput
   transactions: TransactionUpdateManyWithoutWalletInput
+}
+
+input WalletUpdateManyDataInput {
+  name: String
+  description: String
+}
+
+input WalletUpdateManyMutationInput {
+  name: String
+  description: String
 }
 
 input WalletUpdateManyWithoutUserInput {
@@ -970,13 +1284,19 @@ input WalletUpdateManyWithoutUserInput {
   disconnect: [WalletWhereUniqueInput!]
   delete: [WalletWhereUniqueInput!]
   update: [WalletUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [WalletUpdateManyWithWhereNestedInput!]
+  deleteMany: [WalletScalarWhereInput!]
   upsert: [WalletUpsertWithWhereUniqueWithoutUserInput!]
 }
 
-input WalletUpdateOneWithoutTransactionsInput {
+input WalletUpdateManyWithWhereNestedInput {
+  where: WalletScalarWhereInput!
+  data: WalletUpdateManyDataInput!
+}
+
+input WalletUpdateOneRequiredWithoutTransactionsInput {
   create: WalletCreateWithoutTransactionsInput
   connect: WalletWhereUniqueInput
-  delete: Boolean
   update: WalletUpdateWithoutTransactionsDataInput
   upsert: WalletUpsertWithoutTransactionsInput
 }
@@ -984,7 +1304,7 @@ input WalletUpdateOneWithoutTransactionsInput {
 input WalletUpdateWithoutTransactionsDataInput {
   name: String
   description: String
-  user: UserUpdateOneWithoutWalletsInput
+  user: UserUpdateOneRequiredWithoutWalletsInput
 }
 
 input WalletUpdateWithoutUserDataInput {
@@ -1155,8 +1475,27 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
  * Types
 */
 
+export type MutationType =   'CREATED' |
+  'UPDATED' |
+  'DELETED'
+
 export type TRANSACTION_TYPE =   'EXPENSE' |
   'INCOME'
+
+export type TransactionOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'value_ASC' |
+  'value_DESC' |
+  'type_ASC' |
+  'type_DESC' |
+  'performedAt_ASC' |
+  'performedAt_DESC' |
+  'description_ASC' |
+  'description_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
 
 export type UserOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -1182,30 +1521,278 @@ export type WalletOrderByInput =   'id_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
-export type TransactionOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'value_ASC' |
-  'value_DESC' |
-  'type_ASC' |
-  'type_DESC' |
-  'performedAt_ASC' |
-  'performedAt_DESC' |
-  'description_ASC' |
-  'description_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC'
-
-export type MutationType =   'CREATED' |
-  'UPDATED' |
-  'DELETED'
-
-export interface WalletCreateInput {
-  name: String
+export interface TransactionCreateInput {
+  value: Int
+  type: TRANSACTION_TYPE
+  performedAt: DateTime
   description?: String
-  user: UserCreateOneWithoutWalletsInput
-  transactions?: TransactionCreateManyWithoutWalletInput
+  tags?: TransactionCreatetagsInput
+  wallet: WalletCreateOneWithoutTransactionsInput
+}
+
+export interface TransactionCreateManyWithoutWalletInput {
+  create?: TransactionCreateWithoutWalletInput[] | TransactionCreateWithoutWalletInput
+  connect?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
+}
+
+export interface TransactionCreatetagsInput {
+  set?: String[] | String
+}
+
+export interface TransactionCreateWithoutWalletInput {
+  value: Int
+  type: TRANSACTION_TYPE
+  performedAt: DateTime
+  description?: String
+  tags?: TransactionCreatetagsInput
+}
+
+export interface TransactionScalarWhereInput {
+  AND?: TransactionScalarWhereInput[] | TransactionScalarWhereInput
+  OR?: TransactionScalarWhereInput[] | TransactionScalarWhereInput
+  NOT?: TransactionScalarWhereInput[] | TransactionScalarWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  value?: Int
+  value_not?: Int
+  value_in?: Int[] | Int
+  value_not_in?: Int[] | Int
+  value_lt?: Int
+  value_lte?: Int
+  value_gt?: Int
+  value_gte?: Int
+  type?: TRANSACTION_TYPE
+  type_not?: TRANSACTION_TYPE
+  type_in?: TRANSACTION_TYPE[] | TRANSACTION_TYPE
+  type_not_in?: TRANSACTION_TYPE[] | TRANSACTION_TYPE
+  performedAt?: DateTime
+  performedAt_not?: DateTime
+  performedAt_in?: DateTime[] | DateTime
+  performedAt_not_in?: DateTime[] | DateTime
+  performedAt_lt?: DateTime
+  performedAt_lte?: DateTime
+  performedAt_gt?: DateTime
+  performedAt_gte?: DateTime
+  description?: String
+  description_not?: String
+  description_in?: String[] | String
+  description_not_in?: String[] | String
+  description_lt?: String
+  description_lte?: String
+  description_gt?: String
+  description_gte?: String
+  description_contains?: String
+  description_not_contains?: String
+  description_starts_with?: String
+  description_not_starts_with?: String
+  description_ends_with?: String
+  description_not_ends_with?: String
+}
+
+export interface TransactionSubscriptionWhereInput {
+  AND?: TransactionSubscriptionWhereInput[] | TransactionSubscriptionWhereInput
+  OR?: TransactionSubscriptionWhereInput[] | TransactionSubscriptionWhereInput
+  NOT?: TransactionSubscriptionWhereInput[] | TransactionSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: TransactionWhereInput
+}
+
+export interface TransactionUpdateInput {
+  value?: Int
+  type?: TRANSACTION_TYPE
+  performedAt?: DateTime
+  description?: String
+  tags?: TransactionUpdatetagsInput
+  wallet?: WalletUpdateOneRequiredWithoutTransactionsInput
+}
+
+export interface TransactionUpdateManyDataInput {
+  value?: Int
+  type?: TRANSACTION_TYPE
+  performedAt?: DateTime
+  description?: String
+  tags?: TransactionUpdatetagsInput
+}
+
+export interface TransactionUpdateManyMutationInput {
+  value?: Int
+  type?: TRANSACTION_TYPE
+  performedAt?: DateTime
+  description?: String
+  tags?: TransactionUpdatetagsInput
+}
+
+export interface TransactionUpdateManyWithoutWalletInput {
+  create?: TransactionCreateWithoutWalletInput[] | TransactionCreateWithoutWalletInput
+  connect?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
+  disconnect?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
+  delete?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
+  update?: TransactionUpdateWithWhereUniqueWithoutWalletInput[] | TransactionUpdateWithWhereUniqueWithoutWalletInput
+  updateMany?: TransactionUpdateManyWithWhereNestedInput[] | TransactionUpdateManyWithWhereNestedInput
+  deleteMany?: TransactionScalarWhereInput[] | TransactionScalarWhereInput
+  upsert?: TransactionUpsertWithWhereUniqueWithoutWalletInput[] | TransactionUpsertWithWhereUniqueWithoutWalletInput
+}
+
+export interface TransactionUpdateManyWithWhereNestedInput {
+  where: TransactionScalarWhereInput
+  data: TransactionUpdateManyDataInput
+}
+
+export interface TransactionUpdatetagsInput {
+  set?: String[] | String
+}
+
+export interface TransactionUpdateWithoutWalletDataInput {
+  value?: Int
+  type?: TRANSACTION_TYPE
+  performedAt?: DateTime
+  description?: String
+  tags?: TransactionUpdatetagsInput
+}
+
+export interface TransactionUpdateWithWhereUniqueWithoutWalletInput {
+  where: TransactionWhereUniqueInput
+  data: TransactionUpdateWithoutWalletDataInput
+}
+
+export interface TransactionUpsertWithWhereUniqueWithoutWalletInput {
+  where: TransactionWhereUniqueInput
+  update: TransactionUpdateWithoutWalletDataInput
+  create: TransactionCreateWithoutWalletInput
+}
+
+export interface TransactionWhereInput {
+  AND?: TransactionWhereInput[] | TransactionWhereInput
+  OR?: TransactionWhereInput[] | TransactionWhereInput
+  NOT?: TransactionWhereInput[] | TransactionWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  value?: Int
+  value_not?: Int
+  value_in?: Int[] | Int
+  value_not_in?: Int[] | Int
+  value_lt?: Int
+  value_lte?: Int
+  value_gt?: Int
+  value_gte?: Int
+  type?: TRANSACTION_TYPE
+  type_not?: TRANSACTION_TYPE
+  type_in?: TRANSACTION_TYPE[] | TRANSACTION_TYPE
+  type_not_in?: TRANSACTION_TYPE[] | TRANSACTION_TYPE
+  performedAt?: DateTime
+  performedAt_not?: DateTime
+  performedAt_in?: DateTime[] | DateTime
+  performedAt_not_in?: DateTime[] | DateTime
+  performedAt_lt?: DateTime
+  performedAt_lte?: DateTime
+  performedAt_gt?: DateTime
+  performedAt_gte?: DateTime
+  description?: String
+  description_not?: String
+  description_in?: String[] | String
+  description_not_in?: String[] | String
+  description_lt?: String
+  description_lte?: String
+  description_gt?: String
+  description_gte?: String
+  description_contains?: String
+  description_not_contains?: String
+  description_starts_with?: String
+  description_not_starts_with?: String
+  description_ends_with?: String
+  description_not_ends_with?: String
+  wallet?: WalletWhereInput
+}
+
+export interface TransactionWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface UserCreateInput {
+  name: String
+  email: String
+  password: String
+  wallets?: WalletCreateManyWithoutUserInput
+}
+
+export interface UserCreateOneWithoutWalletsInput {
+  create?: UserCreateWithoutWalletsInput
+  connect?: UserWhereUniqueInput
+}
+
+export interface UserCreateWithoutWalletsInput {
+  name: String
+  email: String
+  password: String
+}
+
+export interface UserSubscriptionWhereInput {
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: UserWhereInput
+}
+
+export interface UserUpdateInput {
+  name?: String
+  email?: String
+  password?: String
+  wallets?: WalletUpdateManyWithoutUserInput
+}
+
+export interface UserUpdateManyMutationInput {
+  name?: String
+  email?: String
+  password?: String
+}
+
+export interface UserUpdateOneRequiredWithoutWalletsInput {
+  create?: UserCreateWithoutWalletsInput
+  connect?: UserWhereUniqueInput
+  update?: UserUpdateWithoutWalletsDataInput
+  upsert?: UserUpsertWithoutWalletsInput
+}
+
+export interface UserUpdateWithoutWalletsDataInput {
+  name?: String
+  email?: String
+  password?: String
+}
+
+export interface UserUpsertWithoutWalletsInput {
+  update: UserUpdateWithoutWalletsDataInput
+  create: UserCreateWithoutWalletsInput
 }
 
 export interface UserWhereInput {
@@ -1289,25 +1876,21 @@ export interface UserWhereInput {
   wallets_none?: WalletWhereInput
 }
 
-export interface TransactionUpdatetagsInput {
-  set?: String[] | String
+export interface UserWhereUniqueInput {
+  id?: ID_Input
+  email?: String
 }
 
-export interface TransactionUpdateManyWithoutWalletInput {
-  create?: TransactionCreateWithoutWalletInput[] | TransactionCreateWithoutWalletInput
-  connect?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
-  disconnect?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
-  delete?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
-  update?: TransactionUpdateWithWhereUniqueWithoutWalletInput[] | TransactionUpdateWithWhereUniqueWithoutWalletInput
-  upsert?: TransactionUpsertWithWhereUniqueWithoutWalletInput[] | TransactionUpsertWithWhereUniqueWithoutWalletInput
-}
-
-export interface TransactionUpdateWithoutWalletDataInput {
-  value?: Int
-  type?: TRANSACTION_TYPE
-  performedAt?: DateTime
+export interface WalletCreateInput {
+  name: String
   description?: String
-  tags?: TransactionUpdatetagsInput
+  user: UserCreateOneWithoutWalletsInput
+  transactions?: TransactionCreateManyWithoutWalletInput
+}
+
+export interface WalletCreateManyWithoutUserInput {
+  create?: WalletCreateWithoutUserInput[] | WalletCreateWithoutUserInput
+  connect?: WalletWhereUniqueInput[] | WalletWhereUniqueInput
 }
 
 export interface WalletCreateOneWithoutTransactionsInput {
@@ -1315,11 +1898,64 @@ export interface WalletCreateOneWithoutTransactionsInput {
   connect?: WalletWhereUniqueInput
 }
 
-export interface UserCreateInput {
+export interface WalletCreateWithoutTransactionsInput {
   name: String
-  email: String
-  password: String
-  wallets?: WalletCreateManyWithoutUserInput
+  description?: String
+  user: UserCreateOneWithoutWalletsInput
+}
+
+export interface WalletCreateWithoutUserInput {
+  name: String
+  description?: String
+  transactions?: TransactionCreateManyWithoutWalletInput
+}
+
+export interface WalletScalarWhereInput {
+  AND?: WalletScalarWhereInput[] | WalletScalarWhereInput
+  OR?: WalletScalarWhereInput[] | WalletScalarWhereInput
+  NOT?: WalletScalarWhereInput[] | WalletScalarWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  name?: String
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+  description?: String
+  description_not?: String
+  description_in?: String[] | String
+  description_not_in?: String[] | String
+  description_lt?: String
+  description_lte?: String
+  description_gt?: String
+  description_gte?: String
+  description_contains?: String
+  description_not_contains?: String
+  description_starts_with?: String
+  description_not_starts_with?: String
+  description_ends_with?: String
+  description_not_ends_with?: String
 }
 
 export interface WalletSubscriptionWhereInput {
@@ -1333,9 +1969,61 @@ export interface WalletSubscriptionWhereInput {
   node?: WalletWhereInput
 }
 
-export interface WalletCreateManyWithoutUserInput {
+export interface WalletUpdateInput {
+  name?: String
+  description?: String
+  user?: UserUpdateOneRequiredWithoutWalletsInput
+  transactions?: TransactionUpdateManyWithoutWalletInput
+}
+
+export interface WalletUpdateManyDataInput {
+  name?: String
+  description?: String
+}
+
+export interface WalletUpdateManyMutationInput {
+  name?: String
+  description?: String
+}
+
+export interface WalletUpdateManyWithoutUserInput {
   create?: WalletCreateWithoutUserInput[] | WalletCreateWithoutUserInput
   connect?: WalletWhereUniqueInput[] | WalletWhereUniqueInput
+  disconnect?: WalletWhereUniqueInput[] | WalletWhereUniqueInput
+  delete?: WalletWhereUniqueInput[] | WalletWhereUniqueInput
+  update?: WalletUpdateWithWhereUniqueWithoutUserInput[] | WalletUpdateWithWhereUniqueWithoutUserInput
+  updateMany?: WalletUpdateManyWithWhereNestedInput[] | WalletUpdateManyWithWhereNestedInput
+  deleteMany?: WalletScalarWhereInput[] | WalletScalarWhereInput
+  upsert?: WalletUpsertWithWhereUniqueWithoutUserInput[] | WalletUpsertWithWhereUniqueWithoutUserInput
+}
+
+export interface WalletUpdateManyWithWhereNestedInput {
+  where: WalletScalarWhereInput
+  data: WalletUpdateManyDataInput
+}
+
+export interface WalletUpdateOneRequiredWithoutTransactionsInput {
+  create?: WalletCreateWithoutTransactionsInput
+  connect?: WalletWhereUniqueInput
+  update?: WalletUpdateWithoutTransactionsDataInput
+  upsert?: WalletUpsertWithoutTransactionsInput
+}
+
+export interface WalletUpdateWithoutTransactionsDataInput {
+  name?: String
+  description?: String
+  user?: UserUpdateOneRequiredWithoutWalletsInput
+}
+
+export interface WalletUpdateWithoutUserDataInput {
+  name?: String
+  description?: String
+  transactions?: TransactionUpdateManyWithoutWalletInput
+}
+
+export interface WalletUpdateWithWhereUniqueWithoutUserInput {
+  where: WalletWhereUniqueInput
+  data: WalletUpdateWithoutUserDataInput
 }
 
 export interface WalletUpsertWithoutTransactionsInput {
@@ -1343,81 +2031,10 @@ export interface WalletUpsertWithoutTransactionsInput {
   create: WalletCreateWithoutTransactionsInput
 }
 
-export interface WalletCreateWithoutUserInput {
-  name: String
-  description?: String
-  transactions?: TransactionCreateManyWithoutWalletInput
-}
-
-export interface WalletWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface TransactionCreateManyWithoutWalletInput {
-  create?: TransactionCreateWithoutWalletInput[] | TransactionCreateWithoutWalletInput
-  connect?: TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
-}
-
-export interface WalletUpdateWithoutTransactionsDataInput {
-  name?: String
-  description?: String
-  user?: UserUpdateOneWithoutWalletsInput
-}
-
-export interface TransactionCreateWithoutWalletInput {
-  value: Int
-  type: TRANSACTION_TYPE
-  performedAt: DateTime
-  description?: String
-  tags?: TransactionCreatetagsInput
-}
-
-export interface TransactionUpdateInput {
-  value?: Int
-  type?: TRANSACTION_TYPE
-  performedAt?: DateTime
-  description?: String
-  tags?: TransactionUpdatetagsInput
-  wallet?: WalletUpdateOneWithoutTransactionsInput
-}
-
-export interface TransactionCreatetagsInput {
-  set?: String[] | String
-}
-
-export interface UserUpdateWithoutWalletsDataInput {
-  name?: String
-  email?: String
-  password?: String
-}
-
-export interface TransactionUpdateWithWhereUniqueWithoutWalletInput {
-  where: TransactionWhereUniqueInput
-  data: TransactionUpdateWithoutWalletDataInput
-}
-
-export interface WalletUpdateInput {
-  name?: String
-  description?: String
-  user?: UserUpdateOneWithoutWalletsInput
-  transactions?: TransactionUpdateManyWithoutWalletInput
-}
-
-export interface UserCreateOneWithoutWalletsInput {
-  create?: UserCreateWithoutWalletsInput
-  connect?: UserWhereUniqueInput
-}
-
-export interface TransactionUpsertWithWhereUniqueWithoutWalletInput {
-  where: TransactionWhereUniqueInput
-  update: TransactionUpdateWithoutWalletDataInput
-  create: TransactionCreateWithoutWalletInput
-}
-
-export interface UserCreateWithoutWalletsInput {
-  name: String
-  email: String
-  password: String
+export interface WalletUpsertWithWhereUniqueWithoutUserInput {
+  where: WalletWhereUniqueInput
+  update: WalletUpdateWithoutUserDataInput
+  create: WalletCreateWithoutUserInput
 }
 
 export interface WalletWhereInput {
@@ -1472,159 +2089,8 @@ export interface WalletWhereInput {
   transactions_none?: TransactionWhereInput
 }
 
-export interface TransactionCreateInput {
-  value: Int
-  type: TRANSACTION_TYPE
-  performedAt: DateTime
-  description?: String
-  tags?: TransactionCreatetagsInput
-  wallet: WalletCreateOneWithoutTransactionsInput
-}
-
-export interface UserWhereUniqueInput {
+export interface WalletWhereUniqueInput {
   id?: ID_Input
-  email?: String
-}
-
-export interface TransactionWhereInput {
-  AND?: TransactionWhereInput[] | TransactionWhereInput
-  OR?: TransactionWhereInput[] | TransactionWhereInput
-  NOT?: TransactionWhereInput[] | TransactionWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  value?: Int
-  value_not?: Int
-  value_in?: Int[] | Int
-  value_not_in?: Int[] | Int
-  value_lt?: Int
-  value_lte?: Int
-  value_gt?: Int
-  value_gte?: Int
-  type?: TRANSACTION_TYPE
-  type_not?: TRANSACTION_TYPE
-  type_in?: TRANSACTION_TYPE[] | TRANSACTION_TYPE
-  type_not_in?: TRANSACTION_TYPE[] | TRANSACTION_TYPE
-  performedAt?: DateTime
-  performedAt_not?: DateTime
-  performedAt_in?: DateTime[] | DateTime
-  performedAt_not_in?: DateTime[] | DateTime
-  performedAt_lt?: DateTime
-  performedAt_lte?: DateTime
-  performedAt_gt?: DateTime
-  performedAt_gte?: DateTime
-  description?: String
-  description_not?: String
-  description_in?: String[] | String
-  description_not_in?: String[] | String
-  description_lt?: String
-  description_lte?: String
-  description_gt?: String
-  description_gte?: String
-  description_contains?: String
-  description_not_contains?: String
-  description_starts_with?: String
-  description_not_starts_with?: String
-  description_ends_with?: String
-  description_not_ends_with?: String
-  wallet?: WalletWhereInput
-}
-
-export interface WalletUpdateOneWithoutTransactionsInput {
-  create?: WalletCreateWithoutTransactionsInput
-  connect?: WalletWhereUniqueInput
-  delete?: Boolean
-  update?: WalletUpdateWithoutTransactionsDataInput
-  upsert?: WalletUpsertWithoutTransactionsInput
-}
-
-export interface WalletCreateWithoutTransactionsInput {
-  name: String
-  description?: String
-  user: UserCreateOneWithoutWalletsInput
-}
-
-export interface UserUpdateOneWithoutWalletsInput {
-  create?: UserCreateWithoutWalletsInput
-  connect?: UserWhereUniqueInput
-  delete?: Boolean
-  update?: UserUpdateWithoutWalletsDataInput
-  upsert?: UserUpsertWithoutWalletsInput
-}
-
-export interface WalletUpdateWithoutUserDataInput {
-  name?: String
-  description?: String
-  transactions?: TransactionUpdateManyWithoutWalletInput
-}
-
-export interface WalletUpdateWithWhereUniqueWithoutUserInput {
-  where: WalletWhereUniqueInput
-  data: WalletUpdateWithoutUserDataInput
-}
-
-export interface WalletUpdateManyWithoutUserInput {
-  create?: WalletCreateWithoutUserInput[] | WalletCreateWithoutUserInput
-  connect?: WalletWhereUniqueInput[] | WalletWhereUniqueInput
-  disconnect?: WalletWhereUniqueInput[] | WalletWhereUniqueInput
-  delete?: WalletWhereUniqueInput[] | WalletWhereUniqueInput
-  update?: WalletUpdateWithWhereUniqueWithoutUserInput[] | WalletUpdateWithWhereUniqueWithoutUserInput
-  upsert?: WalletUpsertWithWhereUniqueWithoutUserInput[] | WalletUpsertWithWhereUniqueWithoutUserInput
-}
-
-export interface UserUpdateInput {
-  name?: String
-  email?: String
-  password?: String
-  wallets?: WalletUpdateManyWithoutUserInput
-}
-
-export interface WalletUpsertWithWhereUniqueWithoutUserInput {
-  where: WalletWhereUniqueInput
-  update: WalletUpdateWithoutUserDataInput
-  create: WalletCreateWithoutUserInput
-}
-
-export interface UserUpsertWithoutWalletsInput {
-  update: UserUpdateWithoutWalletsDataInput
-  create: UserCreateWithoutWalletsInput
-}
-
-export interface TransactionWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface UserSubscriptionWhereInput {
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: UserWhereInput
-}
-
-export interface TransactionSubscriptionWhereInput {
-  AND?: TransactionSubscriptionWhereInput[] | TransactionSubscriptionWhereInput
-  OR?: TransactionSubscriptionWhereInput[] | TransactionSubscriptionWhereInput
-  NOT?: TransactionSubscriptionWhereInput[] | TransactionSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: TransactionWhereInput
 }
 
 /*
@@ -1635,13 +2101,20 @@ export interface Node {
   id: ID_Output
 }
 
-export interface TransactionPreviousValues {
-  id: ID_Output
-  value: Int
-  type: TRANSACTION_TYPE
-  performedAt: DateTime
-  description?: String
-  tags?: String[]
+export interface AggregateTransaction {
+  count: Int
+}
+
+export interface AggregateUser {
+  count: Int
+}
+
+export interface AggregateWallet {
+  count: Int
+}
+
+export interface BatchPayload {
+  count: Long
 }
 
 /*
@@ -1655,24 +2128,6 @@ export interface PageInfo {
   endCursor?: String
 }
 
-export interface Wallet extends Node {
-  id: ID_Output
-  user: User
-  name: String
-  description?: String
-  transactions?: Transaction[]
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface UserConnection {
-  pageInfo: PageInfo
-  edges: UserEdge[]
-  aggregate: AggregateUser
-}
-
 export interface Transaction extends Node {
   id: ID_Output
   wallet: Wallet
@@ -1680,11 +2135,7 @@ export interface Transaction extends Node {
   type: TRANSACTION_TYPE
   performedAt: DateTime
   description?: String
-  tags?: String[]
-}
-
-export interface AggregateTransaction {
-  count: Int
+  tags: String[]
 }
 
 /*
@@ -1697,17 +2148,29 @@ export interface TransactionConnection {
   aggregate: AggregateTransaction
 }
 
-export interface BatchPayload {
-  count: Long
-}
-
 /*
  * An edge in a connection.
 
  */
-export interface WalletEdge {
-  node: Wallet
+export interface TransactionEdge {
+  node: Transaction
   cursor: String
+}
+
+export interface TransactionPreviousValues {
+  id: ID_Output
+  value: Int
+  type: TRANSACTION_TYPE
+  performedAt: DateTime
+  description?: String
+  tags: String[]
+}
+
+export interface TransactionSubscriptionPayload {
+  mutation: MutationType
+  node?: Transaction
+  updatedFields?: String[]
+  previousValues?: TransactionPreviousValues
 }
 
 export interface User extends Node {
@@ -1720,15 +2183,23 @@ export interface User extends Node {
   wallets?: Wallet[]
 }
 
-export interface AggregateUser {
-  count: Int
+/*
+ * A connection to a list of items.
+
+ */
+export interface UserConnection {
+  pageInfo: PageInfo
+  edges: UserEdge[]
+  aggregate: AggregateUser
 }
 
-export interface TransactionSubscriptionPayload {
-  mutation: MutationType
-  node?: Transaction
-  updatedFields?: String[]
-  previousValues?: TransactionPreviousValues
+/*
+ * An edge in a connection.
+
+ */
+export interface UserEdge {
+  node: User
+  cursor: String
 }
 
 export interface UserPreviousValues {
@@ -1747,35 +2218,12 @@ export interface UserSubscriptionPayload {
   previousValues?: UserPreviousValues
 }
 
-export interface WalletSubscriptionPayload {
-  mutation: MutationType
-  node?: Wallet
-  updatedFields?: String[]
-  previousValues?: WalletPreviousValues
-}
-
-export interface WalletPreviousValues {
+export interface Wallet extends Node {
   id: ID_Output
+  user: User
   name: String
   description?: String
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface TransactionEdge {
-  node: Transaction
-  cursor: String
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface UserEdge {
-  node: User
-  cursor: String
+  transactions?: Transaction[]
 }
 
 /*
@@ -1788,14 +2236,34 @@ export interface WalletConnection {
   aggregate: AggregateWallet
 }
 
-export interface AggregateWallet {
-  count: Int
+/*
+ * An edge in a connection.
+
+ */
+export interface WalletEdge {
+  node: Wallet
+  cursor: String
+}
+
+export interface WalletPreviousValues {
+  id: ID_Output
+  name: String
+  description?: String
+}
+
+export interface WalletSubscriptionPayload {
+  mutation: MutationType
+  node?: Wallet
+  updatedFields?: String[]
+  previousValues?: WalletPreviousValues
 }
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+The `Boolean` scalar type represents `true` or `false`.
 */
-export type Int = number
+export type Boolean = boolean
+
+export type DateTime = Date | string
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
@@ -1804,17 +2272,15 @@ export type ID_Input = string | number
 export type ID_Output = string
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
-export type Boolean = boolean
+export type Int = number
 
 /*
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
 */
 export type Long = string
-
-export type DateTime = Date | string
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
