@@ -1,11 +1,16 @@
 type User {
   id: ID! @unique
-  name: String!
+  name: String
   email: String! @unique
-  password: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   wallets: [Wallet!]!
+}
+
+type AccessToken {
+  id: ID! @unique
+  user: User!
+  expiresAt: DateTime!
 }
 
 type Wallet {

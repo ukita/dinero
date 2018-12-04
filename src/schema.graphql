@@ -2,18 +2,19 @@
 
 type Query {
   viewer: Viewer
+  checkToken(token: ID!): Boolean
 }
 
 type Mutation {
-  signup(name: String!, email: String!, password: String!): AuthPayload!
-  login(email: String!, password: String!): AuthPayload!
+  signup(email: String!): SignupPayload!
+  confirmToken(token: ID!): ConfirmTokenPayload!
   addWallet(name: String!, description: String): Wallet!
   addTransaction(
-    walletId: ID!,
-    value: Float!,
-    type: TRANSACTION_TYPE!,
-    description: String,
-    tags: [String!],
+    walletId: ID!
+    value: Float!
+    type: TRANSACTION_TYPE!
+    description: String
+    tags: [String!]
     performedAt: DateTime!
   ): Transaction!
 }
@@ -23,18 +24,17 @@ type Viewer {
   wallets(id: String): [Wallet!]!
 }
 
-type AuthPayload {
-  token: String!
-  user: User!
+type CheckTokenPayload {
+  message: String!
 }
 
-type User {
-  id: ID!
-  name: String!
-  email: String!
-  wallets: [Wallet!]!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+type SignupPayload {
+  message: String!
+}
+
+type ConfirmTokenPayload {
+  token: String!
+  user: User!
 }
 
 type Wallet {

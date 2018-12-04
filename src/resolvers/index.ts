@@ -2,7 +2,7 @@ import { extractFragmentReplacements } from 'prisma-binding'
 
 import { Query } from './Query'
 import Mutation from './Mutation'
-import { AuthPayload } from './AuthPayload'
+import { ConfirmTokenPayload } from './ConfirmTokenPayload'
 import { Wallet } from './Wallet'
 import { Transaction } from './Transaction'
 import { Viewer } from './Viewer'
@@ -12,7 +12,7 @@ export const resolvers: any = {
 
   Mutation,
 
-  AuthPayload,
+  ConfirmTokenPayload,
   Wallet,
   Transaction,
   Viewer

@@ -2389,7 +2389,7 @@ graphcool-yml@0.4.15:
     scuid "^1.0.2"
     yaml-ast-parser "^0.0.40"
 
-graphql-binding@2.3.5:
+graphql-binding@2.3.5, graphql-binding@^2.3.5:
   version "2.3.5"
   resolved "https://registry.yarnpkg.com/graphql-binding/-/graphql-binding-2.3.5.tgz#b3a7ee91f82f94f044c9902b08f888ef4bf0c6a9"
   integrity sha512-COtcQzRIJU3MLJ+NOiVtN0UrLS/ZknZRbAqPIRmK4oAQlvBhY4M903m6RoS4kRW1uk/aFuQyEqyj4lbzHoLjfw==
