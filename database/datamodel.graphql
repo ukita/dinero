@@ -2,15 +2,11 @@ type User {
   id: ID! @unique
   name: String
   email: String! @unique
+  token: String @unique
+  tokenExpiry: Float
   createdAt: DateTime!
   updatedAt: DateTime!
   wallets: [Wallet!]!
-}
-
-type AccessToken {
-  id: ID! @unique
-  user: User!
-  expiresAt: DateTime!
 }
 
 type Wallet {

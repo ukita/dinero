@@ -4,60 +4,49 @@ import { Options } from 'graphql-binding'
 import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 
 export interface Query {
-    accessTokens: <T = AccessToken[]>(args: { where?: AccessTokenWhereInput, orderBy?: AccessTokenOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    users: <T = User[]>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     wallets: <T = Wallet[]>(args: { where?: WalletWhereInput, orderBy?: WalletOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     transactions: <T = Transaction[]>(args: { where?: TransactionWhereInput, orderBy?: TransactionOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    users: <T = User[]>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    accessToken: <T = AccessToken>(args: { where: AccessTokenWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    user: <T = User>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     wallet: <T = Wallet>(args: { where: WalletWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     transaction: <T = Transaction>(args: { where: TransactionWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    user: <T = User>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    accessTokensConnection: <T = AccessTokenConnection>(args: { where?: AccessTokenWhereInput, orderBy?: AccessTokenOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    usersConnection: <T = UserConnection>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     walletsConnection: <T = WalletConnection>(args: { where?: WalletWhereInput, orderBy?: WalletOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     transactionsConnection: <T = TransactionConnection>(args: { where?: TransactionWhereInput, orderBy?: TransactionOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    usersConnection: <T = UserConnection>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     node: <T = Node>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> 
   }
 
 export interface Mutation {
-    createAccessToken: <T = AccessToken>(args: { data: AccessTokenCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createWallet: <T = Wallet>(args: { data: WalletCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createTransaction: <T = Transaction>(args: { data: TransactionCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateAccessToken: <T = AccessToken>(args: { data: AccessTokenUpdateInput, where: AccessTokenWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateUser: <T = User>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateWallet: <T = Wallet>(args: { data: WalletUpdateInput, where: WalletWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateTransaction: <T = Transaction>(args: { data: TransactionUpdateInput, where: TransactionWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    updateUser: <T = User>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    deleteAccessToken: <T = AccessToken>(args: { where: AccessTokenWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteUser: <T = User>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteWallet: <T = Wallet>(args: { where: WalletWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteTransaction: <T = Transaction>(args: { where: TransactionWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    deleteUser: <T = User>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    upsertAccessToken: <T = AccessToken>(args: { where: AccessTokenWhereUniqueInput, create: AccessTokenCreateInput, update: AccessTokenUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertWallet: <T = Wallet>(args: { where: WalletWhereUniqueInput, create: WalletCreateInput, update: WalletUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertTransaction: <T = Transaction>(args: { where: TransactionWhereUniqueInput, create: TransactionCreateInput, update: TransactionUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyAccessTokens: <T = BatchPayload>(args: { data: AccessTokenUpdateManyMutationInput, where?: AccessTokenWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyMutationInput, where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyWallets: <T = BatchPayload>(args: { data: WalletUpdateManyMutationInput, where?: WalletWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyTransactions: <T = BatchPayload>(args: { data: TransactionUpdateManyMutationInput, where?: TransactionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyMutationInput, where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyAccessTokens: <T = BatchPayload>(args: { where?: AccessTokenWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyWallets: <T = BatchPayload>(args: { where?: WalletWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyTransactions: <T = BatchPayload>(args: { where?: TransactionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+    deleteManyTransactions: <T = BatchPayload>(args: { where?: TransactionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Subscription {
-    accessToken: <T = AccessTokenSubscriptionPayload>(args: { where?: AccessTokenSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    user: <T = UserSubscriptionPayload>(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     wallet: <T = WalletSubscriptionPayload>(args: { where?: WalletSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
-    transaction: <T = TransactionSubscriptionPayload>(args: { where?: TransactionSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
-    user: <T = UserSubscriptionPayload>(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
+    transaction: <T = TransactionSubscriptionPayload>(args: { where?: TransactionSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
   }
 
 export interface Exists {
-  AccessToken: (where?: AccessTokenWhereInput) => Promise<boolean>
+  User: (where?: UserWhereInput) => Promise<boolean>
   Wallet: (where?: WalletWhereInput) => Promise<boolean>
   Transaction: (where?: TransactionWhereInput) => Promise<boolean>
-  User: (where?: UserWhereInput) => Promise<boolean>
 }
 
 export interface Prisma {
@@ -82,183 +71,7 @@ export interface BindingConstructor<T> {
  * Type Defs
 */
 
-const typeDefs = `type AccessToken implements Node {
-  id: ID!
-  user: User!
-  expiresAt: DateTime!
-}
-
-"""A connection to a list of items."""
-type AccessTokenConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [AccessTokenEdge]!
-  aggregate: AggregateAccessToken!
-}
-
-input AccessTokenCreateInput {
-  expiresAt: DateTime!
-  user: UserCreateOneInput!
-}
-
-"""An edge in a connection."""
-type AccessTokenEdge {
-  """The item at the end of the edge."""
-  node: AccessToken!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum AccessTokenOrderByInput {
-  id_ASC
-  id_DESC
-  expiresAt_ASC
-  expiresAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type AccessTokenPreviousValues {
-  id: ID!
-  expiresAt: DateTime!
-}
-
-type AccessTokenSubscriptionPayload {
-  mutation: MutationType!
-  node: AccessToken
-  updatedFields: [String!]
-  previousValues: AccessTokenPreviousValues
-}
-
-input AccessTokenSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [AccessTokenSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [AccessTokenSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [AccessTokenSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: AccessTokenWhereInput
-}
-
-input AccessTokenUpdateInput {
-  expiresAt: DateTime
-  user: UserUpdateOneRequiredInput
-}
-
-input AccessTokenUpdateManyMutationInput {
-  expiresAt: DateTime
-}
-
-input AccessTokenWhereInput {
-  """Logical AND on all given filters."""
-  AND: [AccessTokenWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [AccessTokenWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [AccessTokenWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  expiresAt: DateTime
-
-  """All values that are not equal to given value."""
-  expiresAt_not: DateTime
-
-  """All values that are contained in given list."""
-  expiresAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  expiresAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  expiresAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  expiresAt_lte: DateTime
-
-  """All values greater than the given value."""
-  expiresAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  expiresAt_gte: DateTime
-  user: UserWhereInput
-}
-
-input AccessTokenWhereUniqueInput {
-  id: ID
-}
-
-type AggregateAccessToken {
-  count: Int!
-}
-
-type AggregateTransaction {
+const typeDefs = `type AggregateTransaction {
   count: Int!
 }
 
@@ -284,30 +97,24 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
-  createAccessToken(data: AccessTokenCreateInput!): AccessToken!
+  createUser(data: UserCreateInput!): User!
   createWallet(data: WalletCreateInput!): Wallet!
   createTransaction(data: TransactionCreateInput!): Transaction!
-  createUser(data: UserCreateInput!): User!
-  updateAccessToken(data: AccessTokenUpdateInput!, where: AccessTokenWhereUniqueInput!): AccessToken
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateWallet(data: WalletUpdateInput!, where: WalletWhereUniqueInput!): Wallet
   updateTransaction(data: TransactionUpdateInput!, where: TransactionWhereUniqueInput!): Transaction
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  deleteAccessToken(where: AccessTokenWhereUniqueInput!): AccessToken
+  deleteUser(where: UserWhereUniqueInput!): User
   deleteWallet(where: WalletWhereUniqueInput!): Wallet
   deleteTransaction(where: TransactionWhereUniqueInput!): Transaction
-  deleteUser(where: UserWhereUniqueInput!): User
-  upsertAccessToken(where: AccessTokenWhereUniqueInput!, create: AccessTokenCreateInput!, update: AccessTokenUpdateInput!): AccessToken!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertWallet(where: WalletWhereUniqueInput!, create: WalletCreateInput!, update: WalletUpdateInput!): Wallet!
   upsertTransaction(where: TransactionWhereUniqueInput!, create: TransactionCreateInput!, update: TransactionUpdateInput!): Transaction!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  updateManyAccessTokens(data: AccessTokenUpdateManyMutationInput!, where: AccessTokenWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyWallets(data: WalletUpdateManyMutationInput!, where: WalletWhereInput): BatchPayload!
   updateManyTransactions(data: TransactionUpdateManyMutationInput!, where: TransactionWhereInput): BatchPayload!
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  deleteManyAccessTokens(where: AccessTokenWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyWallets(where: WalletWhereInput): BatchPayload!
   deleteManyTransactions(where: TransactionWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -338,18 +145,15 @@ type PageInfo {
 }
 
 type Query {
-  accessTokens(where: AccessTokenWhereInput, orderBy: AccessTokenOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AccessToken]!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   wallets(where: WalletWhereInput, orderBy: WalletOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Wallet]!
   transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction]!
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  accessToken(where: AccessTokenWhereUniqueInput!): AccessToken
+  user(where: UserWhereUniqueInput!): User
   wallet(where: WalletWhereUniqueInput!): Wallet
   transaction(where: TransactionWhereUniqueInput!): Transaction
-  user(where: UserWhereUniqueInput!): User
-  accessTokensConnection(where: AccessTokenWhereInput, orderBy: AccessTokenOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AccessTokenConnection!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   walletsConnection(where: WalletWhereInput, orderBy: WalletOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WalletConnection!
   transactionsConnection(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TransactionConnection!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -359,10 +163,9 @@ type Query {
 }
 
 type Subscription {
-  accessToken(where: AccessTokenSubscriptionWhereInput): AccessTokenSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   wallet(where: WalletSubscriptionWhereInput): WalletSubscriptionPayload
   transaction(where: TransactionSubscriptionWhereInput): TransactionSubscriptionPayload
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
 type Transaction implements Node {
@@ -853,6 +656,8 @@ type User implements Node {
   id: ID!
   name: String
   email: String!
+  token: String
+  tokenExpiry: Float
   createdAt: DateTime!
   updatedAt: DateTime!
   wallets(where: WalletWhereInput, orderBy: WalletOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Wallet!]
@@ -871,12 +676,9 @@ type UserConnection {
 input UserCreateInput {
   name: String
   email: String!
+  token: String
+  tokenExpiry: Float
   wallets: WalletCreateManyWithoutUserInput
-}
-
-input UserCreateOneInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutWalletsInput {
@@ -887,6 +689,8 @@ input UserCreateOneWithoutWalletsInput {
 input UserCreateWithoutWalletsInput {
   name: String
   email: String!
+  token: String
+  tokenExpiry: Float
 }
 
 """An edge in a connection."""
@@ -905,6 +709,10 @@ enum UserOrderByInput {
   name_DESC
   email_ASC
   email_DESC
+  token_ASC
+  token_DESC
+  tokenExpiry_ASC
+  tokenExpiry_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -915,6 +723,8 @@ type UserPreviousValues {
   id: ID!
   name: String
   email: String!
+  token: String
+  tokenExpiry: Float
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -958,28 +768,19 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
-input UserUpdateDataInput {
-  name: String
-  email: String
-  wallets: WalletUpdateManyWithoutUserInput
-}
-
 input UserUpdateInput {
   name: String
   email: String
+  token: String
+  tokenExpiry: Float
   wallets: WalletUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
   email: String
-}
-
-input UserUpdateOneRequiredInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-  update: UserUpdateDataInput
-  upsert: UserUpsertNestedInput
+  token: String
+  tokenExpiry: Float
 }
 
 input UserUpdateOneRequiredWithoutWalletsInput {
@@ -992,11 +793,8 @@ input UserUpdateOneRequiredWithoutWalletsInput {
 input UserUpdateWithoutWalletsDataInput {
   name: String
   email: String
-}
-
-input UserUpsertNestedInput {
-  update: UserUpdateDataInput!
-  create: UserCreateInput!
+  token: String
+  tokenExpiry: Float
 }
 
 input UserUpsertWithoutWalletsInput {
@@ -1133,6 +931,68 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   email_not_ends_with: String
+  token: String
+
+  """All values that are not equal to given value."""
+  token_not: String
+
+  """All values that are contained in given list."""
+  token_in: [String!]
+
+  """All values that are not contained in given list."""
+  token_not_in: [String!]
+
+  """All values less than the given value."""
+  token_lt: String
+
+  """All values less than or equal the given value."""
+  token_lte: String
+
+  """All values greater than the given value."""
+  token_gt: String
+
+  """All values greater than or equal the given value."""
+  token_gte: String
+
+  """All values containing the given string."""
+  token_contains: String
+
+  """All values not containing the given string."""
+  token_not_contains: String
+
+  """All values starting with the given string."""
+  token_starts_with: String
+
+  """All values not starting with the given string."""
+  token_not_starts_with: String
+
+  """All values ending with the given string."""
+  token_ends_with: String
+
+  """All values not ending with the given string."""
+  token_not_ends_with: String
+  tokenExpiry: Float
+
+  """All values that are not equal to given value."""
+  tokenExpiry_not: Float
+
+  """All values that are contained in given list."""
+  tokenExpiry_in: [Float!]
+
+  """All values that are not contained in given list."""
+  tokenExpiry_not_in: [Float!]
+
+  """All values less than the given value."""
+  tokenExpiry_lt: Float
+
+  """All values less than or equal the given value."""
+  tokenExpiry_lte: Float
+
+  """All values greater than the given value."""
+  tokenExpiry_gt: Float
+
+  """All values greater than or equal the given value."""
+  tokenExpiry_gte: Float
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -1185,6 +1045,7 @@ input UserWhereInput {
 input UserWhereUniqueInput {
   id: ID
   email: String
+  token: String
 }
 
 type Wallet implements Node {
@@ -1646,15 +1507,6 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
  * Types
 */
 
-export type AccessTokenOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'expiresAt_ASC' |
-  'expiresAt_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC'
-
 export type MutationType =   'CREATED' |
   'UPDATED' |
   'DELETED'
@@ -1683,6 +1535,10 @@ export type UserOrderByInput =   'id_ASC' |
   'name_DESC' |
   'email_ASC' |
   'email_DESC' |
+  'token_ASC' |
+  'token_DESC' |
+  'tokenExpiry_ASC' |
+  'tokenExpiry_DESC' |
   'createdAt_ASC' |
   'createdAt_DESC' |
   'updatedAt_ASC' |
@@ -1698,64 +1554,6 @@ export type WalletOrderByInput =   'id_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
   'createdAt_DESC'
-
-export interface AccessTokenCreateInput {
-  expiresAt: DateTime
-  user: UserCreateOneInput
-}
-
-export interface AccessTokenSubscriptionWhereInput {
-  AND?: AccessTokenSubscriptionWhereInput[] | AccessTokenSubscriptionWhereInput
-  OR?: AccessTokenSubscriptionWhereInput[] | AccessTokenSubscriptionWhereInput
-  NOT?: AccessTokenSubscriptionWhereInput[] | AccessTokenSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: AccessTokenWhereInput
-}
-
-export interface AccessTokenUpdateInput {
-  expiresAt?: DateTime
-  user?: UserUpdateOneRequiredInput
-}
-
-export interface AccessTokenUpdateManyMutationInput {
-  expiresAt?: DateTime
-}
-
-export interface AccessTokenWhereInput {
-  AND?: AccessTokenWhereInput[] | AccessTokenWhereInput
-  OR?: AccessTokenWhereInput[] | AccessTokenWhereInput
-  NOT?: AccessTokenWhereInput[] | AccessTokenWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  expiresAt?: DateTime
-  expiresAt_not?: DateTime
-  expiresAt_in?: DateTime[] | DateTime
-  expiresAt_not_in?: DateTime[] | DateTime
-  expiresAt_lt?: DateTime
-  expiresAt_lte?: DateTime
-  expiresAt_gt?: DateTime
-  expiresAt_gte?: DateTime
-  user?: UserWhereInput
-}
-
-export interface AccessTokenWhereUniqueInput {
-  id?: ID_Input
-}
 
 export interface TransactionCreateInput {
   value: Int
@@ -1974,12 +1772,9 @@ export interface TransactionWhereUniqueInput {
 export interface UserCreateInput {
   name?: String
   email: String
+  token?: String
+  tokenExpiry?: Float
   wallets?: WalletCreateManyWithoutUserInput
-}
-
-export interface UserCreateOneInput {
-  create?: UserCreateInput
-  connect?: UserWhereUniqueInput
 }
 
 export interface UserCreateOneWithoutWalletsInput {
@@ -1990,6 +1785,8 @@ export interface UserCreateOneWithoutWalletsInput {
 export interface UserCreateWithoutWalletsInput {
   name?: String
   email: String
+  token?: String
+  tokenExpiry?: Float
 }
 
 export interface UserSubscriptionWhereInput {
@@ -2003,28 +1800,19 @@ export interface UserSubscriptionWhereInput {
   node?: UserWhereInput
 }
 
-export interface UserUpdateDataInput {
-  name?: String
-  email?: String
-  wallets?: WalletUpdateManyWithoutUserInput
-}
-
 export interface UserUpdateInput {
   name?: String
   email?: String
+  token?: String
+  tokenExpiry?: Float
   wallets?: WalletUpdateManyWithoutUserInput
 }
 
 export interface UserUpdateManyMutationInput {
   name?: String
   email?: String
-}
-
-export interface UserUpdateOneRequiredInput {
-  create?: UserCreateInput
-  connect?: UserWhereUniqueInput
-  update?: UserUpdateDataInput
-  upsert?: UserUpsertNestedInput
+  token?: String
+  tokenExpiry?: Float
 }
 
 export interface UserUpdateOneRequiredWithoutWalletsInput {
@@ -2037,11 +1825,8 @@ export interface UserUpdateOneRequiredWithoutWalletsInput {
 export interface UserUpdateWithoutWalletsDataInput {
   name?: String
   email?: String
-}
-
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput
-  create: UserCreateInput
+  token?: String
+  tokenExpiry?: Float
 }
 
 export interface UserUpsertWithoutWalletsInput {
@@ -2095,6 +1880,28 @@ export interface UserWhereInput {
   email_not_starts_with?: String
   email_ends_with?: String
   email_not_ends_with?: String
+  token?: String
+  token_not?: String
+  token_in?: String[] | String
+  token_not_in?: String[] | String
+  token_lt?: String
+  token_lte?: String
+  token_gt?: String
+  token_gte?: String
+  token_contains?: String
+  token_not_contains?: String
+  token_starts_with?: String
+  token_not_starts_with?: String
+  token_ends_with?: String
+  token_not_ends_with?: String
+  tokenExpiry?: Float
+  tokenExpiry_not?: Float
+  tokenExpiry_in?: Float[] | Float
+  tokenExpiry_not_in?: Float[] | Float
+  tokenExpiry_lt?: Float
+  tokenExpiry_lte?: Float
+  tokenExpiry_gt?: Float
+  tokenExpiry_gte?: Float
   createdAt?: DateTime
   createdAt_not?: DateTime
   createdAt_in?: DateTime[] | DateTime
@@ -2119,6 +1926,7 @@ export interface UserWhereInput {
 export interface UserWhereUniqueInput {
   id?: ID_Input
   email?: String
+  token?: String
 }
 
 export interface WalletCreateInput {
@@ -2341,47 +2149,6 @@ export interface Node {
   id: ID_Output
 }
 
-export interface AccessToken extends Node {
-  id: ID_Output
-  user: User
-  expiresAt: DateTime
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface AccessTokenConnection {
-  pageInfo: PageInfo
-  edges: AccessTokenEdge[]
-  aggregate: AggregateAccessToken
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface AccessTokenEdge {
-  node: AccessToken
-  cursor: String
-}
-
-export interface AccessTokenPreviousValues {
-  id: ID_Output
-  expiresAt: DateTime
-}
-
-export interface AccessTokenSubscriptionPayload {
-  mutation: MutationType
-  node?: AccessToken
-  updatedFields?: String[]
-  previousValues?: AccessTokenPreviousValues
-}
-
-export interface AggregateAccessToken {
-  count: Int
-}
-
 export interface AggregateTransaction {
   count: Int
 }
@@ -2458,6 +2225,8 @@ export interface User extends Node {
   id: ID_Output
   name?: String
   email: String
+  token?: String
+  tokenExpiry?: Float
   createdAt: DateTime
   updatedAt: DateTime
   wallets?: Wallet[]
@@ -2486,6 +2255,8 @@ export interface UserPreviousValues {
   id: ID_Output
   name?: String
   email: String
+  token?: String
+  tokenExpiry?: Float
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -2543,6 +2314,11 @@ The `Boolean` scalar type represents `true` or `false`.
 export type Boolean = boolean
 
 export type DateTime = Date | string
+
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point). 
+*/
+export type Float = number
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.

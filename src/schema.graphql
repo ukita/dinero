@@ -2,7 +2,6 @@
 
 type Query {
   viewer: Viewer
-  checkToken(token: ID!): SuccessMessage
 }
 
 type Mutation {
@@ -31,6 +30,13 @@ type SuccessMessage {
 type TokenPayload {
   token: String!
   user: User!
+}
+
+type User {
+  id: ID!
+  name: String
+  email: String!
+  wallets: [Wallet!]!
 }
 
 type Wallet {

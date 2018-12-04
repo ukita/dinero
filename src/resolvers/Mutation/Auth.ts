@@ -1,50 +1,49 @@
 import * as jwt from 'jsonwebtoken'
-import { addFragmentToInfo } from 'graphql-binding'
+import { randomBytes } from 'crypto'
+import { promisify } from 'util'
 
 import { Context } from '../../utils'
 import config from '../../config'
 import { sendAccessToken } from '../../mail'
 
+const randomBytesPromiseified = promisify(randomBytes)
+
 export const Auth = {
   signup: async (parent: any, args: any, ctx: Context, info: any) => {
+    const token = (await randomBytesPromiseified(20)).toString('hex')
+    const tokenExpiry = Date.now() + config.tokenExpiresAt
+
     const user = await ctx.db.mutation.createUser({
-      data: args
+      data: { ...args, token, tokenExpiry }
     })
 
-    const expiresAt = new Date()
-    expiresAt.setSeconds(config.tokenExpiresAt)
-
-    const token = await ctx.db.mutation.createAccessToken({
-      data: { user: { connect: { id: user.id } }, expiresAt }
-    })
-
-    sendAccessToken({ email: user.email, token: token.id })
+    sendAccessToken({ email: user.email, token })
 
     return { message: `Check your ${user.email} for a link we just sent you` }
   },
 
   confirmToken: async (parent: any, args: any, ctx: Context, info: any) => {
-    const fragment = `fragment EnsureUser on ConfirmTokenPayload { user { id } }`
-    const token = await ctx.db.query.accessToken(
-      {
-        where: { id: args.token }
-      },
-      addFragmentToInfo(info, fragment)
-    )
-    if (!token) {
-      throw new Error('Invalid token')
+    const [user] = await ctx.db.query.users({
+      where: {
+        token: args.token,
+        tokenExpiry_gte: Date.now() - config.tokenExpiresAt
+      }
+    })
+    if (!user) {
+      throw new Error('This token is either invalid or expired')
     }
 
-    const date = new Date()
-    if (token.expiresAt < date) {
-      throw new Error('Expired token')
-    }
-
-    await ctx.db.mutation.deleteAccessToken({ where: { id: token.id } })
+    await ctx.db.mutation.updateUser({
+      where: { id: user.id },
+      data: {
+        token: undefined,
+        tokenExpiry: undefined
+      }
+    })
 
     return {
-      token: jwt.sign({ userId: token.user.id }, config.appSecret),
-      user: token.user
+      token: jwt.sign({ userId: user.id }, config.appSecret),
+      user
     }
   }
 }
