@@ -1,9 +1,9 @@
-import { auth } from './auth'
-import { wallet } from './wallet'
-import { transaction } from './transaction'
+import { Auth } from './Auth'
+import { Wallet } from './Wallet'
+import { Transaction } from './Transaction'
 
 export default {
-  ...auth,
-  ...wallet,
-  ...transaction
+  ...Auth,
+  ...Wallet,
+  ...Transaction
 }

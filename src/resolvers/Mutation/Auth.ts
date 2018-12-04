@@ -4,7 +4,7 @@ import { addFragmentToInfo } from 'graphql-binding'
 import { Context } from '../../utils'
 import config from '../../config'
 
-export const auth = {
+export const Auth = {
   signup: async (parent: any, args: any, ctx: Context, info: any) => {
     const user = await ctx.db.mutation.createUser({
       data: args

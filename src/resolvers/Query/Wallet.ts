@@ -1,5 +1,5 @@
-import { Context } from '../utils'
-import { Transaction } from '../generated/prisma'
+import { Context } from '../../utils'
+import { Transaction } from '../../generated/prisma'
 
 const sumTransactions = (transactions: Transaction[]) =>
   transactions.reduce((sum, { value }) => sum + value, 0)
@@ -12,7 +12,7 @@ export const Wallet = {
         where: { wallet: { id }, type: 'INCOME' }
       })
 
-      return sumTransactions(transactions) / 100
+      return sumTransactions(transactions)
     }
   },
 
@@ -23,7 +23,7 @@ export const Wallet = {
         where: { wallet: { id }, type: 'EXPENSE' }
       })
 
-      return sumTransactions(transactions) / 100
+      return sumTransactions(transactions)
     }
   }
 }

@@ -1,4 +1,4 @@
-import { getUserId, Context } from '../utils'
+import { getUserId, Context } from '../../utils'
 
 export const Viewer = {
   me: (parent, args, ctx: Context, info) => {

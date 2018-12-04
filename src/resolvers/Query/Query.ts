@@ -1,6 +1,4 @@
-import { forwardTo } from 'prisma-binding'
-
-import { Context } from '../utils'
+import { Context } from '../../utils'
 
 export const Query = {
   viewer: () => ({}),
