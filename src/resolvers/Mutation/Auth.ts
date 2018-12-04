@@ -3,6 +3,7 @@ import { addFragmentToInfo } from 'graphql-binding'
 
 import { Context } from '../../utils'
 import config from '../../config'
+import { sendAccessToken } from '../../mail'
 
 export const Auth = {
   signup: async (parent: any, args: any, ctx: Context, info: any) => {
@@ -17,8 +18,7 @@ export const Auth = {
       data: { user: { connect: { id: user.id } }, expiresAt }
     })
 
-    // TODO: Send email with link to activation
-    console.log(token)
+    sendAccessToken({ email: user.email, token: token.id })
 
     return { message: `Check your ${user.email} for a link we just sent you` }
   },
@@ -39,6 +39,8 @@ export const Auth = {
     if (token.expiresAt < date) {
       throw new Error('Expired token')
     }
+
+    await ctx.db.mutation.deleteAccessToken({ where: { id: token.id } })
 
     return {
       token: jwt.sign({ userId: token.user.id }, config.appSecret),
