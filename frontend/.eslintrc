@@ -1,0 +1,12 @@
+{
+  "plugins": ["jsx-a11y"],
+  "extends": ["standard", "standard-react", "plugin:jsx-a11y/recommended"],
+  "rules": {
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "aspects": ["invalidHref", "preferButton"]
+      }
+    ]
+  }
+}

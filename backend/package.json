@@ -1,9 +1,9 @@
 {
-  "name": "dinero-api",
+  "name": "dinero-backend",
   "version": "0.1.0",
-  "description": "💰 Simple budgeting app for studies purposes",
+  "description": "💰 Simple budgeting app for study purposes",
   "main": "index.js",
-  "repository": "https://github.com/ukita/dinero-api",
+  "repository": "https://github.com/ukita/dinero",
   "author": "Bruno Ukita <brunoukita@gmail.com>",
   "license": "MIT",
   "scripts": {
