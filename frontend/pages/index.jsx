@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import Head from '../components/head'
-import Nav from '../components/nav'
+import Head from '../components/Head'
+import Nav from '../components/Nav'
 
 const Home = () => (
   <div>
@@ -39,7 +39,7 @@ const Home = () => (
       </div>
     </div>
 
-    <style jsx>{`
+    {/* <style jsx>{`
       .hero {
         width: 100%;
         color: #333;
@@ -84,7 +84,7 @@ const Home = () => (
         font-size: 13px;
         color: #333;
       }
-    `}</style>
+    `}</style> */}
   </div>
 )
 
