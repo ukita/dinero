@@ -11,7 +11,8 @@ const theme = {
 
     lightGray: '#edf2f7',
     gray: '#a0aec0',
-    darkGray: '#4a5568'
+    darkGray: '#4a5568',
+    darkerGray: '#243B53'
   }
 }
 
@@ -31,7 +32,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.6rem;
     line-height: 2;
     font-family: 'Inter UI', sans-serif;
-    color: ${({ theme }) => theme.colors.darkGray};
+    color: ${({ theme }) => theme.colors.darkerGray};
   }
   @supports (font-variation-settings: normal) {
     html { font-family: 'Inter UI var alt', sans-serif; }
