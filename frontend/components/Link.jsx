@@ -9,7 +9,7 @@ function Link ({ as: Element, children, router, href, activeClassName, className
   }
 
   const buildClassName = () => {
-    const klass = className || ''
+    const klass = className
 
     if (router.pathname === href) {
       return `${klass} ${activeClassName}`.trim()
@@ -35,7 +35,10 @@ Link.propTypes = {
 }
 
 Link.defaultProps = {
-  as: 'a'
+  as: 'a',
+  className: '',
+  activeClassName: '',
+  href: ''
 }
 
 export default withRouter(Link)

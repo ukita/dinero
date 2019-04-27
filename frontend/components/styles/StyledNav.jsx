@@ -3,13 +3,13 @@ import styled from 'styled-components'
 const StyledNav = styled.nav`
   display: flex;
   justify-self: end;
-  width: 100%;
   font-size: 1.5rem;
 
   a,
   button {
     text-decoration: none;
     color: ${({ theme }) => theme.colors.gray};
+    margin: 0;
     padding: 1rem 2rem;
     display: flex;
     align-items: center;
@@ -32,6 +32,11 @@ const StyledNav = styled.nav`
       color: ${({ theme }) => theme.colors.darkerGray};
       border-bottom-color: ${({ theme }) => theme.colors.primary};
     }
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    width: 100%;
+    justify-content: center;
   }
 `
 

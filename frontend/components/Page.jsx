@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 
 const theme = {
+  breakpoints: {
+    sm: '768px'
+  },
   colors: {
     white: 'white',
     black: 'black',
