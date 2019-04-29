@@ -1,12 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
 import Head from '../components/Head'
-import Nav from '../components/Nav'
+import Header from '../components/Header'
 
 const Home = () => (
   <div>
     <Head title='Home' />
-    <Nav />
+    <Header />
 
     <div className='hero'>
       <h1 className='title'>Welcome to Next!</h1>
@@ -25,8 +25,7 @@ const Home = () => (
           <a className='card'>
             <h3>Examples &rarr;</h3>
             <p>
-              Find other example boilerplates on the{' '}
-              <code>create-next-app</code> site
+              Find other example boilerplates on the <code>create-next-app</code> site
             </p>
           </a>
         </Link>

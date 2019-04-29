@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Form = styled.form`
-  padding: 2rem;
+  padding: 2rem 3rem;
   font-size: 1.5rem;
   line-height: 2;
 
@@ -9,6 +9,10 @@ const Form = styled.form`
     font-weight: 600;
     display: block;
     margin-bottom: 1rem;
+
+    &:last-of-type {
+      margin-bottom: 4.5rem;
+    }
   }
 
   input,
