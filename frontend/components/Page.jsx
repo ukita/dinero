@@ -23,8 +23,7 @@ const theme = {
 }
 
 const InnerPage = styled.main`
-  max-width: 1000px;
-  margin: 0 auto;
+  width: 100%;
   padding: 2rem;
 `
 

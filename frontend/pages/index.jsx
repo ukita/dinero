@@ -1,12 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
 import Head from '../components/Head'
-import Header from '../components/Header'
 
 const Home = () => (
   <div>
     <Head title='Home' />
-    <Header />
 
     <div className='hero'>
       <h1 className='title'>Welcome to Next!</h1>

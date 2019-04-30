@@ -9,7 +9,6 @@ const StyledForm = styled.section`
   grid-template-columns: 1fr 1fr;
   max-width: 900px;
   width: 100%;
-  max-height: 550px;
   height: 100%;
 
   background: ${({ theme }) => theme.colors.white};
@@ -18,10 +17,30 @@ const StyledForm = styled.section`
   align-items: stretch;
   overflow: hidden;
 
-  img {
+  .img {
+    position: relative;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+
+    :after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: ${({ theme }) => theme.colors.primary};
+      mix-blend-mode: multiply;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 0;
+      filter: contrast(0.3) brightness(1.4) saturate(0.5);
+    }
   }
 
   .logo {
@@ -30,21 +49,9 @@ const StyledForm = styled.section`
     margin: 0;
   }
 
-  .form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-
-    ${Form} {
-      padding: 0 3rem 2rem;
-    }
-  }
-
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     grid-template-columns: 1fr;
     max-width: 500px;
-    max-height: none;
-    height: auto;
 
     img {
       display: none;
@@ -55,12 +62,11 @@ const StyledForm = styled.section`
 function Signup () {
   return (
     <StyledForm>
-      <img
-        alt='coins'
-        src='https://images.unsplash.com/photo-1512075135822-67cdd9dd7314?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=720&q=80'
-      />
+      <div className='img'>
+        <img alt='coins' src='https://source.unsplash.com/ZKVBM2_Dp84/600x400' />
+      </div>
 
-      <div className='form'>
+      <div>
         <h1 className='logo'>
           <span role='img' aria-label='Dinero'>
             💰
