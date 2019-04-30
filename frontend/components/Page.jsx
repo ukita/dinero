@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
-
-import Header from './Header'
+import { ThemeProvider, createGlobalStyle } from 'styled-components'
 
 const theme = {
   breakpoints: {
@@ -16,16 +14,11 @@ const theme = {
     darkPrimary: '#147D64',
 
     lightGray: '#edf2f7',
-    gray: '#a0aec0',
+    gray: '#8795a1',
     darkGray: '#4a5568',
     darkerGray: '#243B53'
   }
 }
-
-const InnerPage = styled.main`
-  width: 100%;
-  padding: 2rem;
-`
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://rsms.me/inter/inter-ui.css');
@@ -64,8 +57,7 @@ function Page ({ children = '' }) {
     <ThemeProvider theme={theme}>
       <>
         <GlobalStyle />
-        <Header />
-        <InnerPage>{children}</InnerPage>
+        {children}
       </>
     </ThemeProvider>
   )

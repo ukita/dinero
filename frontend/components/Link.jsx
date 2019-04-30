@@ -1,12 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'next/router'
 
-function Link ({ as: Element, children, router, href, activeClassName, className, ...props }) {
+function Link ({
+  as: Element,
+  children,
+  router,
+  prefetch,
+  href,
+  activeClassName,
+  className,
+  ...props
+}) {
   const handleClick = e => {
     e.preventDefault()
     router.push(href)
   }
+
+  useEffect(() => {
+    if (prefetch) {
+      router.prefetch(href)
+    }
+  }, [])
 
   const buildClassName = () => {
     const klass = className
@@ -31,6 +46,7 @@ Link.propTypes = {
   href: PropTypes.string,
   activeClassName: PropTypes.string,
   className: PropTypes.string,
+  prefetch: PropTypes.bool,
   router: PropTypes.object.isRequired
 }
 
@@ -38,7 +54,8 @@ Link.defaultProps = {
   as: 'a',
   className: '',
   activeClassName: '',
-  href: ''
+  href: '',
+  prefetch: false
 }
 
 export default withRouter(Link)

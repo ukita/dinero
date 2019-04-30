@@ -48,7 +48,9 @@ function Header () {
     <StyledHeader>
       <div className='topbar'>
         <Logo>
-          <Link href='/'>Dinero</Link>
+          <Link prefetch href='/'>
+            Dinero
+          </Link>
         </Logo>
         <Nav />
       </div>
