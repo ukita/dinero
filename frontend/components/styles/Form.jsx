@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 const Form = styled.form`
-  padding: 2rem 3rem;
   font-size: 1.5rem;
   line-height: 2;
 

@@ -2,17 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 
+const breakpoints = {
+  sm: '768px'
+}
+
 const theme = {
-  breakpoints: {
-    sm: '768px'
-  },
+  breakpoints,
   colors: {
     white: 'white',
     black: 'black',
 
-    primary: '#27AB83',
-    darkPrimary: '#147D64',
+    primary: '#199473',
+    darkPrimary: '#0C6B58',
 
+    lighterGray: '#f5f7fa',
     lightGray: '#edf2f7',
     gray: '#8795a1',
     darkGray: '#4a5568',
@@ -44,7 +47,14 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
+    font-size: 1.4rem;
+    color: inherit;
+    vertical-align: baseline;
     text-decoration: none;
+
+    :hover {
+      text-decoration: underline;
+    }
   }
 
   input, textarea, select, button {

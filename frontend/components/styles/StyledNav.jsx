@@ -24,6 +24,7 @@ const StyledNav = styled.nav`
     &:hover,
     &:focus {
       outline: none;
+      text-decoration: none;
       color: ${({ theme }) => theme.colors.darkGray};
       background-color: ${({ theme }) => theme.colors.lightGray};
     }
