@@ -6,8 +6,11 @@ import StyledNav from './styles/StyledNav'
 function Nav () {
   return (
     <StyledNav>
+      <Link prefetch href='/login' activeClassName='active'>
+        Sign in
+      </Link>
       <Link prefetch href='/signup' activeClassName='active'>
-        Join Free
+        Join in
       </Link>
     </StyledNav>
   )

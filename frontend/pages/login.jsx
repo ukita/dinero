@@ -1,17 +1,17 @@
 import React from 'react'
 
-import SignupForm from '../components/Signup'
+import LoginForm from '../components/Login'
 import SessionPage from '../components/styles/SessionPage'
 import Container from '../components/styles/Container'
 
-function Signup () {
+function Login () {
   return (
     <SessionPage>
       <Container>
-        <SignupForm />
+        <LoginForm />
       </Container>
     </SessionPage>
   )
 }
 
-export default Signup
+export default Login

@@ -47,7 +47,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    font-size: 1.4rem;
     color: inherit;
     vertical-align: baseline;
     text-decoration: none;

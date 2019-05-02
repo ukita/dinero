@@ -5,7 +5,7 @@ import SessionForm from './styles/SessionForm'
 import Form from './styles/Form'
 import Button from './styles/Button'
 
-function Signup () {
+function Login () {
   return (
     <SessionForm>
       <div className='img'>
@@ -19,30 +19,26 @@ function Signup () {
           </span>
         </h1>
         <div className='title'>
-          <h1>Create your free account</h1>
+          <h1>Welcome back!</h1>
           <p>
-            Fill up the form below, and we will send you a magic link to your inbox.{' '}
+            Enter your email address, and we'll send a magic link to your inbox.{' '}
             <span role='img' aria-label='Sparkles'>
               ✨
             </span>
           </p>
         </div>
         <Form method='post'>
-          <label htmlFor='name'>
-            Name
-            <input id='name' name='name' type='name' placeholder='John Doe' />
-          </label>
           <label htmlFor='email'>
-            Email
+            Your email
             <input id='email' name='email' type='email' placeholder='johndoe@email.com' />
           </label>
           <Button type='submit' block>
-            Join in
+            Log in
           </Button>
         </Form>
         <div className='links'>
-          <Link href='/login' prefetch>
-            Already have an account? Log In
+          <Link href='/signup' prefetch>
+            Don’t have an account? Sign Up
           </Link>
         </div>
       </div>
@@ -50,4 +46,4 @@ function Signup () {
   )
 }
 
-export default Signup
+export default Login

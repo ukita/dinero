@@ -10,7 +10,7 @@ const Form = styled.form`
     margin-bottom: 1rem;
 
     &:last-of-type {
-      margin-bottom: 4.5rem;
+      margin-bottom: 3rem;
     }
   }
 
