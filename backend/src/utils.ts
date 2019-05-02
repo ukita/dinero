@@ -1,9 +1,9 @@
 import * as jwt from 'jsonwebtoken'
-import { Prisma } from './generated/prisma'
+import { Prisma } from './generated/prisma-client'
 import config from './config'
 
 export interface Context {
-  db: Prisma
+  prisma: Prisma
   request: any
 }
 

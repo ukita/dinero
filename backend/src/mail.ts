@@ -3,13 +3,7 @@ import config from './config'
 
 sgMail.setApiKey(config.sendgridAPIKey)
 
-export function sendAccessToken ({
-  email,
-  token
-}: {
-  email: string;
-  token: string;
-}) {
+export function sendAccessToken ({ email, token }: { email: string; token: string }) {
   // TODO: Create an email template
   const msg = {
     to: email,

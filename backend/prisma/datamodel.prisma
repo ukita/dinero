@@ -1,0 +1,36 @@
+type User {
+  id: ID! @id
+  name: String
+  email: String! @unique
+  token: String @unique
+  tokenExpiry: Float
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  wallets: [Wallet!]!
+}
+
+type Wallet {
+  id: ID! @id
+  user: User!
+  name: String!
+  description: String
+  transactions: [Transaction!]! @relation(name: "WalletTransactions", onDelete: SET_NULL)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Transaction {
+  id: ID! @id
+  wallet: Wallet! @relation(name: "WalletTransactions", onDelete: SET_NULL)
+  value: Int!
+  type: TRANSACTION_TYPE!
+  description: String
+  tags: [String!] @scalarList(strategy: RELATION)
+  performedAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+enum TRANSACTION_TYPE {
+  EXPENSE
+  INCOME
+}

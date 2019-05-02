@@ -1,29 +1,29 @@
 import { Context } from '../../utils'
-import { Transaction } from '../../generated/prisma'
+import { Transaction, FragmentableArray } from '../../generated/prisma-client'
 
 const sumTransactions = (transactions: Transaction[]) =>
   transactions.reduce((sum, { value }) => sum + value, 0)
 
 export const Wallet = {
-  income: {
-    fragment: `fragment Income on Wallet { id }`,
-    resolve: async ({ id }, args, ctx: Context, info) => {
-      const transactions = await ctx.db.query.transactions({
+  income: async ({ id }, args, ctx: Context) => {
+    const fragment = `fragment Income on Wallet { id }`
+    const transactions = await ctx.prisma
+      .transactions({
         where: { wallet: { id }, type: 'INCOME' }
       })
+      .$fragment<FragmentableArray<Transaction>>(fragment)
 
-      return sumTransactions(transactions)
-    }
+    return sumTransactions(transactions)
   },
 
-  expense: {
-    fragment: `fragment Expense on Wallet { id }`,
-    resolve: async ({ id }, args, ctx: Context, info) => {
-      const transactions = await ctx.db.query.transactions({
+  expense: async ({ id }, args, ctx: Context) => {
+    const fragment = `fragment Expense on Wallet { id }`
+    const transactions = await ctx.prisma
+      .transactions({
         where: { wallet: { id }, type: 'EXPENSE' }
       })
+      .$fragment<FragmentableArray<Transaction>>(fragment)
 
-      return sumTransactions(transactions)
-    }
+    return sumTransactions(transactions)
   }
 }

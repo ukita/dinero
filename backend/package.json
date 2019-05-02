@@ -8,33 +8,28 @@
   "license": "MIT",
   "scripts": {
     "start": "dotenv -- nodemon -e ts,graphql -x ts-node src/index.ts",
-    "dev": "npm-run-all --parallel start playground",
     "debug": "dotenv -- nodemon -e ts,graphql -x ts-node --inspect src/index.ts",
-    "playground": "graphql playground",
     "build": "rimraf dist && tsc",
     "lint": "tslint -c tslint.json -p tsconfig.json"
   },
   "dependencies": {
     "@sendgrid/mail": "^6.3.1",
     "bcryptjs": "2.4.3",
-    "graphql-binding": "^2.3.5",
-    "graphql-yoga": "1.16.7",
-    "jsonwebtoken": "8.4.0",
-    "prisma-binding": "2.2.8"
+    "graphql-yoga": "1.17.4",
+    "jsonwebtoken": "8.5.1",
+    "prisma-client-lib": "^1.32.0"
   },
   "devDependencies": {
-    "@types/bcryptjs": "2.4.1",
-    "@types/jsonwebtoken": "^7.2.7",
+    "@types/bcryptjs": "2.4.2",
+    "@types/node": "10.14.6",
     "dotenv-cli": "1.4.0",
-    "graphql-cli": "2.17.0",
-    "nodemon": "1.18.7",
-    "npm-run-all": "4.1.5",
-    "prisma": "1.21.1",
-    "rimraf": "2.6.2",
+    "nodemon": "1.19.0",
+    "prisma": "1.32.0",
+    "rimraf": "2.6.3",
     "ts-graphql-plugin": "^1.1.2",
-    "ts-node": "6.2.0",
-    "tslint": "^5.10.0",
-    "tslint-config-standard": "^7.1.0",
-    "typescript": "2.9.2"
+    "ts-node": "7.0.1",
+    "tslint": "^5.16.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "3.2.2"
   }
 }

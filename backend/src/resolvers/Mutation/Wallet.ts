@@ -1,5 +1,5 @@
 import { Context, getUserId } from '../../utils'
-import { WalletCreateInput } from '../../generated/prisma'
+import { WalletCreateInput } from '../../generated/prisma-client'
 
 export const Wallet = {
   addWallet: async (parent, args, ctx: Context, info) => {
@@ -11,11 +11,6 @@ export const Wallet = {
       user: { connect: { id } }
     }
 
-    return ctx.db.mutation.createWallet(
-      {
-        data: walletData
-      },
-      info
-    )
+    return ctx.prisma.createWallet(walletData)
   }
 }
