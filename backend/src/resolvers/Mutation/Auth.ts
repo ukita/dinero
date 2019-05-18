@@ -47,9 +47,7 @@ export const Auth = {
   },
 
   confirmToken: async (parent: any, { token }: any, ctx: Context) => {
-    const user = await ctx.prisma.user({
-      token
-    })
+    const user = await ctx.prisma.user({ token })
 
     if (!user || isTokenValid(user.tokenExpiry)) {
       throw new Error('This token is either invalid or expired')
@@ -63,9 +61,12 @@ export const Auth = {
       }
     })
 
-    return {
-      token: jwt.sign({ userId: user.id }, config.appSecret),
-      user
-    }
+    const jwtToken = jwt.sign({ userId: user.id }, config.appSecret)
+    ctx.response.cookie('token', jwtToken, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365
+    })
+
+    return user
   }
 }

@@ -8,13 +8,15 @@
   "license": "MIT",
   "scripts": {
     "start": "dotenv -- nodemon -e ts,graphql -x ts-node src/index.ts",
-    "debug": "dotenv -- nodemon -e ts,graphql -x ts-node --inspect src/index.ts",
+    "debug": "dotenv -- nodemon -e ts,graphql -x node --inspect -r ts-node/register src/index.ts",
     "build": "rimraf dist && tsc",
-    "lint": "tslint -c tslint.json -p tsconfig.json"
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "prisma:deploy": "prisma deploy"
   },
   "dependencies": {
     "@sendgrid/mail": "^6.3.1",
     "bcryptjs": "2.4.3",
+    "cookie-parser": "^1.4.4",
     "graphql-shield": "^5.3.4",
     "graphql-yoga": "1.17.4",
     "jsonwebtoken": "8.5.1",

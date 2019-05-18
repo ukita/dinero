@@ -7,7 +7,7 @@ type Query {
 type Mutation {
   signup(name: String!, email: String!): SuccessMessage
   signin(email: String!): SuccessMessage
-  confirmToken(token: ID!): TokenPayload!
+  confirmToken(token: ID!): User!
   addWallet(name: String!, description: String): Wallet!
   addTransaction(
     walletId: ID!
