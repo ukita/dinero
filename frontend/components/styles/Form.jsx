@@ -32,6 +32,14 @@ const Form = styled.form`
       border-color: ${({ theme }) => theme.colors.primary};
     }
   }
+
+  fieldset {
+    border: 0;
+    padding: 0;
+    &[disabled] {
+      opacity: 0.5;
+    }
+  }
 `
 
 export default Form

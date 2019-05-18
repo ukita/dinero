@@ -6,9 +6,6 @@ const SessionForm = styled.section`
   max-width: 900px;
   width: 100%;
   min-height: 550px;
-  background: ${({ theme }) => theme.colors.white};
-  border-radius: 4px;
-  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
   align-items: stretch;
   overflow: hidden;
 
