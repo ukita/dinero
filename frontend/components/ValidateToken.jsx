@@ -18,7 +18,7 @@ const CONFIRM_TOKEN_MUTATION = gql`
 function ValidateToken ({ validate, data, error, loading }) {
   useEffect(() => {
     validate()
-  }, [])
+  }, [validate])
 
   if (loading) return 'Loading...'
   if (error) return <pre>{JSON.stringify(error, undefined, 2)}</pre>
