@@ -4,10 +4,17 @@ import ApolloClient, { InMemoryCache } from 'apollo-boost'
 const GRAPHQL_URL = process.env.GRAPHQL_URL
 
 export default withApollo(
-  ({ initialState }) =>
+  ({ headers, initialState }) =>
     new ApolloClient({
       uri: GRAPHQL_URL,
-      fetchOptions: { credentials: 'include' },
+      request: operation => {
+        operation.setContext({
+          fetchOptions: {
+            credentials: 'include'
+          },
+          headers
+        })
+      },
       cache: new InMemoryCache().restore(initialState || {})
     })
 )
