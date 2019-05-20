@@ -1,0 +1,10 @@
+kind: pipeline
+name: backend
+
+steps:
+- name: build
+  image: node
+  commands:
+  - cd backend
+  - yarn
+  - yarn build
