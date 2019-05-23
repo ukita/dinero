@@ -19,3 +19,10 @@ export function getUserId (ctx: Context) {
 
   return null
 }
+
+export function getApplicationHost (ctx: Context) {
+  const proto = ctx.request.headers['x-forwarded-proto'] || 'http'
+  const host = ctx.request.headers['host'] || ctx.request.headers['x-now-deployment-url']
+
+  return `${proto}://${host}`
+}

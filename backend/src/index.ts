@@ -1,27 +1,24 @@
-import { GraphQLServer, Options } from 'graphql-yoga'
-import * as cookieParser from 'cookie-parser'
-import { prisma } from './generated/prisma-client'
-import { resolvers } from './resolvers'
-import { permissions } from './permissions'
+import { Options } from 'graphql-yoga'
+
+import server from './graphql'
 import config from './config'
 
-const server = new GraphQLServer({
-  typeDefs: './src/schema.graphql',
-  resolvers,
-  middlewares: [permissions],
-  context: request => ({
-    ...request,
-    prisma
-  })
-})
-
 const opts: Options = {
-  cors: {
+  endpoint: '/graphql',
+  playground: config.prod ? false : ''
+}
+
+if (!config.isNow) {
+  opts.cors = {
     credentials: true,
-    origin: [config.frontendURL]
+    origin: ['http://localhost:4444']
   }
 }
 
-server.express.use(cookieParser())
+const httpServer = server.createHttpServer(opts)
 
-server.start(opts, () => console.log(`Server is running on http://localhost:4000`))
+if (!config.isNow) {
+  httpServer.listen(4000, () => console.log(`Server is running on http://localhost:4000`))
+}
+
+export default server.express

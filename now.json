@@ -1,0 +1,28 @@
+{
+  "name": "dinero",
+  "version": 2,
+  "alias": "dinero.now.sh",
+  "build": {
+    "env": {
+      "GRAPHQL_URL": "/graphql"
+    }
+  },
+  "env": {
+    "NODE_ENV": "production",
+    "APP_SECRET": "@dinero-backend-secret",
+    "SENDGRID_API_KEY": "@dinero-sendgrid-api-key",
+    "PRISMA_ENDPOINT": "@dinero-prisma-endpoint"
+  },
+  "builds": [
+    { "src": "backend/src/index.ts", "use": "@now/node" },
+    { "src": "frontend/package.json", "use": "@now/next" }
+  ],
+  "routes": [
+    { "src": "/graphql", "dest": "/backend/src/index.ts" },
+    {
+      "src": "/c/(?<token>[^/]+)$",
+      "dest": "/frontend/confirm-token?token=$token"
+    },
+    { "src": "/(.*)", "dest": "/frontend/$1" }
+  ]
+}

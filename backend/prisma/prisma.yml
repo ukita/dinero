@@ -9,7 +9,7 @@ generate:
   - generator: typescript-client
     output: ../src/generated/prisma-client
   - generator: graphql-schema
-    output: ../src/generated/prisma.graphql
+    output: ../src/prisma.graphql
 # Seed your service with initial data based on `seed.graphql`.
 # seed:
 #   import: seed.graphql

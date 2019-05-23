@@ -24,7 +24,7 @@ export const Auth = {
       tokenExpiry
     })
 
-    sendAccessToken({ email: user.email, token })
+    await sendAccessToken(ctx, { email: user.email, token })
 
     return { message: `Check your ${user.email} for a link we just sent you` }
   },
@@ -41,7 +41,7 @@ export const Auth = {
       }
     })
 
-    sendAccessToken({ email, token })
+    await sendAccessToken(ctx, { email, token })
 
     return { message: `Check your ${email} for a link we just sent you` }
   },
