@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const SessionForm = styled.section`
   display: grid;
@@ -15,7 +15,7 @@ const SessionForm = styled.section`
     height: 100%;
 
     :after {
-      content: '';
+      content: "";
       display: block;
       position: absolute;
       top: 0;
@@ -74,6 +74,6 @@ const SessionForm = styled.section`
       display: none;
     }
   }
-`
+`;
 
-export default SessionForm
+export default SessionForm;

@@ -1,15 +1,15 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-export function useInput (initialState = '', valueKey = 'value') {
-  const [value, setValue] = useState(initialState)
+export function useInput(initialState = "", valueKey = "value") {
+  const [value, setValue] = useState(initialState);
 
-  function setValueFromEvent (event) {
-    setValue(event.target[valueKey])
+  function setValueFromEvent(event) {
+    setValue(event.target[valueKey]);
   }
 
-  function resetValue () {
-    setValue(initialState)
+  function resetValue() {
+    setValue(initialState);
   }
 
-  return [value, setValueFromEvent, resetValue]
+  return [value, setValueFromEvent, resetValue];
 }

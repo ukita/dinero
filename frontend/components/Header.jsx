@@ -1,8 +1,8 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
-import Nav from './Nav'
-import Link from './Link'
+import Nav from "./Nav";
+import Link from "./Link";
 
 const Logo = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ const Logo = styled.div`
     margin: 0 auto;
     text-align: center;
   }
-`
+`;
 
 const StyledHeader = styled.header`
   background: ${({ theme }) => theme.colors.white};
@@ -41,21 +41,21 @@ const StyledHeader = styled.header`
       justify-content: center;
     }
   }
-`
+`;
 
-function Header () {
+function Header() {
   return (
     <StyledHeader>
-      <div className='topbar'>
+      <div className="topbar">
         <Logo>
-          <Link prefetch href='/'>
+          <Link prefetch href="/">
             Dinero
           </Link>
         </Logo>
         <Nav />
       </div>
     </StyledHeader>
-  )
+  );
 }
 
-export default Header
+export default Header;

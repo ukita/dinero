@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Form = styled.form`
   font-size: 1.5rem;
@@ -40,6 +40,6 @@ const Form = styled.form`
       opacity: 0.5;
     }
   }
-`
+`;
 
-export default Form
+export default Form;

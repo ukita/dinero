@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Button = styled.button`
   background-color: ${({ theme }) => theme.colors.primary};
@@ -9,7 +9,7 @@ const Button = styled.button`
   border-radius: 4px;
   padding: 1.2rem 2.4rem;
   cursor: pointer;
-  width: ${({ block }) => (block ? '100%' : 'auto')};
+  width: ${({ block }) => (block ? "100%" : "auto")};
 
   :hover,
   :focus {
@@ -20,6 +20,6 @@ const Button = styled.button`
   :active {
     box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.5);
   }
-`
+`;
 
-export default Button
+export default Button;

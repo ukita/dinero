@@ -1,30 +1,30 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
-import ValidateToken from '../components/ValidateToken'
+import ValidateToken from "../components/ValidateToken";
 
-function ConfirmTokenPage ({ query }) {
-  const { token } = query
+function ConfirmTokenPage({ query }) {
+  const { token } = query;
 
-  return <ValidateToken token={token} />
+  return <ValidateToken token={token} />;
 }
 
 ConfirmTokenPage.getInitialProps = async ({ query, res }) => {
-  const { token } = query
+  const { token } = query;
 
   if (res && !token) {
     res.writeHead(307, {
-      Location: '/'
-    })
+      Location: "/"
+    });
 
-    res.end()
+    res.end();
   }
 
-  return { token }
-}
+  return { token };
+};
 
 ConfirmTokenPage.propTypes = {
   query: PropTypes.shape({ token: PropTypes.string.isRequired })
-}
+};
 
-export default ConfirmTokenPage
+export default ConfirmTokenPage;

@@ -1,30 +1,30 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { ThemeProvider, createGlobalStyle } from 'styled-components'
+import React from "react";
+import PropTypes from "prop-types";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
 
 const breakpoints = {
-  sm: '768px'
-}
+  sm: "768px"
+};
 
 const theme = {
   breakpoints,
   colors: {
-    white: 'white',
-    black: 'black',
+    white: "white",
+    black: "black",
 
-    primary: '#199473',
-    darkPrimary: '#0C6B58',
+    primary: "#199473",
+    darkPrimary: "#0C6B58",
 
-    lighterRed: '#c53030',
-    red: '#fc8181',
+    lighterRed: "#c53030",
+    red: "#fc8181",
 
-    lighterGray: '#f5f7fa',
-    lightGray: '#edf2f7',
-    gray: '#8795a1',
-    darkGray: '#4a5568',
-    darkerGray: '#243B53'
+    lighterGray: "#f5f7fa",
+    lightGray: "#edf2f7",
+    gray: "#8795a1",
+    darkGray: "#4a5568",
+    darkerGray: "#243B53"
   }
-}
+};
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://rsms.me/inter/inter-ui.css');
@@ -62,9 +62,9 @@ const GlobalStyle = createGlobalStyle`
   input, textarea, select, button {
     font-family: inherit;
   }
-`
+`;
 
-function Page ({ children = '' }) {
+function Page({ children = "" }) {
   return (
     <ThemeProvider theme={theme}>
       <>
@@ -72,11 +72,11 @@ function Page ({ children = '' }) {
         {children}
       </>
     </ThemeProvider>
-  )
+  );
 }
 
 Page.propTypes = {
   children: PropTypes.node
-}
+};
 
-export default Page
+export default Page;

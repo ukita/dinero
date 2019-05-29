@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -39,6 +39,6 @@ const StyledNav = styled.nav`
     width: 100%;
     justify-content: center;
   }
-`
+`;
 
-export default StyledNav
+export default StyledNav;

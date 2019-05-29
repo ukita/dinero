@@ -1,7 +1,8 @@
-import withApollo from 'next-with-apollo'
-import ApolloClient, { InMemoryCache } from 'apollo-boost'
+import withApollo from "next-with-apollo";
+import ApolloClient, { InMemoryCache } from "apollo-boost";
 
-const GRAPHQL_URL = process.env.GRAPHQL_URL
+// eslint-disable-next-line no-undef
+const GRAPHQL_URL = process.env.GRAPHQL_URL;
 
 export default withApollo(
   ({ headers, initialState }) =>
@@ -10,11 +11,11 @@ export default withApollo(
       request: operation => {
         operation.setContext({
           fetchOptions: {
-            credentials: 'include'
+            credentials: "include"
           },
           headers
-        })
+        });
       },
       cache: new InMemoryCache().restore(initialState || {})
     })
-)
+);

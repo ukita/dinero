@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'next/router'
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import { withRouter } from "next/router";
 
-function Link ({
+function Link({
   as: Element,
   children,
   router,
@@ -13,31 +13,36 @@ function Link ({
   ...props
 }) {
   const handleClick = e => {
-    e.preventDefault()
-    router.push(href)
-  }
+    e.preventDefault();
+    router.push(href);
+  };
 
   useEffect(() => {
     if (prefetch) {
-      router.prefetch(href)
+      router.prefetch(href);
     }
-  }, [])
+  }, [href, prefetch, router]);
 
   const buildClassName = () => {
-    const klass = className
+    const klass = className;
 
     if (router.pathname === href) {
-      return `${klass} ${activeClassName}`.trim()
+      return `${klass} ${activeClassName}`.trim();
     }
 
-    return klass
-  }
+    return klass;
+  };
 
   return (
-    <Element {...props} href={href} className={buildClassName()} onClick={handleClick}>
+    <Element
+      {...props}
+      href={href}
+      className={buildClassName()}
+      onClick={handleClick}
+    >
       {children}
     </Element>
-  )
+  );
 }
 
 Link.propTypes = {
@@ -48,14 +53,14 @@ Link.propTypes = {
   className: PropTypes.string,
   prefetch: PropTypes.bool,
   router: PropTypes.object.isRequired
-}
+};
 
 Link.defaultProps = {
-  as: 'a',
-  className: '',
-  activeClassName: '',
-  href: '',
+  as: "a",
+  className: "",
+  activeClassName: "",
+  href: "",
   prefetch: false
-}
+};
 
-export default withRouter(Link)
+export default withRouter(Link);

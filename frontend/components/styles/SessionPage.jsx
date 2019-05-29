@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import Container from './Container'
+import Container from "./Container";
 
 const SessionPage = styled.div`
   width: 100%;
@@ -22,6 +22,6 @@ const SessionPage = styled.div`
       height: 100%;
     }
   }
-`
+`;
 
-export default SessionPage
+export default SessionPage;

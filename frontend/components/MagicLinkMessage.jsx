@@ -1,8 +1,8 @@
-import React from 'react'
-import styled from 'styled-components'
-import PropTypes from 'prop-types'
+import React from "react";
+import styled from "styled-components";
+import PropTypes from "prop-types";
 
-import Mailbox from '../assets/svg/mailbox.svg'
+import Mailbox from "../assets/svg/mailbox.svg";
 
 const StyledMessage = styled.div`
   display: flex;
@@ -20,13 +20,13 @@ const StyledMessage = styled.div`
       margin: 0;
     }
   }
-`
+`;
 
-function MagicLinkMessage ({ email = '' }) {
+function MagicLinkMessage({ email = "" }) {
   return (
     <StyledMessage>
       <Mailbox />
-      <div className='content'>
+      <div className="content">
         <h2>An email is on its way!</h2>
         <p>
           We just sent an email to you at <strong>{email}</strong>
@@ -34,11 +34,11 @@ function MagicLinkMessage ({ email = '' }) {
         <p>It contains a link that will sign you in super quick</p>
       </div>
     </StyledMessage>
-  )
+  );
 }
 
 MagicLinkMessage.propTypes = {
   email: PropTypes.string
-}
+};
 
-export default MagicLinkMessage
+export default MagicLinkMessage;

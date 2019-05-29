@@ -1,6 +1,6 @@
-import styled from 'styled-components'
-import React from 'react'
-import PropTypes from 'prop-types'
+import styled from "styled-components";
+import React from "react";
+import PropTypes from "prop-types";
 
 const ErrorStyles = styled.div`
   color: ${({ theme }) => theme.colors.lighterRed};
@@ -18,25 +18,25 @@ const ErrorStyles = styled.div`
       display: block;
     }
   }
-`
+`;
 
 const hasNetworkError = ({ networkError } = {}) =>
-  networkError && networkError.result && networkError.result.errors.length
+  networkError && networkError.result && networkError.result.errors.length;
 
-const removeErrorPrefix = str => str.replace('GraphQL error: ', '')
+const removeErrorPrefix = str => str.replace("GraphQL error: ", "");
 
 const DisplayError = ({ error }) => {
-  if (!error || !error.message) return null
+  if (!error || !error.message) return null;
 
   if (hasNetworkError(error)) {
-    const { errors } = error.networkError.result
+    const { errors } = error.networkError.result;
 
     return errors.map((error, i) => (
       <ErrorStyles key={i}>
         <strong>Shoot!</strong>
         <span>{removeErrorPrefix(error.message)}</span>
       </ErrorStyles>
-    ))
+    ));
   }
 
   return (
@@ -44,15 +44,15 @@ const DisplayError = ({ error }) => {
       <strong>Shoot!</strong>
       <span>{removeErrorPrefix(error.message)}</span>
     </ErrorStyles>
-  )
-}
+  );
+};
 
 DisplayError.defaultProps = {
   error: {}
-}
+};
 
 DisplayError.propTypes = {
   error: PropTypes.object
-}
+};
 
-export default DisplayError
+export default DisplayError;
