@@ -1,6 +1,0 @@
-{
-  "extends": "tslint-config-standard",
-  "linterOptions": {
-    "exclude": ["src/generated/**", "node_modules"]
-  }
-}

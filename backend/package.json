@@ -10,7 +10,8 @@
     "start": "dotenv -- nodemon -e ts,graphql -x ts-node src/index.ts",
     "debug": "dotenv -- nodemon -e ts,graphql -x node --inspect -r ts-node/register src/index.ts",
     "build": "rimraf build && ncc build src/index.ts -o build",
-    "lint": "tslint -c tslint.json -p tsconfig.json"
+    "lint": "tsc --noEmit && eslint src/**/*.{js,ts} --fix",
+    "prettier": "prettier --write src/**/*.{js,ts}"
   },
   "dependencies": {
     "@sendgrid/mail": "^6.3.1",
@@ -24,15 +25,19 @@
   "devDependencies": {
     "@types/bcryptjs": "2.4.2",
     "@types/node": "10.14.6",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^1.9.0",
     "dotenv-cli": "1.4.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
     "ncc": "^0.3.6",
     "nodemon": "1.19.0",
+    "prettier": "^1.17.1",
     "prisma": "1.32.0",
     "rimraf": "2.6.3",
     "ts-graphql-plugin": "^1.1.2",
     "ts-node": "7.0.1",
-    "tslint": "^5.16.0",
-    "tslint-config-standard": "^8.0.1",
     "typescript": "3.2.2"
   }
 }

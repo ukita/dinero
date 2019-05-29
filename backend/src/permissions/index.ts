@@ -1,22 +1,22 @@
-import { rule, shield, and } from 'graphql-shield'
-import { getUserId, Context } from '../utils'
+import { rule, shield, and } from "graphql-shield";
+import { getUserId, Context } from "../utils";
 
 const rules = {
-  isAuthenticatedUser: rule()((parent, args, context: Context) => {
-    const userId = getUserId(context)
+  isAuthenticatedUser: rule()((_parent, _args, context: Context) => {
+    const userId = getUserId(context);
 
     return context.prisma.$exists.user({
       id: userId
-    })
+    });
   }),
 
-  canAddTransaction: rule()(async (parent, { walletId }, context: Context) => {
-    const userId = getUserId(context)
-    const user = await context.prisma.wallet({ id: walletId }).user()
+  canAddTransaction: rule()(async (_parent, { walletId }, context: Context) => {
+    const userId = getUserId(context);
+    const user = await context.prisma.wallet({ id: walletId }).user();
 
-    return userId === user.id
+    return userId === user.id;
   })
-}
+};
 
 export const permissions = shield({
   Query: {
@@ -26,4 +26,4 @@ export const permissions = shield({
     addWallet: rules.isAuthenticatedUser,
     addTransaction: and(rules.isAuthenticatedUser, rules.canAddTransaction)
   }
-})
+});

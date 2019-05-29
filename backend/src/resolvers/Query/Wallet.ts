@@ -1,29 +1,29 @@
-import { Context } from '../../utils'
-import { Transaction, FragmentableArray } from '../../generated/prisma-client'
+import { Context } from "../../utils";
+import { Transaction, FragmentableArray } from "../../generated/prisma-client";
 
 const sumTransactions = (transactions: Transaction[]) =>
-  transactions.reduce((sum, { value }) => sum + value, 0)
+  transactions.reduce((sum, { value }) => sum + value, 0);
 
 export const Wallet = {
-  income: async ({ id }, args, ctx: Context) => {
-    const fragment = `fragment Income on Wallet { id }`
+  income: async ({ id }: any, _args: any, ctx: Context) => {
+    const fragment = `fragment Income on Wallet { id }`;
     const transactions = await ctx.prisma
       .transactions({
-        where: { wallet: { id }, type: 'INCOME' }
+        where: { wallet: { id }, type: "INCOME" }
       })
-      .$fragment<FragmentableArray<Transaction>>(fragment)
+      .$fragment<FragmentableArray<Transaction>>(fragment);
 
-    return sumTransactions(transactions)
+    return sumTransactions(transactions);
   },
 
-  expense: async ({ id }, args, ctx: Context) => {
-    const fragment = `fragment Expense on Wallet { id }`
+  expense: async ({ id }: any, _args: any, ctx: Context) => {
+    const fragment = `fragment Expense on Wallet { id }`;
     const transactions = await ctx.prisma
       .transactions({
-        where: { wallet: { id }, type: 'EXPENSE' }
+        where: { wallet: { id }, type: "EXPENSE" }
       })
-      .$fragment<FragmentableArray<Transaction>>(fragment)
+      .$fragment<FragmentableArray<Transaction>>(fragment);
 
-    return sumTransactions(transactions)
+    return sumTransactions(transactions);
   }
-}
+};

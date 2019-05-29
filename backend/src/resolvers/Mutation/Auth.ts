@@ -1,37 +1,37 @@
-import * as jwt from 'jsonwebtoken'
-import { randomBytes } from 'crypto'
-import { promisify } from 'util'
+import * as jwt from "jsonwebtoken";
+import { randomBytes } from "crypto";
+import { promisify } from "util";
 
-import { Context } from '../../utils'
-import config from '../../config'
-import { sendAccessToken } from '../../mail'
+import { Context } from "../../utils";
+import config from "../../config";
+import { sendAccessToken } from "../../mail";
 
-const randomBytesPromiseified = promisify(randomBytes)
+const randomBytesPromiseified = promisify(randomBytes);
 const isTokenValid = (expiresAt: number | undefined): boolean => {
-  if (!expiresAt) return false
+  if (!expiresAt) return false;
 
-  return expiresAt >= Date.now()
-}
+  return expiresAt >= Date.now();
+};
 
 export const Auth = {
-  signup: async (parent: any, args: any, ctx: Context) => {
-    const token = (await randomBytesPromiseified(20)).toString('hex')
-    const tokenExpiry = Date.now() + config.tokenExpiresAt
+  signup: async (_parent: any, args: any, ctx: Context) => {
+    const token = (await randomBytesPromiseified(20)).toString("hex");
+    const tokenExpiry = Date.now() + config.tokenExpiresAt;
 
     const user = await ctx.prisma.createUser({
       ...args,
       token,
       tokenExpiry
-    })
+    });
 
-    await sendAccessToken(ctx, { email: user.email, token })
+    await sendAccessToken(ctx, { email: user.email, token });
 
-    return { message: `Check your ${user.email} for a link we just sent you` }
+    return { message: `Check your ${user.email} for a link we just sent you` };
   },
 
-  signin: async (parent: any, { email }: any, ctx: Context) => {
-    const token = (await randomBytesPromiseified(20)).toString('hex')
-    const tokenExpiry = Date.now() + config.tokenExpiresAt
+  signin: async (_parent: any, { email }: any, ctx: Context) => {
+    const token = (await randomBytesPromiseified(20)).toString("hex");
+    const tokenExpiry = Date.now() + config.tokenExpiresAt;
 
     await ctx.prisma.updateUser({
       where: { email },
@@ -39,18 +39,18 @@ export const Auth = {
         token,
         tokenExpiry
       }
-    })
+    });
 
-    await sendAccessToken(ctx, { email, token })
+    await sendAccessToken(ctx, { email, token });
 
-    return { message: `Check your ${email} for a link we just sent you` }
+    return { message: `Check your ${email} for a link we just sent you` };
   },
 
-  confirmToken: async (parent: any, { token }: any, ctx: Context) => {
-    const user = await ctx.prisma.user({ token })
+  confirmToken: async (_parent: any, { token }: any, ctx: Context) => {
+    const user = await ctx.prisma.user({ token });
 
     if (!user || isTokenValid(user.tokenExpiry)) {
-      throw new Error('This token is either invalid or expired')
+      throw new Error("This token is either invalid or expired");
     }
 
     await ctx.prisma.updateUser({
@@ -59,14 +59,14 @@ export const Auth = {
         token: null,
         tokenExpiry: null
       }
-    })
+    });
 
-    const jwtToken = jwt.sign({ userId: user.id }, config.appSecret)
-    ctx.response.cookie('token', jwtToken, {
+    const jwtToken = jwt.sign({ userId: user.id }, config.appSecret);
+    ctx.response.cookie("token", jwtToken, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365
-    })
+    });
 
-    return user
+    return user;
   }
-}
+};
