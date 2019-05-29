@@ -9,9 +9,8 @@
   "scripts": {
     "start": "dotenv -- nodemon -e ts,graphql -x ts-node src/index.ts",
     "debug": "dotenv -- nodemon -e ts,graphql -x node --inspect -r ts-node/register src/index.ts",
-    "build": "rimraf dist && tsc",
-    "lint": "tslint -c tslint.json -p tsconfig.json",
-    "prisma:deploy": "prisma deploy"
+    "build": "rimraf build && ncc build src/index.ts -o build",
+    "lint": "tslint -c tslint.json -p tsconfig.json"
   },
   "dependencies": {
     "@sendgrid/mail": "^6.3.1",
@@ -26,6 +25,7 @@
     "@types/bcryptjs": "2.4.2",
     "@types/node": "10.14.6",
     "dotenv-cli": "1.4.0",
+    "ncc": "^0.3.6",
     "nodemon": "1.19.0",
     "prisma": "1.32.0",
     "rimraf": "2.6.3",
