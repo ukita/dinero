@@ -5,7 +5,7 @@ import config from './config'
 
 const opts: Options = {
   endpoint: '/graphql',
-  playground: config.prod ? false : ''
+  playground: config.prod ? false : '/graphql'
 }
 
 if (!config.isNow) {
