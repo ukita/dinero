@@ -5,6 +5,24 @@ import { promisify } from "util";
 import { Context } from "../../utils";
 import config from "../../config";
 import { sendAccessToken } from "../../mail";
+import { User } from "../../generated/prisma-client";
+
+export interface AuthSignupArguments {
+  name: string;
+  email: string;
+}
+
+export interface AuthSigninArguments {
+  email: string;
+}
+
+export interface AuthConfirmTokenArguments {
+  token: string;
+}
+
+export interface AuthMessage {
+  message: string;
+}
 
 const randomBytesPromiseified = promisify(randomBytes);
 const isTokenValid = (expiresAt: number | undefined): boolean => {
@@ -14,7 +32,11 @@ const isTokenValid = (expiresAt: number | undefined): boolean => {
 };
 
 export const Auth = {
-  signup: async (_parent: any, args: any, ctx: Context) => {
+  signup: async (
+    _parent,
+    args: AuthSignupArguments,
+    ctx: Context
+  ): Promise<AuthMessage> => {
     const token = (await randomBytesPromiseified(20)).toString("hex");
     const tokenExpiry = Date.now() + config.tokenExpiresAt;
 
@@ -29,7 +51,11 @@ export const Auth = {
     return { message: `Check your ${user.email} for a link we just sent you` };
   },
 
-  signin: async (_parent: any, { email }: any, ctx: Context) => {
+  signin: async (
+    _parent,
+    { email }: AuthSigninArguments,
+    ctx: Context
+  ): Promise<AuthMessage> => {
     const token = (await randomBytesPromiseified(20)).toString("hex");
     const tokenExpiry = Date.now() + config.tokenExpiresAt;
 
@@ -46,7 +72,11 @@ export const Auth = {
     return { message: `Check your ${email} for a link we just sent you` };
   },
 
-  confirmToken: async (_parent: any, { token }: any, ctx: Context) => {
+  confirmToken: async (
+    _parent,
+    { token }: AuthConfirmTokenArguments,
+    ctx: Context
+  ): Promise<User> => {
     const user = await ctx.prisma.user({ token });
 
     if (!user || isTokenValid(user.tokenExpiry)) {

@@ -1,11 +1,19 @@
 import { Context } from "../../utils";
 import { Transaction, FragmentableArray } from "../../generated/prisma-client";
 
-const sumTransactions = (transactions: Transaction[]) =>
-  transactions.reduce((sum, { value }) => sum + value, 0);
+export interface WalletParent {
+  id: string;
+}
+
+const sumTransactions = (transactions: Transaction[]): number =>
+  transactions.reduce((sum, { value }): number => sum + value, 0);
 
 export const Wallet = {
-  income: async ({ id }: any, _args: any, ctx: Context) => {
+  income: async (
+    { id }: WalletParent,
+    _args,
+    ctx: Context
+  ): Promise<number> => {
     const fragment = `fragment Income on Wallet { id }`;
     const transactions = await ctx.prisma
       .transactions({
@@ -16,7 +24,11 @@ export const Wallet = {
     return sumTransactions(transactions);
   },
 
-  expense: async ({ id }: any, _args: any, ctx: Context) => {
+  expense: async (
+    { id }: WalletParent,
+    _args,
+    ctx: Context
+  ): Promise<number> => {
     const fragment = `fragment Expense on Wallet { id }`;
     const transactions = await ctx.prisma
       .transactions({

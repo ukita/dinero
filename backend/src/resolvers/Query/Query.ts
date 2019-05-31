@@ -1,3 +1,5 @@
+import { IResolverObject } from "graphql-tools";
+
 export const Query = {
-  viewer: () => ({})
+  viewer: (): IResolverObject => ({})
 };

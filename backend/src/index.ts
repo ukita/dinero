@@ -18,8 +18,9 @@ if (!config.isNow) {
 const httpServer = server.createHttpServer(opts);
 
 if (!config.isNow) {
-  httpServer.listen(4000, () =>
-    console.log(`Server is running on http://localhost:4000`)
+  httpServer.listen(
+    4000,
+    (): void => console.log(`Server is running on http://localhost:4000`)
   );
 }
 

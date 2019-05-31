@@ -1,21 +1,25 @@
 import { Context, getUserId } from "../../utils";
-import { WalletCreateInput } from "../../generated/prisma-client";
+import {
+  WalletCreateInput,
+  Wallet as IWallet
+} from "../../generated/prisma-client";
+
+export interface AddWalletArguments {
+  name: string;
+  description: string;
+}
 
 export const Wallet = {
   addWallet: async (
-    _parent: any,
-    args: {
-      name: string;
-      description: string;
-    },
-    ctx: Context,
-    _info: any
-  ) => {
+    _parent,
+    { name, description }: AddWalletArguments,
+    ctx: Context
+  ): Promise<IWallet> => {
     const id = getUserId(ctx);
 
     const walletData: WalletCreateInput = {
-      name: args.name,
-      description: args.description,
+      name,
+      description,
       user: { connect: { id } }
     };
 

@@ -1,17 +1,23 @@
 import { Context, getUserId } from "../../utils";
+import {
+  TRANSACTION_TYPE,
+  Transaction as ITransaction
+} from "../../generated/prisma-client";
+
+export interface AddTransactionArguments {
+  walletId: string;
+  type: TRANSACTION_TYPE;
+  value: number;
+  description: string;
+  tags: string[];
+}
 
 export const Transaction = {
   addTransaction: async (
-    _parent: any,
-    args: {
-      walletId?: any;
-      type?: any;
-      value?: any;
-      description?: any;
-      tags?: any;
-    },
+    _parent,
+    args: AddTransactionArguments,
     ctx: Context
-  ) => {
+  ): Promise<ITransaction> => {
     const userId = getUserId(ctx);
     const { walletId } = args;
 

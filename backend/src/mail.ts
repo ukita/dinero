@@ -1,15 +1,21 @@
 import * as sgMail from "@sendgrid/mail";
 import { MailData } from "@sendgrid/helpers/classes/mail";
+import { ClientResponse } from "@sendgrid/client/src/response";
 
 import config from "./config";
 import { Context, getApplicationHost } from "./utils";
 
 sgMail.setApiKey(config.sendgridAPIKey);
 
+export interface SendAccessTokenParams {
+  email: string;
+  token: string;
+}
+
 export function sendAccessToken(
   ctx: Context,
-  { email, token }: { email: string; token: string }
-) {
+  { email, token }: SendAccessTokenParams
+): Promise<[ClientResponse, {}]> {
   const host = getApplicationHost(ctx);
 
   // TODO: Create an email template
