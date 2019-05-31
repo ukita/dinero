@@ -20,45 +20,21 @@ scalar Long
 
 type Mutation {
   createTransaction(data: TransactionCreateInput!): Transaction!
-  updateTransaction(
-    data: TransactionUpdateInput!
-    where: TransactionWhereUniqueInput!
-  ): Transaction
-  updateManyTransactions(
-    data: TransactionUpdateManyMutationInput!
-    where: TransactionWhereInput
-  ): BatchPayload!
-  upsertTransaction(
-    where: TransactionWhereUniqueInput!
-    create: TransactionCreateInput!
-    update: TransactionUpdateInput!
-  ): Transaction!
+  updateTransaction(data: TransactionUpdateInput!, where: TransactionWhereUniqueInput!): Transaction
+  updateManyTransactions(data: TransactionUpdateManyMutationInput!, where: TransactionWhereInput): BatchPayload!
+  upsertTransaction(where: TransactionWhereUniqueInput!, create: TransactionCreateInput!, update: TransactionUpdateInput!): Transaction!
   deleteTransaction(where: TransactionWhereUniqueInput!): Transaction
   deleteManyTransactions(where: TransactionWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateManyUsers(
-    data: UserUpdateManyMutationInput!
-    where: UserWhereInput
-  ): BatchPayload!
-  upsertUser(
-    where: UserWhereUniqueInput!
-    create: UserCreateInput!
-    update: UserUpdateInput!
-  ): User!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   deleteUser(where: UserWhereUniqueInput!): User
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   createWallet(data: WalletCreateInput!): Wallet!
   updateWallet(data: WalletUpdateInput!, where: WalletWhereUniqueInput!): Wallet
-  updateManyWallets(
-    data: WalletUpdateManyMutationInput!
-    where: WalletWhereInput
-  ): BatchPayload!
-  upsertWallet(
-    where: WalletWhereUniqueInput!
-    create: WalletCreateInput!
-    update: WalletUpdateInput!
-  ): Wallet!
+  updateManyWallets(data: WalletUpdateManyMutationInput!, where: WalletWhereInput): BatchPayload!
+  upsertWallet(where: WalletWhereUniqueInput!, create: WalletCreateInput!, update: WalletUpdateInput!): Wallet!
   deleteWallet(where: WalletWhereUniqueInput!): Wallet
   deleteManyWallets(where: WalletWhereInput): BatchPayload!
 }
@@ -82,69 +58,19 @@ type PageInfo {
 
 type Query {
   transaction(where: TransactionWhereUniqueInput!): Transaction
-  transactions(
-    where: TransactionWhereInput
-    orderBy: TransactionOrderByInput
-    skip: Int
-    after: String
-    before: String
-    first: Int
-    last: Int
-  ): [Transaction]!
-  transactionsConnection(
-    where: TransactionWhereInput
-    orderBy: TransactionOrderByInput
-    skip: Int
-    after: String
-    before: String
-    first: Int
-    last: Int
-  ): TransactionConnection!
+  transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction]!
+  transactionsConnection(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TransactionConnection!
   user(where: UserWhereUniqueInput!): User
-  users(
-    where: UserWhereInput
-    orderBy: UserOrderByInput
-    skip: Int
-    after: String
-    before: String
-    first: Int
-    last: Int
-  ): [User]!
-  usersConnection(
-    where: UserWhereInput
-    orderBy: UserOrderByInput
-    skip: Int
-    after: String
-    before: String
-    first: Int
-    last: Int
-  ): UserConnection!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   wallet(where: WalletWhereUniqueInput!): Wallet
-  wallets(
-    where: WalletWhereInput
-    orderBy: WalletOrderByInput
-    skip: Int
-    after: String
-    before: String
-    first: Int
-    last: Int
-  ): [Wallet]!
-  walletsConnection(
-    where: WalletWhereInput
-    orderBy: WalletOrderByInput
-    skip: Int
-    after: String
-    before: String
-    first: Int
-    last: Int
-  ): WalletConnection!
+  wallets(where: WalletWhereInput, orderBy: WalletOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Wallet]!
+  walletsConnection(where: WalletWhereInput, orderBy: WalletOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WalletConnection!
   node(id: ID!): Node
 }
 
 type Subscription {
-  transaction(
-    where: TransactionSubscriptionWhereInput
-  ): TransactionSubscriptionPayload
+  transaction(where: TransactionSubscriptionWhereInput): TransactionSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   wallet(where: WalletSubscriptionWhereInput): WalletSubscriptionPayload
 }
@@ -443,15 +369,7 @@ type User {
   tokenExpiry: Float
   createdAt: DateTime!
   updatedAt: DateTime!
-  wallets(
-    where: WalletWhereInput
-    orderBy: WalletOrderByInput
-    skip: Int
-    after: String
-    before: String
-    first: Int
-    last: Int
-  ): [Wallet!]
+  wallets(where: WalletWhereInput, orderBy: WalletOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Wallet!]
 }
 
 type UserConnection {
@@ -666,15 +584,7 @@ type Wallet {
   user: User!
   name: String!
   description: String
-  transactions(
-    where: TransactionWhereInput
-    orderBy: TransactionOrderByInput
-    skip: Int
-    after: String
-    before: String
-    first: Int
-    last: Int
-  ): [Transaction!]
+  transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction!]
   createdAt: DateTime!
   updatedAt: DateTime!
 }
