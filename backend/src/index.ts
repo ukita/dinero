@@ -5,6 +5,7 @@ import config from "./config";
 
 const opts: Options = {
   endpoint: "/graphql",
+  subscriptions: "/graphql",
   playground: config.prod ? false : "/graphql"
 };
 
