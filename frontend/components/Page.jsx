@@ -1,33 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { themeGet } from "@styled-system/theme-get";
 
-const breakpoints = {
-  sm: "768px"
-};
-
-const theme = {
-  breakpoints,
-  colors: {
-    white: "white",
-    black: "black",
-
-    primary: "#199473",
-    darkPrimary: "#0C6B58",
-
-    lighterRed: "#c53030",
-    red: "#fc8181",
-
-    lighterGray: "#f5f7fa",
-    lightGray: "#edf2f7",
-    gray: "#8795a1",
-    darkGray: "#4a5568",
-    darkerGray: "#243B53"
-  }
-};
+import theme from "../theme";
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://rsms.me/inter/inter-ui.css');
+  @import url('https://rsms.me/inter/inter.css');
 
   html {
     box-sizing: border-box;
@@ -39,28 +18,80 @@ const GlobalStyle = createGlobalStyle`
   body {
     padding: 0;
     margin: 0;
-    font-size: 1.6rem;
-    line-height: 2;
-    font-family: 'Inter UI', sans-serif;
-    color: ${({ theme }) => theme.colors.darkerGray};
-    background: ${({ theme }) => theme.colors.lightGray};
-  }
-  @supports (font-variation-settings: normal) {
-    html { font-family: 'Inter UI var alt', sans-serif; }
-  }
-
-  a {
-    color: inherit;
-    vertical-align: baseline;
-    text-decoration: none;
-
-    :hover {
-      text-decoration: underline;
-    }
+    font-family: ${themeGet("fonts.body")};
+    font-size: ${themeGet("fontSizes.body")};
+    line-height: ${themeGet("lineHeights.body")};
+    color: ${themeGet("colors.text")};
+    background: ${themeGet("colors.background")};
   }
 
   input, textarea, select, button {
     font-family: inherit;
+  }
+
+  blockquote,
+  dl,
+  dd,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  figure,
+  p,
+  pre {
+    margin: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  a {
+    color: ${themeGet("colors.link")};
+    text-decoration: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:active, &:visited {
+      color: inherit;
+    }
+  }
+
+  fieldset {
+    margin: 0;
+    padding: 0;
+  }
+
+  ol,
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: inherit;
+    opacity: 0.5;
+  }
+
+  button,
+  [role="button"] {
+    cursor: pointer;
   }
 `;
 
