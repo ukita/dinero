@@ -23,7 +23,8 @@
     "react": "^16.8.6",
     "react-apollo": "^2.5.5",
     "react-dom": "^16.8.6",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "styled-system": "^5.0.5"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.10.0",
