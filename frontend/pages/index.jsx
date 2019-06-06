@@ -1,11 +1,11 @@
 import React from "react";
 
-import Head from "../components/Head";
-import Header from "../components/Header";
-import Container from "../components/styles/Container";
-import CurrentUser from "../components/CurrentUser";
+import Head from "@components/Head";
+import Header from "@components/Header";
+import Container from "@components/styles/Container";
+import CurrentUser from "@components/CurrentUser";
 
-import { getProp } from "../lib/utils";
+import { getProp } from "@lib/utils";
 
 function Home() {
   return (

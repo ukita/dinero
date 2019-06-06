@@ -27,6 +27,10 @@ module.exports = {
       use: ["@svgr/webpack"]
     });
 
+    // Resolve aliases
+    config.resolve.alias["@components"] = path.join(__dirname, "components");
+    config.resolve.alias["@lib"] = path.join(__dirname, "lib");
+
     return config;
   }
 };

@@ -2,16 +2,16 @@ import React from "react";
 import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
 
-import Link from "./Link";
-import ErrorMessage from "./ErrorMessage";
-import MagicLinkMessage from "./MagicLinkMessage";
-import SessionForm from "./styles/SessionForm";
-import Form from "./styles/Form";
-import Button from "./styles/Button";
-import Box from "./styles/Box";
+import Link from "@components/Link";
+import ErrorMessage from "@components/ErrorMessage";
+import MagicLinkMessage from "@components/MagicLinkMessage";
+import SessionForm from "@components/styles/SessionForm";
+import Form from "@components/styles/Form";
+import Button from "@components/styles/Button";
+import Box from "@components/styles/Box";
 
-import { useInput } from "../lib/hooks";
-import { getProp } from "../lib/utils";
+import { useInput } from "@lib/hooks";
+import { getProp } from "@lib/utils";
 
 const LOGIN_MUTATION = gql`
   mutation LOGIN_MUTATION($email: String!) {

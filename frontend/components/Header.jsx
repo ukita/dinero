@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import Nav from "./Nav";
-import Link from "./Link";
+import Nav from "@components/Nav";
+import Link from "@components/Link";
 
 const Logo = styled.div`
   display: flex;

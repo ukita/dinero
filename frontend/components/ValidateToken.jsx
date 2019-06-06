@@ -3,8 +3,8 @@ import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
 import Router from "next/router";
 
-import { CURRENT_USER_QUERY } from "./CurrentUser";
-import { getProp } from "../lib/utils";
+import { CURRENT_USER_QUERY } from "@components/CurrentUser";
+import { getProp } from "@lib/utils";
 
 const CONFIRM_TOKEN_MUTATION = gql`
   mutation CONFIRM_TOKEN_MUTATION($token: ID!) {

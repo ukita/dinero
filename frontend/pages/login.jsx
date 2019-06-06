@@ -1,8 +1,8 @@
 import React from "react";
 
-import LoginForm from "../components/Login";
-import SessionPage from "../components/styles/SessionPage";
-import Container from "../components/styles/Container";
+import LoginForm from "@components/Login";
+import SessionPage from "@components/styles/SessionPage";
+import Container from "@components/styles/Container";
 
 function Login() {
   return (

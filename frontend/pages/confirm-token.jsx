@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import ValidateToken from "../components/ValidateToken";
+import ValidateToken from "@components/ValidateToken";
 
 function ConfirmTokenPage({ query }) {
   const { token } = query;
