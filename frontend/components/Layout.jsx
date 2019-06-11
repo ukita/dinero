@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { space, layout, color, flex, grid } from "styled-system";
+import { space, layout, color, flex, grid, position } from "styled-system";
 import propTypes from "@styled-system/prop-types";
 
 export const Box = styled.div`
@@ -61,4 +61,22 @@ Container.propTypes = {
 export const Footer = props => <Flex {...props} as="footer" />;
 Footer.propTypes = {
   ...Flex.propTypes
+};
+
+export const Relative = styled(Box)`
+  position: relative;
+  ${position}
+`;
+Relative.propTypes = {
+  ...Box.propTypes,
+  ...propTypes.position
+};
+
+export const Absolute = styled(Box)`
+  position: absolute;
+  ${position}
+`;
+Absolute.propTypes = {
+  ...Box.propTypes,
+  ...propTypes.position
 };

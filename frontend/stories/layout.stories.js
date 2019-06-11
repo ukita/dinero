@@ -10,10 +10,12 @@ import {
   Box,
   Flex,
   Grid,
-  Container
+  Container,
+  Relative,
+  Absolute
 } from "../components/Layout";
 
-storiesOf("Base Components|Box", module).add("Basic usage", () => {
+storiesOf("Components|Box", module).add("Basic usage", () => {
   return (
     <Box p={10} bg="red">
       <Box p={20} m={15} bg="white">
@@ -29,7 +31,21 @@ storiesOf("Base Components|Box", module).add("Basic usage", () => {
   );
 });
 
-storiesOf("Base Components|Flex", module).add("Basic usage", () => {
+storiesOf("Components|Position", module).add("Basic usage", () => {
+  return (
+    <Relative p={5} zIndex={-1} bg="blue.1">
+      <Absolute p={3} m={2} bg="blue.3" top={0} right={0}>
+        Absolute
+      </Absolute>
+
+      <Absolute p={3} m={2} bg="blue.3" bottom={0} left={0}>
+        Absolute
+      </Absolute>
+    </Relative>
+  );
+});
+
+storiesOf("Components|Flex", module).add("Basic usage", () => {
   return (
     <Flex p={10} justifyContent="space-between" bg="white">
       <Box p={15} bg="red">
@@ -45,7 +61,7 @@ storiesOf("Base Components|Flex", module).add("Basic usage", () => {
   );
 });
 
-storiesOf("Base Components|Grid", module).add("Basic usage", () => {
+storiesOf("Components|Grid", module).add("Basic usage", () => {
   return (
     <Grid
       gridTemplateColumns="25% 1fr"
@@ -60,7 +76,7 @@ storiesOf("Base Components|Grid", module).add("Basic usage", () => {
   );
 });
 
-storiesOf("Base Components|Layout", module)
+storiesOf("Components|Layout", module)
   .add("Basic usage", () => {
     return (
       <Layout bg="white" m={2}>
