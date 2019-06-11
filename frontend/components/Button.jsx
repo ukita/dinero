@@ -1,59 +1,93 @@
 import styled, { css } from "styled-components";
-import { width, space } from "styled-system";
+import { layout, space } from "styled-system";
 import propTypes from "@styled-system/prop-types";
 import { themeGet } from "@styled-system/theme-get";
+import t from "prop-types";
 
 const scale = ({ scale }) => {
   switch (scale) {
+    case "xs":
+      return css`
+        font-size: ${themeGet("fontSizes.0")}px;
+        padding: 6px 8px;
+      `;
     case "sm":
       return css`
         font-size: ${themeGet("fontSizes.1")}px;
-        padding: 7px 12px;
+        padding: 8px 10px;
       `;
     case "md":
       return css`
         font-size: inherit;
-        padding: 9.5px 18px;
+        padding: 12px 16px;
       `;
     case "lg":
       return css`
         font-size: ${themeGet("fontSizes.3")}px;
-        padding: 12px 22px;
+        padding: 15px 30px;
+      `;
+    default:
+      return css`
+        font-size: inherit;
+        padding: 12px 16px;
       `;
   }
 };
 
-const variant = ({ variant, outline }) => {
-  const color = themeGet(`buttons.${variant}.text`);
-  const background = themeGet(`buttons.${variant}.background`);
-  const backgroundHover = themeGet(`buttons.${variant}.backgroundHover`);
+const buttonStyle = ({ variant, color }) => {
+  const textColor = themeGet(`buttons.${color}.text`);
+  const background = themeGet(`buttons.${color}.background`);
+  const backgroundHover = themeGet(`buttons.${color}.backgroundHover`);
 
-  if (outline) {
-    return css`
-      background-color: transparent;
-      color: ${background};
-      box-shadow: inset 0 0 0 2px ${background};
+  switch (variant) {
+    case "primary":
+      return css`
+        color: ${textColor};
+        background-color: ${background};
 
-      :hover,
-      :focus {
+        :hover,
+        :focus {
+          background-color: ${props =>
+            props.disabled ? null : backgroundHover(props)};
+        }
+      `;
+    case "secondary":
+      return css`
         background-color: transparent;
-        color: ${props => (props.disabled ? null : backgroundHover(props))};
-        box-shadow: inset 0 0 0 2px
-          ${props => (props.disabled ? null : backgroundHover(props))};
-      }
-    `;
+        color: ${background};
+        box-shadow: inset 0 0 0 2px ${background};
+
+        :hover,
+        :focus {
+          background-color: transparent;
+          color: ${props => (props.disabled ? null : backgroundHover(props))};
+          box-shadow: inset 0 0 0 2px
+            ${props => (props.disabled ? null : backgroundHover(props))};
+        }
+      `;
+    case "tertiary":
+      return css`
+        background-color: transparent;
+        color: ${background};
+
+        :hover,
+        :focus {
+          background-color: transparent;
+          color: ${props => (props.disabled ? null : backgroundHover(props))};
+        }
+      `;
+    default:
+      return css`
+        color: ${textColor};
+        background-color: ${background};
+
+        :hover,
+        :focus {
+          background-color: ${props =>
+            props.disabled ? null : backgroundHover(props)};
+        }
+      `;
   }
-
-  return css`
-    color: ${color};
-    background-color: ${background};
-
-    :hover,
-    :focus {
-      background-color: ${props =>
-        props.disabled ? null : backgroundHover(props)};
-    }
-  `;
 };
 
 const Button = styled("button")`
@@ -69,23 +103,28 @@ const Button = styled("button")`
   border-radius: ${themeGet("radius")};
 
   :disabled {
-    opacity: 0.45;
+    opacity: 0.3;
+    cursor: default;
   }
 
   ${scale}
-  ${variant}
-  ${width}
+  ${buttonStyle}
+  ${layout}
   ${space}
 `;
 
 Button.propTypes = {
+  variant: t.oneOf(["primary", "secondary", "tertiary"]),
+  scale: t.oneOf(["xs", "sm", "md", "lg"]),
+  color: t.oneOf(["green", "grey", "red"]),
+  outline: t.bool,
   ...propTypes.space,
-  width: propTypes.layout.width
+  ...propTypes.layout
 };
 
 Button.defaultProps = {
   variant: "primary",
-  outline: false,
+  color: "green",
   scale: "md"
 };
 

@@ -2,73 +2,78 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
+import { select } from "@storybook/addon-knobs";
 
 import Button from "../components/Button";
 
 storiesOf("Components|Button", module)
   .add("Basic usage", () => {
-    return <Button onClick={action("Clicked")}>Hey you!!</Button>;
+    return (
+      <Button m={2} onClick={action("Clicked")}>
+        Hey you!!
+      </Button>
+    );
   })
   .add("Sizes", () => {
+    const variant = select("Variant", ["primary", "secondary", "tertiary"]);
+    const color = select("Color", ["green", "red", "grey"]);
+
     return [
-      <Button key="sm" scale="sm" mr={2}>
+      <Button key="xs" scale="xs" color={color} variant={variant} m={2}>
+        Extra Small
+      </Button>,
+      <Button key="sm" scale="sm" color={color} variant={variant} m={2}>
         Small
       </Button>,
-      <Button key="md" scale="md" mr={2}>
+      <Button key="md" scale="md" color={color} variant={variant} m={2}>
         Medium
       </Button>,
-      <Button key="lg" scale="lg" mr={2}>
+      <Button key="lg" scale="lg" color={color} variant={variant} m={2}>
         Large
       </Button>
     ];
   })
   .add("Block", () => {
-    return <Button width={1}>Block</Button>;
+    return (
+      <Button mt={2} width={1}>
+        Block
+      </Button>
+    );
   })
-  .add("Outline", () => {
+  .add("Variants", () => {
+    const color = select("Color", ["green", "red", "grey"]);
+
     return [
-      <Button
-        key="primary"
-        variant="primary"
-        onClick={action("Clicked")}
-        outline
-        mr={2}
-      >
+      <Button key="primary" color={color} variant="primary" m={2}>
         Primary
       </Button>,
-      <Button
-        key="secondary"
-        variant="secondary"
-        onClick={action("Clicked")}
-        outline
-        mr={2}
-      >
+      <Button key="secondary" color={color} variant="secondary" m={2}>
         Secondary
       </Button>,
-      <Button
-        key="red"
-        variant="red"
-        onClick={action("Clicked")}
-        outline
-        mr={2}
-      >
-        Red
+      <Button key="tertiary" color={color} variant="tertiary" m={2}>
+        Tertiary
       </Button>
     ];
   })
-  .add("Variants", () => {
+  .add("Colors", () => {
     return [
-      <Button key="primary" variant="primary" mr={2}>
-        Primary
+      <Button key="green" onClick={action("Clicked")} m={2}>
+        Green
       </Button>,
-      <Button key="secondary" variant="secondary" mr={2}>
-        Secondary
+      <Button key="grey" color="grey" onClick={action("Clicked")} m={2}>
+        Grey
       </Button>,
-      <Button key="red" variant="red" mr={2}>
+      <Button key="red" color="red" onClick={action("Clicked")} m={2}>
         Red
       </Button>
     ];
   })
   .add("Disabled", () => {
-    return <Button disabled>Disabled!!!</Button>;
+    const variant = select("Variant", ["primary", "secondary", "tertiary"]);
+
+    return (
+      <Button m={2} variant={variant} disabled>
+        Do not click me!
+      </Button>
+    );
   });

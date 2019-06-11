@@ -11,7 +11,7 @@ const fonts = {
 };
 
 // Font Sizes
-const fontSizes = [12, 14, 16, 20, 24, 32, 48, 64];
+const fontSizes = [12, 14, 16, 20, 24, 32, 36, 48, 60, 72];
 fontSizes.body = `${fontSizes[2]}px`;
 
 // Spacing
@@ -150,12 +150,12 @@ const colors = {
 };
 
 const buttons = {
-  primary: {
+  green: {
     text: baseColors.white,
     background: baseColors.teal[5],
     backgroundHover: baseColors.teal[7]
   },
-  secondary: {
+  grey: {
     text: baseColors.white,
     background: baseColors.grey[5],
     backgroundHover: baseColors.grey[7]
