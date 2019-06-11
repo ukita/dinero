@@ -107,6 +107,11 @@ const Button = styled("button")`
     cursor: default;
   }
 
+  :active,
+  :focus {
+    box-shadow: ${themeGet("boxShadows.outline")};
+  }
+
   ${scale}
   ${buttonStyle}
   ${layout}
