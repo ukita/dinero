@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { select } from "@storybook/addon-knobs";
 
-import Button from "../components/Button";
+import Button from "../../components/Button";
 
 storiesOf("Components|Button", module)
   .add("Basic usage", () => {
@@ -16,7 +16,15 @@ storiesOf("Components|Button", module)
   })
   .add("Sizes", () => {
     const variant = select("Variant", ["primary", "secondary", "tertiary"]);
-    const color = select("Color", ["green", "red", "grey"]);
+    const color = select("Color", [
+      "teal",
+      "grey",
+      "blue",
+      "red",
+      "primary",
+      "warning",
+      "highlight"
+    ]);
 
     return [
       <Button key="xs" scale="xs" color={color} variant={variant} m={2}>
@@ -41,7 +49,15 @@ storiesOf("Components|Button", module)
     );
   })
   .add("Variants", () => {
-    const color = select("Color", ["green", "red", "grey"]);
+    const color = select("Color", [
+      "teal",
+      "grey",
+      "blue",
+      "red",
+      "primary",
+      "warning",
+      "highlight"
+    ]);
 
     return [
       <Button key="primary" color={color} variant="primary" m={2}>
@@ -57,14 +73,17 @@ storiesOf("Components|Button", module)
   })
   .add("Colors", () => {
     return [
-      <Button key="green" onClick={action("Clicked")} m={2}>
-        Green
+      <Button key="primary" onClick={action("Clicked")} m={2}>
+        Primary
       </Button>,
       <Button key="grey" color="grey" onClick={action("Clicked")} m={2}>
         Grey
       </Button>,
-      <Button key="red" color="red" onClick={action("Clicked")} m={2}>
-        Red
+      <Button key="red" color="warning" onClick={action("Clicked")} m={2}>
+        Warning
+      </Button>,
+      <Button key="blue" color="highlight" onClick={action("Clicked")} m={2}>
+        Highlight
       </Button>
     ];
   })

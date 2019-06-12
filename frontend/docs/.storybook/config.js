@@ -2,7 +2,7 @@ import { configure, addDecorator } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import { withKnobs } from "@storybook/addon-knobs";
 
-import Page from "../components/Page";
+import Page from "../../components/Page";
 
 addDecorator(withInfo);
 addDecorator(withKnobs);

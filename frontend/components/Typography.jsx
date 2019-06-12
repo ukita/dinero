@@ -23,14 +23,15 @@ export const Heading = ({
   fontSize = 5,
   fontWeight = "bold",
   lineHeight = "heading",
+  as = "h2",
   ...props
 }) => (
   <Text
     {...props}
+    as={as}
     fontSize={fontSize}
     fontWeight={fontWeight}
     lineHeight={lineHeight}
-    as="h1"
   />
 );
 Heading.propTypes = {

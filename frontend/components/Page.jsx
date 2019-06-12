@@ -86,7 +86,7 @@ const GlobalStyle = createGlobalStyle`
   input::placeholder,
   textarea::placeholder {
     color: inherit;
-    opacity: 0.5;
+    opacity: 0.65;
   }
 
   button,

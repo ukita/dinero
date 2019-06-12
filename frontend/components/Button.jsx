@@ -35,9 +35,9 @@ const scale = ({ scale }) => {
 };
 
 const buttonStyle = ({ variant, color }) => {
-  const textColor = themeGet(`buttons.${color}.text`);
-  const background = themeGet(`buttons.${color}.background`);
-  const backgroundHover = themeGet(`buttons.${color}.backgroundHover`);
+  const textColor = themeGet(`buttons.${color}.text`, "#FFF");
+  const background = themeGet(`buttons.${color}.background`, "#000");
+  const backgroundHover = themeGet(`buttons.${color}.backgroundHover`, "#111");
 
   switch (variant) {
     case "primary":
@@ -49,6 +49,10 @@ const buttonStyle = ({ variant, color }) => {
         :focus {
           background-color: ${props =>
             props.disabled ? null : backgroundHover(props)};
+        }
+
+        :active {
+          box-shadow: ${themeGet("boxShadows.outline")};
         }
       `;
     case "secondary":
@@ -101,15 +105,12 @@ const Button = styled("button")`
   font-size: inherit;
   font-weight: ${themeGet("fontWeights.bold")};
   border-radius: ${themeGet("radius")};
+  transition: all 0.2s ease 0s;
+  outline: currentColor none medium;
 
   :disabled {
     opacity: 0.3;
     cursor: default;
-  }
-
-  :active,
-  :focus {
-    box-shadow: ${themeGet("boxShadows.outline")};
   }
 
   ${scale}
@@ -121,7 +122,15 @@ const Button = styled("button")`
 Button.propTypes = {
   variant: t.oneOf(["primary", "secondary", "tertiary"]),
   scale: t.oneOf(["xs", "sm", "md", "lg"]),
-  color: t.oneOf(["green", "grey", "red"]),
+  color: t.oneOf([
+    "teal",
+    "grey",
+    "blue",
+    "red",
+    "primary",
+    "warning",
+    "highlight"
+  ]),
   outline: t.bool,
   ...propTypes.space,
   ...propTypes.layout
@@ -129,7 +138,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   variant: "primary",
-  color: "green",
+  color: "primary",
   scale: "md"
 };
 

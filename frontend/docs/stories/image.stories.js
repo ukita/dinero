@@ -2,7 +2,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 
-import Image from "../components/Image";
+import Image from "../../components/Image";
 
 storiesOf("Components|Image", module).add("Basic usage", () => {
   return (

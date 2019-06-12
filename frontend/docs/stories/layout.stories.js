@@ -13,7 +13,7 @@ import {
   Container,
   Relative,
   Absolute
-} from "../components/Layout";
+} from "../../components/Layout";
 
 storiesOf("Components|Box", module).add("Basic usage", () => {
   return (

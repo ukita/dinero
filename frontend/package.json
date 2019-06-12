@@ -11,8 +11,8 @@
     "start": "NODE_ENV=production node server.js",
     "lint": "eslint **/*.{js,jsx}",
     "prettier": "prettier --write **/*.{js,jsx}",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "start-storybook -c docs/.storybook -p 6006",
+    "build-storybook": "build-storybook -c docs/.storybook"
   },
   "dependencies": {
     "@styled-system/prop-types": "^5.0.5",

@@ -34,6 +34,7 @@ const fontWeights = {
 
 // Border Radius
 export const radii = [0, 2, 4, 6];
+radii.pill = "9999px";
 export const radius = "4px";
 
 // Box Shadows
@@ -44,6 +45,7 @@ export const boxShadows = [
   "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
 ];
 boxShadows.default = boxShadows[0];
+boxShadows.sm = boxShadows[0];
 boxShadows.md = boxShadows[1];
 boxShadows.lg = boxShadows[2];
 boxShadows.xl = boxShadows[3];
@@ -139,7 +141,8 @@ const colors = {
 
   primary: baseColors.teal[5],
   text: baseColors.grey[9],
-  link: baseColors.blue[9],
+  link: baseColors.blue[5],
+  card: baseColors.white,
   background: baseColors.grey[0],
 
   // Old
@@ -157,7 +160,7 @@ const colors = {
 
 // Buttons colors
 const buttons = {
-  green: {
+  teal: {
     text: baseColors.white,
     background: baseColors.teal[5],
     backgroundHover: baseColors.teal[7]
@@ -167,12 +170,20 @@ const buttons = {
     background: baseColors.grey[5],
     backgroundHover: baseColors.grey[7]
   },
+  blue: {
+    text: baseColors.white,
+    background: baseColors.blue[5],
+    backgroundHover: baseColors.blue[7]
+  },
   red: {
     text: baseColors.white,
     background: baseColors.red[5],
     backgroundHover: baseColors.red[7]
   }
 };
+buttons.primary = buttons.teal;
+buttons.warning = buttons.red;
+buttons.highlight = buttons.blue;
 
 export default {
   breakpoints,
