@@ -117,7 +117,7 @@ const Button = styled("button")`
   font-size: inherit;
   font-weight: ${themeGet("fontWeights.bold")};
   border-radius: ${themeGet("radius")};
-  transition: all 0.15s ease 0s;
+  transition: all 0.2s ease 0s;
 
   :disabled {
     opacity: 0.3;

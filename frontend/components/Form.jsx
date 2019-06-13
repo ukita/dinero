@@ -7,6 +7,7 @@ import t from "prop-types";
 export const Fieldset = styled.fieldset`
   border: 0;
   padding: 0;
+  transition: all 0.2s ease 0s;
 
   :disabled {
     opacity: 0.5;
@@ -73,6 +74,7 @@ export const Input = styled.input`
   line-height: 1.5;
   font-size: ${themeGet("fontSizes.body")};
   border-radius: ${themeGet("radius")};
+  transition: all 0.2s ease 0s;
 
   :disabled {
     opacity: 0.5;
@@ -115,20 +117,14 @@ export const Checkbox = styled.input`
   width: ${({ size }) => size}px;
   color: ${themeGet("colors.primary")};
   border-radius: ${themeGet("radii.2")}px;
-  border-color: ${themeGet("colors.grey.3")};
-  border-width: 1px;
-  border-style: solid;
+  border: 2px solid ${themeGet("colors.grey.3")};
   background-color: transparent;
   background-origin: border-box;
   user-select: none;
   color-adjust: exact;
   flex-shrink: 0;
   margin: 0;
-
-  :focus {
-    outline: 0;
-    box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.5);
-  }
+  transition: all 0.2s ease 0s;
 
   :checked {
     background-color: currentColor;
