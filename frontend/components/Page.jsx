@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { themeGet } from "@styled-system/theme-get";
+import "focus-visible";
 
 import theme from "../theme";
 
@@ -92,6 +93,13 @@ const GlobalStyle = createGlobalStyle`
   button,
   [role="button"] {
     cursor: pointer;
+  }
+
+  /* Enable focus only with keyboard events */
+  .js-focus-visible {
+    *:focus:not([data-focus-visible-added]) {
+      outline: 0;
+    }
   }
 `;
 

@@ -37,7 +37,8 @@ const scale = ({ scale }) => {
 const buttonStyle = ({ variant, color }) => {
   const textColor = themeGet(`buttons.${color}.text`, "#FFF");
   const background = themeGet(`buttons.${color}.background`, "#000");
-  const backgroundHover = themeGet(`buttons.${color}.backgroundHover`, "#111");
+  const hover = themeGet(`buttons.${color}.hover`, "#222");
+  const active = themeGet(`buttons.${color}.active`, "#111");
 
   switch (variant) {
     case "primary":
@@ -47,12 +48,11 @@ const buttonStyle = ({ variant, color }) => {
 
         :hover,
         :focus {
-          background-color: ${props =>
-            props.disabled ? null : backgroundHover(props)};
+          background-color: ${props => (props.disabled ? null : hover(props))};
         }
 
         :active {
-          box-shadow: ${themeGet("boxShadows.outline")};
+          background-color: ${props => (props.disabled ? null : active(props))};
         }
       `;
     case "secondary":
@@ -63,10 +63,15 @@ const buttonStyle = ({ variant, color }) => {
 
         :hover,
         :focus {
-          background-color: transparent;
-          color: ${props => (props.disabled ? null : backgroundHover(props))};
-          box-shadow: inset 0 0 0 2px
-            ${props => (props.disabled ? null : backgroundHover(props))};
+          color: ${props => (props.disabled ? null : hover(props))};
+          box-shadow: inset 0 0 0 3px
+            ${props => (props.disabled ? null : hover(props))};
+        }
+
+        :active {
+          color: ${props => (props.disabled ? null : active(props))};
+          box-shadow: inset 0 0 0 3px
+            ${props => (props.disabled ? null : active(props))};
         }
       `;
     case "tertiary":
@@ -77,7 +82,11 @@ const buttonStyle = ({ variant, color }) => {
         :hover,
         :focus {
           background-color: transparent;
-          color: ${props => (props.disabled ? null : backgroundHover(props))};
+          color: ${props => (props.disabled ? null : hover(props))};
+        }
+
+        :active {
+          color: ${props => (props.disabled ? null : active(props))};
         }
       `;
     default:
@@ -87,8 +96,11 @@ const buttonStyle = ({ variant, color }) => {
 
         :hover,
         :focus {
-          background-color: ${props =>
-            props.disabled ? null : backgroundHover(props)};
+          background-color: ${props => (props.disabled ? null : hover(props))};
+        }
+
+        :active {
+          background-color: ${props => (props.disabled ? null : active(props))};
         }
       `;
   }
@@ -105,8 +117,7 @@ const Button = styled("button")`
   font-size: inherit;
   font-weight: ${themeGet("fontWeights.bold")};
   border-radius: ${themeGet("radius")};
-  transition: all 0.2s ease 0s;
-  outline: currentColor none medium;
+  transition: all 0.15s ease 0s;
 
   :disabled {
     opacity: 0.3;
@@ -131,7 +142,6 @@ Button.propTypes = {
     "warning",
     "highlight"
   ]),
-  outline: t.bool,
   ...propTypes.space,
   ...propTypes.layout
 };

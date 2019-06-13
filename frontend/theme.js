@@ -163,22 +163,26 @@ const buttons = {
   teal: {
     text: baseColors.white,
     background: baseColors.teal[5],
-    backgroundHover: baseColors.teal[7]
+    hover: baseColors.teal[6],
+    active: baseColors.teal[7]
   },
   grey: {
     text: baseColors.white,
     background: baseColors.grey[5],
-    backgroundHover: baseColors.grey[7]
+    hover: baseColors.grey[6],
+    active: baseColors.grey[7]
   },
   blue: {
     text: baseColors.white,
     background: baseColors.blue[5],
-    backgroundHover: baseColors.blue[7]
+    hover: baseColors.blue[6],
+    active: baseColors.blue[7]
   },
   red: {
     text: baseColors.white,
     background: baseColors.red[5],
-    backgroundHover: baseColors.red[7]
+    hover: baseColors.red[6],
+    active: baseColors.red[7]
   }
 };
 buttons.primary = buttons.teal;
