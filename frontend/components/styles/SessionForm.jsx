@@ -35,40 +35,8 @@ const SessionForm = styled.section`
     }
   }
 
-  .logo {
-    font-size: 4rem;
-    text-align: center;
-    margin: 0;
-  }
-
-  .form {
-    padding: 2rem 3rem;
-
-    .title {
-      text-align: center;
-      h1 {
-        font-size: 3.6rem;
-        line-height: 1.25;
-        margin-top: 0;
-      }
-
-      p {
-        margin: 1em auto;
-        line-height: 1.45;
-      }
-    }
-
-    .links {
-      margin-top: 1.5rem;
-      a {
-        font-size: 1.4rem;
-      }
-    }
-  }
-
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     grid-template-columns: 1fr;
-    max-width: 500px;
 
     .img {
       display: none;

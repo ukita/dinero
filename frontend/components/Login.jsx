@@ -2,13 +2,16 @@ import React from "react";
 import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
 
-import Link from "@components/Link";
+import NextLink from "next/link";
 import ErrorMessage from "@components/ErrorMessage";
 import MagicLinkMessage from "@components/MagicLinkMessage";
 import SessionForm from "@components/styles/SessionForm";
-import Form from "@components/styles/Form";
-import Button from "@components/styles/Button";
-import Box from "@components/styles/Box";
+
+import { Input, Label, Fieldset } from "@components/Form";
+import Card from "@components/Card";
+import Button from "@components/Button";
+import { Box } from "@components/Layout";
+import { Text, Heading, Paragraph, Link } from "@components/Typography";
 
 import { useInput } from "@lib/hooks";
 import { getProp } from "@lib/utils";
@@ -31,72 +34,82 @@ function Login() {
 
         if (message) {
           return (
-            <Box>
+            <Card>
               <MagicLinkMessage email={email} />
-            </Box>
+            </Card>
           );
         }
 
         return (
           <Box>
-            <SessionForm>
-              <div className="img">
-                <img
-                  alt="cash"
-                  src="https://source.unsplash.com/ZKVBM2_Dp84/600x400"
-                />
-              </div>
+            <Card boxShadowSize="md" maxWidth="900px" mx="auto">
+              <SessionForm>
+                <div className="img">
+                  <img
+                    alt="cash"
+                    src="https://source.unsplash.com/ZKVBM2_Dp84/600x400"
+                  />
+                </div>
 
-              <div className="form">
-                <h1 className="logo">
-                  <span role="img" aria-label="Dinero">
-                    💰
-                  </span>
-                </h1>
-                <div className="title">
-                  <h1>Welcome back!</h1>
-                  <p>
+                <Box p={4}>
+                  <Text textAlign="center" fontSize={6}>
+                    <span role="img" aria-label="Dinero">
+                      💰
+                    </span>
+                  </Text>
+
+                  <Heading fontSize={6} textAlign="center">
+                    Welcome back!
+                  </Heading>
+                  <Paragraph my={3} mx="auto" textAlign="center">
                     {
                       "Enter your email address, and we'll send a magic link to your inbox."
                     }
                     <span role="img" aria-label="Sparkles">
                       ✨
                     </span>
-                  </p>
-                </div>
-                <ErrorMessage error={error} />
-                <Form
-                  method="post"
-                  onSubmit={async e => {
-                    e.preventDefault();
-                    await login();
-                  }}
-                >
-                  <fieldset disabled={loading}>
-                    <label htmlFor="email">
-                      Your email
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={email}
-                        onChange={setEmail}
-                        placeholder="johndoe@email.com"
-                        required
-                      />
-                    </label>
-                    <Button type="submit" block>
-                      Log in
-                    </Button>
-                  </fieldset>
-                </Form>
-                <div className="links">
+                  </Paragraph>
+
+                  <ErrorMessage error={error} />
+
+                  <form
+                    method="post"
+                    onSubmit={async e => {
+                      e.preventDefault();
+                      await login();
+                    }}
+                  >
+                    <Fieldset disabled={loading}>
+                      <Label htmlFor="email" my={3}>
+                        Your email
+                        <Input
+                          mt={2}
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={email}
+                          onChange={setEmail}
+                          placeholder="johndoe@email.com"
+                          required
+                        />
+                      </Label>
+                      <Button type="submit" width={1}>
+                        Log in
+                      </Button>
+                    </Fieldset>
+                  </form>
+                </Box>
+              </SessionForm>
+            </Card>
+            <Box mt={4} width={1 / 4} mx="auto">
+              <Text textAlign="center">
+                <NextLink href="/signup">
                   <Link href="/signup" prefetch>
                     Don’t have an account? Sign Up
                   </Link>
-                </div>
-              </div>
-            </SessionForm>
+                </NextLink>
+              </Text>
+            </Box>
           </Box>
         );
       }}
