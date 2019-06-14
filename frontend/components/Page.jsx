@@ -4,6 +4,7 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { themeGet } from "@styled-system/theme-get";
 
 import theme from "../theme";
+import FocusVisible from "./FocusVisible";
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://rsms.me/inter/inter.css');
@@ -67,10 +68,6 @@ const GlobalStyle = createGlobalStyle`
     &:hover {
       text-decoration: underline;
     }
-
-    &:active, &:visited {
-      color: inherit;
-    }
   }
 
   fieldset {
@@ -112,6 +109,7 @@ function Page({ children = "" }) {
   return (
     <ThemeProvider theme={theme}>
       <>
+        <FocusVisible />
         <GlobalStyle />
         {children}
       </>

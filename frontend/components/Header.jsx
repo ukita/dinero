@@ -31,22 +31,18 @@ function Header() {
         maxWidth={1280}
       >
         <NextLink href="/">
-          <Link href="/">
-            <Logo
-              width="50px"
-              height="auto"
-              style={{ verticalAlign: "middle" }}
-            />
+          <Link href="/" title="Dinero" aria-label="Dinero">
+            <Logo width="50px" style={{ verticalAlign: "middle" }} />
           </Link>
         </NextLink>
         <Flex alignItems="center">
           <NextLink href="/login">
-            <Button as="a" scale="sm" variant="tertiary" mx={1}>
+            <Button as="a" href="/login" scale="sm" variant="tertiary" mx={1}>
               Login
             </Button>
           </NextLink>
           <NextLink href="/signup">
-            <Button as="a" scale="sm" mx={1}>
+            <Button as="a" href="/signup" scale="sm" mx={1}>
               Signup
             </Button>
           </NextLink>

@@ -14,7 +14,7 @@ function Home() {
     <Layout>
       <Head title="Dinero" />
       <Header />
-      <Main>
+      <Main as="main">
         <Container>
           <Card p={5} boxShadowSize="md">
             <CurrentUser>
