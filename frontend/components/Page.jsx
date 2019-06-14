@@ -2,16 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { themeGet } from "@styled-system/theme-get";
-import "focus-visible";
 
 import theme from "../theme";
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://rsms.me/inter/inter.css');
 
+  :root {
+    --primary-color: ${themeGet("colors.primary")};
+  }
+
   html {
     box-sizing: border-box;
     font-size: 10px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   *, *:before, *:after {
     box-sizing: inherit;
@@ -23,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: ${themeGet("fontSizes.body")};
     line-height: ${themeGet("lineHeights.body")};
     color: ${themeGet("colors.text")};
-    background: ${themeGet("colors.background")};
+    background: ${themeGet("colors.body")};
   }
 
   input, textarea, select, button {

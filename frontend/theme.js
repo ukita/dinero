@@ -29,7 +29,8 @@ lineHeights.heading = 1.25;
 const fontWeights = {
   light: 300,
   normal: 400,
-  bold: 600
+  bold: 600,
+  black: 900
 };
 
 // Border Radius
@@ -135,15 +136,16 @@ const baseColors = {
     "#513C06" // 900
   ]
 };
+baseColors.primary = baseColors.teal;
 
 const colors = {
   ...baseColors,
 
-  primary: baseColors.teal[5],
+  primary: baseColors.primary[5],
   text: baseColors.grey[9],
   link: baseColors.blue[5],
-  card: baseColors.white,
-  background: baseColors.grey[0],
+  body: baseColors.grey[1],
+  background: baseColors.white,
 
   // Old
   darkPrimary: "#0C6B58",
@@ -160,6 +162,12 @@ const colors = {
 
 // Buttons colors
 const buttons = {
+  primary: {
+    text: baseColors.white,
+    background: baseColors.primary[5],
+    hover: baseColors.primary[6],
+    active: baseColors.primary[7]
+  },
   teal: {
     text: baseColors.white,
     background: baseColors.teal[5],
@@ -185,7 +193,6 @@ const buttons = {
     active: baseColors.red[7]
   }
 };
-buttons.primary = buttons.teal;
 buttons.warning = buttons.red;
 buttons.highlight = buttons.blue;
 

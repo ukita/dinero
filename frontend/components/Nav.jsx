@@ -1,7 +1,7 @@
 import React from "react";
 
-import Link from "@components/Link";
-import StyledNav from "@components/styles/StyledNav";
+import Link from "./Link";
+import StyledNav from "./styles/StyledNav";
 
 function Nav() {
   return (

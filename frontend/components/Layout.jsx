@@ -52,7 +52,7 @@ Main.propTypes = {
 };
 
 export const Container = props => (
-  <Box {...props} width="100%" minWidth={0} maxWidth={1024} mx="auto" p={4} />
+  <Box {...props} width="100%" minWidth={0} maxWidth={1280} mx="auto" p={4} />
 );
 Container.propTypes = {
   ...Box.propTypes

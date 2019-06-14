@@ -27,7 +27,7 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
-  bg: "card",
+  bg: "background",
   boxShadowSize: "",
   borderColor: "",
   borderRadius: 2

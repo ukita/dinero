@@ -48,10 +48,12 @@ const buttonStyle = ({ variant, color }) => {
 
         :hover,
         :focus {
+          color: ${textColor};
           background-color: ${props => (props.disabled ? null : hover(props))};
         }
 
         :active {
+          color: ${textColor};
           background-color: ${props => (props.disabled ? null : active(props))};
         }
       `;
@@ -64,13 +66,13 @@ const buttonStyle = ({ variant, color }) => {
         :hover,
         :focus {
           color: ${props => (props.disabled ? null : hover(props))};
-          box-shadow: inset 0 0 0 3px
+          box-shadow: inset 0 0 0 2px
             ${props => (props.disabled ? null : hover(props))};
         }
 
         :active {
           color: ${props => (props.disabled ? null : active(props))};
-          box-shadow: inset 0 0 0 3px
+          box-shadow: inset 0 0 0 2px
             ${props => (props.disabled ? null : active(props))};
         }
       `;
@@ -87,6 +89,7 @@ const buttonStyle = ({ variant, color }) => {
 
         :active {
           color: ${props => (props.disabled ? null : active(props))};
+          text-decoration: underline;
         }
       `;
     default:
@@ -96,10 +99,12 @@ const buttonStyle = ({ variant, color }) => {
 
         :hover,
         :focus {
+          color: ${textColor};
           background-color: ${props => (props.disabled ? null : hover(props))};
         }
 
         :active {
+          color: ${textColor};
           background-color: ${props => (props.disabled ? null : active(props))};
         }
       `;
@@ -120,8 +125,12 @@ const Button = styled("button")`
   transition: all 0.2s ease 0s;
 
   :disabled {
-    opacity: 0.3;
+    opacity: 0.5;
     cursor: default;
+  }
+
+  :hover {
+    text-decoration: none;
   }
 
   ${scale}
