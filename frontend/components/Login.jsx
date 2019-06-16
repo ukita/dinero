@@ -5,12 +5,12 @@ import { Mutation } from "react-apollo";
 import NextLink from "next/link";
 import ErrorMessage from "@components/ErrorMessage";
 import MagicLinkMessage from "@components/MagicLinkMessage";
-import SessionForm from "@components/styles/SessionForm";
 
 import { Input, Label, Fieldset } from "@components/Form";
 import Card from "@components/Card";
 import Button from "@components/Button";
-import { Box } from "@components/Layout";
+import Image from "@components/Image";
+import { Box, Relative, Absolute, Grid } from "@components/Layout";
 import { Text, Heading, Paragraph, Link } from "@components/Typography";
 
 import { useInput } from "@lib/hooks";
@@ -34,7 +34,7 @@ function Login() {
 
         if (message) {
           return (
-            <Card>
+            <Card boxShadowSize="md" maxWidth="900px" mx="auto">
               <MagicLinkMessage email={email} />
             </Card>
           );
@@ -42,14 +42,40 @@ function Login() {
 
         return (
           <Box>
-            <Card boxShadowSize="md" maxWidth="900px" mx="auto">
-              <SessionForm>
-                <div className="img">
-                  <img
+            <Card
+              boxShadowSize="md"
+              maxWidth="900px"
+              mx="auto"
+              style={{ overflow: "hidden" }}
+            >
+              <Grid
+                gridTemplateColumns={{ _: "1fr", sm: "0.75fr 1fr" }}
+                alignItems="stretch"
+                minHeight={550}
+              >
+                <Relative display={{ _: "none", sm: "block" }}>
+                  <Image
                     alt="cash"
                     src="https://source.unsplash.com/ZKVBM2_Dp84/600x400"
+                    style={{
+                      objectFit: "cover",
+                      height: "100%",
+                      objectPosition: 0,
+                      filter: "contrast(0.3) brightness(1.5) saturate(0.5)"
+                    }}
+                    borderRadius={2}
                   />
-                </div>
+                  <Absolute
+                    top="0"
+                    right="0"
+                    bottom="0"
+                    left="0"
+                    bg="primary"
+                    style={{
+                      mixBlendMode: "multiply"
+                    }}
+                  />
+                </Relative>
 
                 <Box p={4}>
                   <Text textAlign="center" fontSize={6}>
@@ -80,7 +106,7 @@ function Login() {
                     }}
                   >
                     <Fieldset disabled={loading}>
-                      <Label htmlFor="email" my={3}>
+                      <Label id="email" htmlFor="email" my={3}>
                         Your email
                         <Input
                           mt={2}
@@ -99,13 +125,14 @@ function Login() {
                     </Fieldset>
                   </form>
                 </Box>
-              </SessionForm>
+              </Grid>
             </Card>
-            <Box mt={4} width={1 / 4} mx="auto">
+            <Box mt={4} mx="auto">
               <Text textAlign="center">
+                Don&apos;t have an account yet?{" "}
                 <NextLink href="/signup">
                   <Link href="/signup" prefetch>
-                    Don’t have an account? Sign Up
+                    Sign up
                   </Link>
                 </NextLink>
               </Text>

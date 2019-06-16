@@ -1,8 +1,8 @@
 import React from "react";
 
-import LoginForm from "@components/Login";
-import Head from "@components/Head";
 import { Container, Layout, Main } from "@components/Layout";
+import Head from "@components/Head";
+import LoginForm from "@components/Login";
 
 function Login() {
   return (

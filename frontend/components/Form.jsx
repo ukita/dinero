@@ -31,7 +31,6 @@ export const Label = styled.label`
   ${color}
 `;
 Label.propTypes = {
-  id: t.string.isRequired,
   ...propTypes.layout,
   ...propTypes.space,
   ...propTypes.color,
