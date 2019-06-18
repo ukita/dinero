@@ -5,11 +5,10 @@ import { Mutation } from "react-apollo";
 import NextLink from "next/link";
 import ErrorMessage from "@components/ErrorMessage";
 import MagicLinkMessage from "@components/MagicLinkMessage";
-
-import { Input, Label, Fieldset } from "@components/Form";
 import Card from "@components/Card";
 import Button from "@components/Button";
 import Image from "@components/Image";
+import { Input, Label, Fieldset } from "@components/Form";
 import { Box, Relative, Absolute, Grid } from "@components/Layout";
 import { Text, Heading, Paragraph, Link } from "@components/Typography";
 
@@ -90,7 +89,7 @@ function Login() {
                   </Heading>
                   <Paragraph my={3} mx="auto" textAlign="center">
                     {
-                      "Enter your email address, and we'll send a magic link to your inbox."
+                      "Enter your email address, and we'll send a magic link to your inbox. "
                     }
                     <span role="img" aria-label="Sparkles">
                       ✨
@@ -132,9 +131,7 @@ function Login() {
               <Text textAlign="center">
                 Don&apos;t have an account yet?{" "}
                 <NextLink href="/signup">
-                  <Link href="/signup" prefetch>
-                    Sign up
-                  </Link>
+                  <Link href="/signup">Sign up</Link>
                 </NextLink>
               </Text>
             </Box>
