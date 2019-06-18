@@ -5,14 +5,13 @@ import propTypes from "@styled-system/prop-types";
 import { Box } from "./Layout";
 
 const Image = styled(Box)`
-  max-width: 100%;
-  height: auto;
-
   ${border}
 `;
 
 Image.defaultProps = {
-  as: "img"
+  as: "img",
+  maxWidth: "100%",
+  height: "auto"
 };
 
 Image.propTypes = {

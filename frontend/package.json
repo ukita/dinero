@@ -24,6 +24,7 @@
     "graphql": "^14.3.1",
     "next": "^8.1.0",
     "next-with-apollo": "^3.4.0",
+    "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-apollo": "^2.5.6",

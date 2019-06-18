@@ -46,7 +46,9 @@ function Login() {
               boxShadowSize="md"
               maxWidth="900px"
               mx="auto"
-              style={{ overflow: "hidden" }}
+              css={{
+                overflow: "hidden"
+              }}
             >
               <Grid
                 gridTemplateColumns={{ _: "1fr", sm: "0.75fr 1fr" }}
@@ -57,13 +59,12 @@ function Login() {
                   <Image
                     alt="cash"
                     src="https://source.unsplash.com/ZKVBM2_Dp84/600x400"
-                    style={{
+                    height="100%"
+                    css={{
                       objectFit: "cover",
-                      height: "100%",
                       objectPosition: 0,
                       filter: "contrast(0.3) brightness(1.5) saturate(0.5)"
                     }}
-                    borderRadius={2}
                   />
                   <Absolute
                     top="0"
@@ -71,7 +72,7 @@ function Login() {
                     bottom="0"
                     left="0"
                     bg="primary"
-                    style={{
+                    css={{
                       mixBlendMode: "multiply"
                     }}
                   />

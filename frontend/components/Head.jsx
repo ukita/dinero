@@ -18,6 +18,7 @@ const Head = props => (
     <link rel="icon" sizes="192x192" href="/static/touch-icon.png" />
     <link rel="apple-touch-icon" href="/static/touch-icon.png" />
     <link rel="icon" href="/static/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
     <meta property="og:url" content={props.url || defaultOGURL} />
     <meta property="og:title" content={props.title || ""} />
     <meta
