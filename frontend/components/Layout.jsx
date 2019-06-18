@@ -51,11 +51,17 @@ Main.propTypes = {
   ...Flex.propTypes
 };
 
-export const Container = props => (
-  <Box {...props} width="100%" minWidth={0} mx="auto" p={4} />
+export const Container = ({ maxWidth = 1280, ...props }) => (
+  <Box
+    {...props}
+    width="100%"
+    minWidth={0}
+    maxWidth={maxWidth}
+    mx="auto"
+    p={4}
+  />
 );
 Container.propTypes = {
-  maxWidth: 1280,
   ...Box.propTypes
 };
 
