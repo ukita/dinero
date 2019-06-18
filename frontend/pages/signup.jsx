@@ -8,8 +8,8 @@ function Signup() {
   return (
     <Layout>
       <Head title="Dinero - Sign Up" />
-      <Main as="main">
-        <Container maxWidth={550}>
+      <Main as="main" alignItems="center">
+        <Container maxWidth={900}>
           <SignupForm />
         </Container>
       </Main>

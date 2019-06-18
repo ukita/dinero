@@ -36,13 +36,13 @@ function Header() {
           </Link>
         </NextLink>
         <Flex alignItems="center">
-          <NextLink href="/login">
-            <Button as="a" href="/login" scale="sm" variant="tertiary" mx={1}>
+          <NextLink href="/login" passHref>
+            <Button as="a" scale="sm" variant="tertiary" mx={1}>
               Login
             </Button>
           </NextLink>
-          <NextLink href="/signup">
-            <Button as="a" href="/signup" scale="sm" mx={1}>
+          <NextLink href="/signup" passHref>
+            <Button as="a" scale="sm" mx={1}>
               Signup
             </Button>
           </NextLink>

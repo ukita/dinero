@@ -3,8 +3,8 @@ import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
 
 import NextLink from "next/link";
+import Router from "next/router";
 import ErrorMessage from "@components/ErrorMessage";
-import MagicLinkMessage from "@components/MagicLinkMessage";
 import Card from "@components/Card";
 import Button from "@components/Button";
 import Image from "@components/Image";
@@ -32,19 +32,16 @@ function Login() {
         const message = getProp(data, "login.message");
 
         if (message) {
-          return (
-            <Card boxShadowSize="md" maxWidth="900px" mx="auto">
-              <MagicLinkMessage email={email} />
-            </Card>
-          );
+          Router.push({
+            pathname: "/notifications/magic-link",
+            query: { email }
+          });
         }
 
         return (
           <Box>
             <Card
               boxShadowSize="md"
-              maxWidth="900px"
-              mx="auto"
               css={{
                 overflow: "hidden"
               }}
@@ -130,8 +127,8 @@ function Login() {
             <Box mt={4} mx="auto">
               <Text textAlign="center">
                 Don&apos;t have an account yet?{" "}
-                <NextLink href="/signup">
-                  <Link href="/signup">Sign up</Link>
+                <NextLink href="/signup" passHref>
+                  <Link>Sign up</Link>
                 </NextLink>
               </Text>
             </Box>

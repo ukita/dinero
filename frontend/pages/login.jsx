@@ -8,8 +8,8 @@ function Login() {
   return (
     <Layout>
       <Head title="Dinero - Login" />
-      <Main as="main">
-        <Container maxWidth={550}>
+      <Main as="main" alignItems="center">
+        <Container maxWidth={900}>
           <LoginForm />
         </Container>
       </Main>
