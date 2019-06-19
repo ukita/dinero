@@ -1,8 +1,22 @@
 import React from "react";
 import App, { Container } from "next/app";
+import Router from "next/router";
+import NProgress from "nprogress";
 import { ApolloProvider } from "react-apollo";
-import Page from "../components/Page";
-import withApollo from "../lib/withApollo";
+import Page from "@components/Page";
+import withApollo from "@lib/withApollo";
+
+Router.onRouteChangeStart = () => {
+  NProgress.start();
+};
+
+Router.onRouteChangeComplete = () => {
+  NProgress.done();
+};
+
+Router.onRouteChangeError = () => {
+  NProgress.done();
+};
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {

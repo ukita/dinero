@@ -1,17 +1,17 @@
 import React from "react";
 import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
+import NextLink from "next/link";
+import Router from "next/router";
 
-import Link from "./Link";
-import Error from "./ErrorMessage";
-import MagicLinkMessage from "./MagicLinkMessage";
-import Box from "./styles/Box";
-import SessionForm from "./styles/SessionForm";
-import Form from "./styles/Form";
-import Button from "./styles/Button";
-
-import { useInput } from "../lib/hooks";
-import { getProp } from "../lib/utils";
+import Button from "@components/Button";
+import { Fieldset, Label, Input } from "@components/Form";
+import { Text, Heading, Paragraph, Link } from "@components/Typography";
+import { Box } from "@components/Layout";
+import ErrorMessage from "@components/ErrorMessage";
+import SessionBox from "@components/SessionBox";
+import { useInput } from "@lib/hooks";
+import { getProp } from "@lib/utils";
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION($name: String!, $email: String!) {
@@ -31,83 +31,86 @@ function Signup() {
         const message = getProp(data, "signup.message");
 
         if (message) {
-          return (
-            <Box>
-              <MagicLinkMessage email={email} />
-            </Box>
-          );
+          Router.push({
+            pathname: "/notifications/magic-link",
+            query: { email }
+          });
+
+          return null;
         }
 
         return (
           <Box>
-            <SessionForm>
-              <div className="img">
-                <img
-                  alt="cash"
-                  src="https://source.unsplash.com/ZKVBM2_Dp84/600x400"
-                />
-              </div>
-              <div className="form">
-                <h1 className="logo">
-                  <span role="img" aria-label="Dinero">
-                    💰
-                  </span>
-                </h1>
-                <div className="title">
-                  <h1>Create your free account</h1>
-                  <p>
-                    Fill up the form below, and we will send you a magic link to
-                    your inbox.{" "}
-                    <span role="img" aria-label="Sparkles">
-                      ✨
-                    </span>
-                  </p>
-                </div>
-                <Error error={error} />
-                <Form
-                  method="post"
-                  onSubmit={async e => {
-                    e.preventDefault();
-                    await signup();
-                  }}
-                >
-                  <fieldset disabled={loading}>
-                    <label htmlFor="name">
-                      Name
-                      <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        value={name}
-                        onChange={setName}
-                        placeholder="John Doe"
-                        required
-                      />
-                    </label>
-                    <label htmlFor="email">
-                      Email
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={email}
-                        onChange={setEmail}
-                        placeholder="johndoe@email.com"
-                        required
-                      />
-                    </label>
-                    <Button type="submit" block>
-                      {loading ? "Joining..." : "Join in"}
-                    </Button>
-                  </fieldset>
-                </Form>
-                <div className="links">
-                  <Link href="/login" prefetch>
-                    Already have an account? Log In
-                  </Link>
-                </div>
-              </div>
-            </SessionForm>
+            <Box mb={2}>
+              <ErrorMessage error={error} />
+            </Box>
+
+            <SessionBox>
+              <Text textAlign="center" fontSize={6}>
+                <span role="img" aria-label="Dinero">
+                  💰
+                </span>
+              </Text>
+
+              <Heading fontSize={6} textAlign="center">
+                Create your free account
+              </Heading>
+              <Paragraph my={3} mx="auto" textAlign="center">
+                Fill up the form below, and we will send you a magic link to
+                your inbox.{" "}
+                <span role="img" aria-label="Sparkles">
+                  ✨
+                </span>
+              </Paragraph>
+
+              <form
+                method="post"
+                onSubmit={async e => {
+                  e.preventDefault();
+                  await signup();
+                }}
+              >
+                <Fieldset disabled={loading}>
+                  <Label id="name" htmlFor="name" my={3}>
+                    Name
+                    <Input
+                      mt={2}
+                      id="name"
+                      name="name"
+                      type="name"
+                      value={name}
+                      onChange={setName}
+                      placeholder="John Doe"
+                      required
+                    />
+                  </Label>
+                  <Label id="email" htmlFor="email" my={3}>
+                    Email
+                    <Input
+                      mt={2}
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={email}
+                      onChange={setEmail}
+                      placeholder="johndoe@email.com"
+                      required
+                    />
+                  </Label>
+                  <Button type="submit" width={1} mt={2}>
+                    {loading ? "Joining..." : "Join in"}
+                  </Button>
+                </Fieldset>
+              </form>
+            </SessionBox>
+            <Box mt={4} mx="auto">
+              <Text textAlign="center">
+                Already have an account?{" "}
+                <NextLink href="/login" passHref>
+                  <Link>Log In</Link>
+                </NextLink>
+              </Text>
+            </Box>
           </Box>
         );
       }}

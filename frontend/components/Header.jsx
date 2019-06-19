@@ -1,60 +1,56 @@
 import React from "react";
 import styled from "styled-components";
+import { themeGet } from "@styled-system/theme-get";
+import NextLink from "next/link";
 
-import Nav from "./Nav";
-import Link from "./Link";
+import { Header as LayoutHeader, Flex } from "./Layout";
+import { Link } from "./Typography";
+import Button from "./Button";
 
-const Logo = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 2rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  font-weight: bolder;
+import Logo from "../assets/svg/logo.svg";
 
-  a {
-    color: inherit;
-    padding: 0.5rem 1rem;
-    text-decoration: none;
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    margin: 0 auto;
-    text-align: center;
-  }
-`;
-
-const StyledHeader = styled.header`
-  background: ${({ theme }) => theme.colors.white};
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  border-top: 0.4rem solid ${({ theme }) => theme.colors.primary};
-
-  .topbar {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    justify-content: space-between;
-    align-items: stretch;
-    min-height: 6.4rem;
-
-    @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-      grid-template-columns: 1fr;
-      justify-content: center;
-    }
-  }
+const BorderHeader = styled(LayoutHeader)`
+  border-top-width: 4px;
+  border-top-style: solid;
+  border-image: ${themeGet("gradients.primary")} 5 stretch;
+  box-shadow: ${themeGet("boxShadows.md")};
 `;
 
 function Header() {
   return (
-    <StyledHeader>
-      <div className="topbar">
-        <Logo>
-          <Link prefetch href="/">
-            Dinero
+    <BorderHeader
+      bg="background"
+      boxShadow="lg"
+      alignItems="center"
+      py={2}
+      px={3}
+    >
+      <Flex
+        flexGrow={1}
+        alignItems="center"
+        justifyContent="space-between"
+        mx="auto"
+        maxWidth={1280}
+      >
+        <NextLink href="/">
+          <Link href="/" title="Dinero" aria-label="Dinero">
+            <Logo width="50px" style={{ verticalAlign: "middle" }} />
           </Link>
-        </Logo>
-        <Nav />
-      </div>
-    </StyledHeader>
+        </NextLink>
+        <Flex alignItems="center">
+          <NextLink href="/login" passHref>
+            <Button as="a" scale="sm" variant="tertiary" mx={1}>
+              Login
+            </Button>
+          </NextLink>
+          <NextLink href="/signup" passHref>
+            <Button as="a" scale="sm" mx={1}>
+              Signup
+            </Button>
+          </NextLink>
+        </Flex>
+      </Flex>
+    </BorderHeader>
   );
 }
 

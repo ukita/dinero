@@ -1,16 +1,19 @@
 import React from "react";
 
-import SignupForm from "../components/Signup";
-import SessionPage from "../components/styles/SessionPage";
-import Container from "../components/styles/Container";
+import Meta from "@components/Meta";
+import { Layout, Main, Container } from "@components/Layout";
+import SignupForm from "@components/Signup";
 
 function Signup() {
   return (
-    <SessionPage>
-      <Container>
-        <SignupForm />
-      </Container>
-    </SessionPage>
+    <Layout>
+      <Meta title="Dinero - Sign Up" />
+      <Main as="main" alignItems="center">
+        <Container maxWidth={900}>
+          <SignupForm />
+        </Container>
+      </Main>
+    </Layout>
   );
 }
 

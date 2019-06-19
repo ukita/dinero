@@ -1,17 +1,18 @@
 import React from "react";
 import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
+import NextLink from "next/link";
+import Router from "next/router";
 
-import Link from "./Link";
-import ErrorMessage from "./ErrorMessage";
-import MagicLinkMessage from "./MagicLinkMessage";
-import SessionForm from "./styles/SessionForm";
-import Form from "./styles/Form";
-import Button from "./styles/Button";
-import Box from "./styles/Box";
+import ErrorMessage from "@components/ErrorMessage";
+import Button from "@components/Button";
+import { Input, Label, Fieldset } from "@components/Form";
+import { Box } from "@components/Layout";
+import SessionBox from "@components/SessionBox";
+import { Text, Heading, Paragraph, Link } from "@components/Typography";
 
-import { useInput } from "../lib/hooks";
-import { getProp } from "../lib/utils";
+import { useInput } from "@lib/hooks";
+import { getProp } from "@lib/utils";
 
 const LOGIN_MUTATION = gql`
   mutation LOGIN_MUTATION($email: String!) {
@@ -30,73 +31,72 @@ function Login() {
         const message = getProp(data, "login.message");
 
         if (message) {
-          return (
-            <Box>
-              <MagicLinkMessage email={email} />
-            </Box>
-          );
+          Router.push({
+            pathname: "/notifications/magic-link",
+            query: { email }
+          });
         }
 
         return (
           <Box>
-            <SessionForm>
-              <div className="img">
-                <img
-                  alt="cash"
-                  src="https://source.unsplash.com/ZKVBM2_Dp84/600x400"
-                />
-              </div>
+            <Box mb={2}>
+              <ErrorMessage error={error} />
+            </Box>
 
-              <div className="form">
-                <h1 className="logo">
-                  <span role="img" aria-label="Dinero">
-                    💰
-                  </span>
-                </h1>
-                <div className="title">
-                  <h1>Welcome back!</h1>
-                  <p>
-                    {
-                      "Enter your email address, and we'll send a magic link to your inbox."
-                    }
-                    <span role="img" aria-label="Sparkles">
-                      ✨
-                    </span>
-                  </p>
-                </div>
-                <ErrorMessage error={error} />
-                <Form
-                  method="post"
-                  onSubmit={async e => {
-                    e.preventDefault();
-                    await login();
-                  }}
-                >
-                  <fieldset disabled={loading}>
-                    <label htmlFor="email">
-                      Your email
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={email}
-                        onChange={setEmail}
-                        placeholder="johndoe@email.com"
-                        required
-                      />
-                    </label>
-                    <Button type="submit" block>
-                      Log in
-                    </Button>
-                  </fieldset>
-                </Form>
-                <div className="links">
-                  <Link href="/signup" prefetch>
-                    Don’t have an account? Sign Up
-                  </Link>
-                </div>
-              </div>
-            </SessionForm>
+            <SessionBox>
+              <Text textAlign="center" fontSize={6}>
+                <span role="img" aria-label="Dinero">
+                  💰
+                </span>
+              </Text>
+
+              <Heading fontSize={6} textAlign="center">
+                Welcome back!
+              </Heading>
+              <Paragraph my={3} mx="auto" textAlign="center">
+                {
+                  "Enter your email address, and we'll send a magic link to your inbox. "
+                }
+                <span role="img" aria-label="Sparkles">
+                  ✨
+                </span>
+              </Paragraph>
+
+              <form
+                method="post"
+                onSubmit={async e => {
+                  e.preventDefault();
+                  await login();
+                }}
+              >
+                <Fieldset disabled={loading}>
+                  <Label id="email" htmlFor="email" my={3}>
+                    Your email
+                    <Input
+                      mt={2}
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={email}
+                      onChange={setEmail}
+                      placeholder="johndoe@email.com"
+                      required
+                    />
+                  </Label>
+                  <Button type="submit" width={1} mt={2}>
+                    Log in
+                  </Button>
+                </Fieldset>
+              </form>
+            </SessionBox>
+            <Box mt={4} mx="auto">
+              <Text textAlign="center">
+                Don&apos;t have an account yet?{" "}
+                <NextLink href="/signup" passHref>
+                  <Link>Sign up</Link>
+                </NextLink>
+              </Text>
+            </Box>
           </Box>
         );
       }}
