@@ -12,9 +12,11 @@
     "lint": "eslint **/*.{js,jsx}",
     "prettier": "prettier --write **/*.{js,jsx}",
     "storybook": "start-storybook -c docs/.storybook -p 6006",
-    "build-storybook": "build-storybook -c docs/.storybook"
+    "build-storybook": "build-storybook -c docs/.storybook",
+    "analyze": "ANALYZE=true yarn build"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^8.1.0",
     "@styled-system/prop-types": "^5.0.8",
     "@styled-system/theme-get": "^5.0.6",
     "@svgr/webpack": "^4.3.0",

@@ -1,8 +1,11 @@
 /* eslint-disable */
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true"
+});
 
-module.exports = {
+module.exports = withBundleAnalyzer({
   target: "serverless",
 
   webpack: config => {
@@ -33,4 +36,4 @@ module.exports = {
 
     return config;
   }
-};
+});
