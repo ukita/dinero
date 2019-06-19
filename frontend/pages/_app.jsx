@@ -22,12 +22,17 @@ class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
     if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
+      try {
+        pageProps = await Component.getInitialProps(ctx);
+      } catch (error) {
+        pageProps.error = error;
+      }
     }
     // this exposes the query to the user
     pageProps.query = ctx.query;
     return { pageProps };
   }
+
   render() {
     const { Component, pageProps, apollo } = this.props;
 
