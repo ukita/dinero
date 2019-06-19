@@ -21,7 +21,7 @@ const Card = styled(Box)`
 Card.propTypes = {
   ...propTypes.border,
   ...propTypes.background,
-  boxShadowSize: t.oneOf(["sm", "md", "lg", "xl"]),
+  boxShadowSize: t.oneOf(["", "sm", "md", "lg", "xl"]),
   borderColor: t.string,
   borderWidth: t.oneOf([0, 1, 2])
 };

@@ -1,13 +1,13 @@
 import React from "react";
 
 import { Container, Layout, Main } from "@components/Layout";
-import Head from "@components/Head";
+import Meta from "@components/Meta";
 import LoginForm from "@components/Login";
 
 function Login() {
   return (
     <Layout>
-      <Head title="Dinero - Login" />
+      <Meta title="Dinero - Login" />
       <Main as="main" alignItems="center">
         <Container maxWidth={900}>
           <LoginForm />

@@ -6,7 +6,7 @@ const defaultDescription = "See exactly how much you are spending.";
 const defaultOGURL = "";
 const defaultOGImage = "";
 
-const Head = props => (
+const Meta = props => (
   <NextHead>
     <meta charSet="UTF-8" />
     <title>{props.title || ""}</title>
@@ -34,11 +34,11 @@ const Head = props => (
   </NextHead>
 );
 
-Head.propTypes = {
+Meta.propTypes = {
   title: string,
   description: string,
   url: string,
   ogImage: string
 };
 
-export default Head;
+export default Meta;

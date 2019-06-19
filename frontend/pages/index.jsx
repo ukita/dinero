@@ -1,6 +1,6 @@
 import React from "react";
 
-import Head from "@components/Head";
+import Meta from "@components/Meta";
 import Header from "@components/Header";
 import { Container, Layout, Main } from "@components/Layout";
 import Card from "@components/Card";
@@ -12,7 +12,7 @@ import { getProp } from "@lib/utils";
 function Home() {
   return (
     <Layout>
-      <Head title="Dinero" />
+      <Meta title="Dinero" />
       <Header />
       <Main as="main">
         <Container>

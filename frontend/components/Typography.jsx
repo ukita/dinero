@@ -1,14 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { space, typography, color } from "styled-system";
+import { space, typography, color, display } from "styled-system";
 import propTypes from "@styled-system/prop-types";
 
 export const Text = styled.div`
   ${space}
   ${typography}
   ${color}
+  ${display}
 `;
 Text.propTypes = {
+  display: propTypes.layout.display,
   ...propTypes.space,
   ...propTypes.typography,
   ...propTypes.color

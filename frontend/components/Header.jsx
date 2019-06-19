@@ -10,7 +10,9 @@ import Button from "./Button";
 import Logo from "../assets/svg/logo.svg";
 
 const BorderHeader = styled(LayoutHeader)`
-  border-top: 4px solid ${themeGet("colors.primary")};
+  border-top-width: 4px;
+  border-top-style: solid;
+  border-image: ${themeGet("gradients.primary")} 5 stretch;
   box-shadow: ${themeGet("boxShadows.md")};
 `;
 

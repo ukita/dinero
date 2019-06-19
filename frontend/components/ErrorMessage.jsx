@@ -1,29 +1,35 @@
-import styled from "styled-components";
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 
-const ErrorStyles = styled.div`
-  color: ${({ theme }) => theme.colors.lighterRed};
-  padding: 0.5rem 1rem;
-  border: 1px solid ${({ theme }) => theme.colors.red};
-  border-radius: 4px;
-  margin: 1rem 0;
-
-  strong {
-    margin-right: 0.5rem;
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    span {
-      display: block;
-    }
-  }
-`;
+import { Text } from "@components/Typography";
+import Card from "@components/Card";
 
 const hasNetworkError = ({ networkError } = {}) =>
   networkError && networkError.result && networkError.result.errors.length;
 
 const removeErrorPrefix = str => str.replace("GraphQL error: ", "");
+
+const ErrorMessage = ({ error = "" }) => (
+  <Card
+    px={3}
+    py={2}
+    bg="red.0"
+    borderWidth={1}
+    borderColor="red.4"
+    borderStyle="solid"
+    role="alert"
+  >
+    <Text as="strong" color="red.7" display={{ _: "block", sm: "inline" }}>
+      Shoot!{" "}
+    </Text>
+    <Text as="span" color="red.7">
+      {error}
+    </Text>
+  </Card>
+);
+ErrorMessage.propTypes = {
+  error: propTypes.string
+};
 
 const DisplayError = ({ error }) => {
   if (!error || !error.message) return null;
@@ -32,19 +38,11 @@ const DisplayError = ({ error }) => {
     const { errors } = error.networkError.result;
 
     return errors.map((error, i) => (
-      <ErrorStyles key={i}>
-        <strong>Shoot!</strong>
-        <span>{removeErrorPrefix(error.message)}</span>
-      </ErrorStyles>
+      <ErrorMessage key={i} error={removeErrorPrefix(error.message)} />
     ));
   }
 
-  return (
-    <ErrorStyles>
-      <strong>Shoot!</strong>
-      <span>{removeErrorPrefix(error.message)}</span>
-    </ErrorStyles>
-  );
+  return <ErrorMessage error={removeErrorPrefix(error.message)} />;
 };
 
 DisplayError.defaultProps = {
@@ -52,7 +50,7 @@ DisplayError.defaultProps = {
 };
 
 DisplayError.propTypes = {
-  error: PropTypes.object
+  error: propTypes.object
 };
 
 export default DisplayError;

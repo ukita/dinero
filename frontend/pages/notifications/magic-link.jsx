@@ -1,6 +1,6 @@
 import React from "react";
 import propTypes from "prop-types";
-import Head from "@components/Head";
+import Meta from "@components/Meta";
 import { Container, Layout, Main, Box, Flex } from "@components/Layout";
 import { Heading, Paragraph } from "@components/Typography";
 import Card from "@components/Card";
@@ -12,7 +12,7 @@ function MagicLink({ query = {} }) {
 
   return (
     <Layout>
-      <Head title="Dinero - Login" />
+      <Meta title="Dinero - Login" />
       <Main as="main" alignItems="center">
         <Container maxWidth={700}>
           <Card boxShadowSize="md" mx="auto">

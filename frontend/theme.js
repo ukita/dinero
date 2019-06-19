@@ -145,19 +145,13 @@ const colors = {
   text: baseColors.grey[9],
   link: baseColors.blue[5],
   body: baseColors.grey[1],
-  background: baseColors.white,
+  background: baseColors.white
+};
 
-  // Old
-  darkPrimary: "#0C6B58",
-
-  lighterRed: "#c53030",
-  red: "#fc8181",
-
-  lighterGray: "#f5f7fa",
-  lightGray: "#edf2f7",
-  gray: "#8795a1",
-  darkGray: "#4a5568",
-  darkerGray: "#243B53"
+const gradients = {
+  primary: `linear-gradient(120deg, ${colors.primary} 0%, ${
+    baseColors.primary[8]
+  } 100%)`
 };
 
 // Buttons colors
@@ -202,6 +196,7 @@ export default {
   fontSizes,
   space,
   colors,
+  gradients,
   fontWeights,
   lineHeights,
   radii,
