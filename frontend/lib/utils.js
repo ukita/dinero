@@ -11,3 +11,10 @@ export function getProp(object, path, defaultVal) {
 
   return getProp(object[_path.shift()], _path, defaultVal);
 }
+
+export function getApplicationHost(headers) {
+  const proto = headers["x-forwarded-proto"] || "http";
+  const host = headers["host"] || headers["x-now-deployment-url"];
+
+  return `${proto}://${host}`;
+}
