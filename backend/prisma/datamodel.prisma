@@ -6,7 +6,7 @@ type User {
   tokenExpiry: Float
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  wallets: [Wallet!]!
+  wallets: [Wallet!]
 }
 
 type Wallet {
@@ -14,7 +14,7 @@ type Wallet {
   user: User!
   name: String!
   description: String
-  transactions: [Transaction!]! @relation(name: "WalletTransactions", onDelete: SET_NULL)
+  transactions: [Transaction!] @relation(name: "WalletTransactions", onDelete: SET_NULL)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

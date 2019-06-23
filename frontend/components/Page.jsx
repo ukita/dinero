@@ -3,14 +3,15 @@ import PropTypes from "prop-types";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { themeGet } from "@styled-system/theme-get";
 
-import theme from "../theme";
+import { getProp } from "@lib/utils";
+import baseTheme from "../theme";
 import FocusVisible from "./FocusVisible";
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://rsms.me/inter/inter.css');
 
   :root {
-    --primary-color: ${themeGet("colors.primary")};
+    --primary-color: ${themeGet("colors.primaryColor")};
   }
 
   html {
@@ -105,9 +106,14 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-function Page({ children = "" }) {
+const getTheme = mode => ({
+  ...baseTheme,
+  colors: { ...baseTheme.colors, ...getProp(baseTheme.colors.modes, mode, {}) }
+});
+
+function Page({ children = "", theme = "" }) {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={getTheme(theme)}>
       <>
         <FocusVisible />
         <GlobalStyle />
@@ -118,6 +124,7 @@ function Page({ children = "" }) {
 }
 
 Page.propTypes = {
+  theme: PropTypes.string,
   children: PropTypes.node
 };
 

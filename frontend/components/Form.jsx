@@ -45,7 +45,9 @@ const borders = ({ color, ...props }) => {
     ? themeGet(`colors.${color}`)(props)
     : themeGet("colors.grey.3")(props);
 
-  const focusColor = color ? borderColor : themeGet("colors.primary")(props);
+  const focusColor = color
+    ? borderColor
+    : themeGet("colors.primaryColor")(props);
 
   return css`
     border-color: ${borderColor};
@@ -114,7 +116,7 @@ export const Checkbox = styled.input`
   vertical-align: middle;
   height: ${({ size }) => size}px;
   width: ${({ size }) => size}px;
-  color: ${themeGet("colors.primary")};
+  color: ${themeGet("colors.primaryColor")};
   border-radius: ${themeGet("radii.2")}px;
   border: 2px solid ${themeGet("colors.grey.3")};
   background-color: transparent;

@@ -37,7 +37,7 @@ type User {
   id: ID!
   name: String
   email: String!
-  wallets: [Wallet!]!
+  wallets: [Wallet!]
 }
 
 type Wallet {
@@ -46,5 +46,5 @@ type Wallet {
   description: String
   income: Int!
   expense: Int!
-  transactions: [Transaction!]!
+  transactions: [Transaction!]
 }

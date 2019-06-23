@@ -1,40 +1,35 @@
 import React from "react";
 
-import Meta from "@components/Meta";
-import Header from "@components/Header";
-import { Container, Layout, Main } from "@components/Layout";
-import Card from "@components/Card";
-
+import { Layout, Main } from "@components/Layout";
 import CurrentUser from "@components/CurrentUser";
+import Home from "@components/Home";
 
 import { getProp } from "@lib/utils";
+import Spinner from "@components/Spinner";
+import Dashboard from "@components/Dashboard";
 
-function Home() {
+function Index() {
   return (
-    <Layout>
-      <Meta title="Dinero" />
-      <Header />
-      <Main as="main">
-        <Container>
-          <Card p={5} boxShadowSize="md">
-            <CurrentUser>
-              {({ data, loading }) => {
-                if (loading) return "Loading";
+    <CurrentUser>
+      {({ data, loading }) => {
+        if (loading)
+          return (
+            <Layout>
+              <Main>
+                <Spinner alignSelf="center" mx="auto" />
+              </Main>
+            </Layout>
+          );
 
-                const user = getProp(data, "viewer.me");
+        const user = getProp(data, "viewer.me");
+        if (user) {
+          return <Dashboard />;
+        }
 
-                if (user) {
-                  return user.name;
-                }
-
-                return "User not logged in";
-              }}
-            </CurrentUser>
-          </Card>
-        </Container>
-      </Main>
-    </Layout>
+        return <Home />;
+      }}
+    </CurrentUser>
   );
 }
 
-export default Home;
+export default Index;

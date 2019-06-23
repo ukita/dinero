@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import propTypes from "prop-types";
 import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
 import NextLink from "next/link";
@@ -19,58 +20,57 @@ const CONFIRM_TOKEN_MUTATION = gql`
   }
 `;
 
-function ValidateTokenWrapper(props) {
+function ValidateTokenWrapper({ validate, data, error }) {
+  useEffect(() => {
+    validate();
+  }, [validate]);
+
+  if (error) {
+    return (
+      <Card bg="transparent">
+        <Meta title="Authentication failed - Dinero" />
+        <Heading textAlign="center">Authentication failed</Heading>
+        <Paragraph textAlign="center" mt={3}>
+          It looks you have clicked on an invalid email verification link.
+        </Paragraph>
+        <Paragraph textAlign="center">
+          <NextLink href="/login" replace passHref>
+            <Link>Please try authenticating again.</Link>
+          </NextLink>
+        </Paragraph>
+      </Card>
+    );
+  }
+
+  if (getProp(data, "confirmToken.id")) {
+    Router.replace("/");
+  }
+
+  return (
+    <Card bg="transparent">
+      <Meta title="Verifying... - Dinero" />
+      <Heading textAlign="center">Verifying...</Heading>
+    </Card>
+  );
+}
+ValidateTokenWrapper.propTypes = {
+  validate: propTypes.func.isRequired,
+  data: propTypes.object,
+  error: propTypes.object
+};
+
+function ValidateToken(props) {
   return (
     <Mutation
       mutation={CONFIRM_TOKEN_MUTATION}
       variables={props}
       refetchQueries={[{ query: CURRENT_USER_QUERY }]}
     >
-      {(validate, { data, error, loading, called }) => {
-        if (!called) validate();
-
-        if (loading) {
-          return (
-            <Card bg="transparent">
-              <Meta title="Verifying... - Dinero" />
-              <Heading textAlign="center">Verifying...</Heading>
-            </Card>
-          );
-        }
-
-        if (error) {
-          return (
-            <Card bg="transparent">
-              <Meta title="Authentication failed - Dinero" />
-              <Heading textAlign="center">Authentication failed</Heading>
-              <Paragraph textAlign="center" mt={3}>
-                It looks you have clicked on an invalid email verification link.
-              </Paragraph>
-              <Paragraph textAlign="center">
-                <NextLink href="/login" replace passHref>
-                  <Link>Please try authenticating again.</Link>
-                </NextLink>
-              </Paragraph>
-            </Card>
-          );
-        }
-
-        if (getProp(data, "confirmToken.id")) {
-          Router.replace("/");
-        }
-
-        return (
-          <Card bg="transparent">
-            <Heading textAlign="center">
-              <span role="img" aria-label="thumbs up">
-                👍
-              </span>
-            </Heading>
-          </Card>
-        );
+      {(validate, payload) => {
+        return <ValidateTokenWrapper validate={validate} {...payload} />;
       }}
     </Mutation>
   );
 }
 
-export default ValidateTokenWrapper;
+export default ValidateToken;

@@ -10,10 +10,18 @@ import Button from "./Button";
 import Logo from "../assets/svg/logo.svg";
 
 const BorderHeader = styled(LayoutHeader)`
+  position: relative;
   border-top-width: 4px;
   border-top-style: solid;
   border-image: ${themeGet("gradients.primary")} 5 stretch;
   box-shadow: ${themeGet("boxShadows.md")};
+
+  :after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 80%;
+  }
 `;
 
 function Header() {

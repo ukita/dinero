@@ -10,6 +10,16 @@ export const CURRENT_USER_QUERY = gql`
         id
         name
         email
+        wallets {
+          id
+          name
+          description
+          income
+          expense
+          transactions {
+            id
+          }
+        }
       }
     }
   }

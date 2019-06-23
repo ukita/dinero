@@ -141,50 +141,60 @@ baseColors.primary = baseColors.teal;
 const colors = {
   ...baseColors,
 
-  primary: baseColors.primary[5],
+  primaryColor: baseColors.primary[5],
   text: baseColors.grey[9],
   link: baseColors.blue[5],
   body: baseColors.grey[1],
-  background: baseColors.white
+  background: baseColors.white,
+
+  modes: {
+    dark: {
+      primaryColor: baseColors.primary[5],
+      text: baseColors.grey[0],
+      link: baseColors.blue[5],
+      body: "#000",
+      background: "#333"
+    }
+  }
 };
 
 const gradients = {
-  primary: `linear-gradient(120deg, ${colors.primary} 0%, ${
-    baseColors.primary[8]
+  primary: `linear-gradient(120deg, ${colors.primaryColor} 0%, ${
+    colors.primary[8]
   } 100%)`
 };
 
 // Buttons colors
 const buttons = {
   primary: {
-    text: baseColors.white,
-    background: baseColors.primary[5],
-    hover: baseColors.primary[6],
-    active: baseColors.primary[7]
+    text: colors.white,
+    background: colors.primary[5],
+    hover: colors.primary[6],
+    active: colors.primary[7]
   },
   teal: {
-    text: baseColors.white,
-    background: baseColors.teal[5],
-    hover: baseColors.teal[6],
-    active: baseColors.teal[7]
+    text: colors.white,
+    background: colors.teal[5],
+    hover: colors.teal[6],
+    active: colors.teal[7]
   },
   grey: {
-    text: baseColors.white,
-    background: baseColors.grey[5],
-    hover: baseColors.grey[6],
-    active: baseColors.grey[7]
+    text: colors.white,
+    background: colors.grey[5],
+    hover: colors.grey[6],
+    active: colors.grey[7]
   },
   blue: {
-    text: baseColors.white,
-    background: baseColors.blue[5],
-    hover: baseColors.blue[6],
-    active: baseColors.blue[7]
+    text: colors.white,
+    background: colors.blue[5],
+    hover: colors.blue[6],
+    active: colors.blue[7]
   },
   red: {
-    text: baseColors.white,
-    background: baseColors.red[5],
-    hover: baseColors.red[6],
-    active: baseColors.red[7]
+    text: colors.white,
+    background: colors.red[5],
+    hover: colors.red[6],
+    active: colors.red[7]
   }
 };
 buttons.warning = buttons.red;
