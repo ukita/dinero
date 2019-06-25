@@ -143,17 +143,21 @@ const colors = {
 
   primaryColor: baseColors.primary[5],
   text: baseColors.grey[9],
+  textSecondary: baseColors.grey[6],
   link: baseColors.blue[5],
   body: baseColors.grey[1],
   background: baseColors.white,
+  hover: baseColors.grey[0],
 
   modes: {
     dark: {
       primaryColor: baseColors.primary[5],
       text: baseColors.grey[0],
+      textSecondary: baseColors.grey[2],
       link: baseColors.blue[5],
       body: "#000",
-      background: "#333"
+      background: "#333",
+      hover: "#444"
     }
   }
 };

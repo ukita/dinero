@@ -21,7 +21,7 @@ function Index() {
             </Layout>
           );
 
-        const user = getProp(data, "viewer.me");
+        const user = getProp(data, "viewer.me", null);
         if (user) {
           return <Dashboard />;
         }

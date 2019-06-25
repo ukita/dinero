@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { themeGet } from "@styled-system/theme-get";
 import NextLink from "next/link";
 
-import { Header as LayoutHeader, Flex } from "./Layout";
-import { Link } from "./Typography";
-import Button from "./Button";
+import { Header as LayoutHeader, Flex } from "@components/Layout";
+import { Link } from "@components/Typography";
+import Button from "@components/Button";
 
 import Logo from "../assets/svg/logo.svg";
 
