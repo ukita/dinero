@@ -70,7 +70,7 @@ function Signup() {
                   await signup();
                 }}
               >
-                <Fieldset disabled={loading}>
+                <Fieldset disabled={loading || message}>
                   <Label id="name" htmlFor="name" my={3}>
                     Name
                     <Input

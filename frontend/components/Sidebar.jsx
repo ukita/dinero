@@ -1,21 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import { themeGet } from "@styled-system/theme-get";
-import { Plus, Square } from "react-feather";
+import { Plus, Square, LogOut } from "react-feather";
+import NextLink from "next/link";
 
 import { Box, Flex } from "@components/Layout";
 import { Text } from "@components/Typography";
+import Button from "@components/Button";
 
 import Logo from "../assets/svg/logo.svg";
 
 const Item = styled(Flex)`
-  color: ${themeGet("colors.textSecondary")};
+  color: ${themeGet("colors.gray")};
   border-radius: ${themeGet("radii.3")}px;
 
   :hover,
   :focus {
+    text-decoration: none;
     color: ${themeGet("colors.text")};
-    background-color: ${themeGet("colors.hover")};
+    background-color: ${themeGet("colors.lightgray")};
   }
 `;
 Item.defaultProps = {
@@ -42,34 +45,49 @@ function Sidebar() {
               <Text as="b">Wallets</Text>
             </Box>
             <ul>
-              <li>
-                <Item>
-                  <Square color="#D64545" fill="#D64545" />
-                  <Text as="span" ml={2}>
-                    Wallet 1
-                  </Text>
-                </Item>
-              </li>
-              <li>
-                <Item>
-                  <Square color="#724BB7" fill="#724BB7" />
-                  <Text as="span" ml={2}>
-                    Wallet 2
-                  </Text>
-                </Item>
-              </li>
-              <li>
+              <Box as="li" mb={1}>
+                <NextLink
+                  href={{ pathname: "/", query: { wallet: "1" } }}
+                  passHref
+                >
+                  <Item as="a">
+                    <Square color="#D64545" fill="#D64545" />
+                    <Text as="span" ml={2}>
+                      Wallet 1
+                    </Text>
+                  </Item>
+                </NextLink>
+              </Box>
+              <Box as="li" mb={1}>
+                <NextLink
+                  href={{ pathname: "/", query: { wallet: "2" } }}
+                  passHref
+                >
+                  <Item as="a">
+                    <Square color="#724BB7" fill="#724BB7" />
+                    <Text as="span" ml={2}>
+                      Wallet 2
+                    </Text>
+                  </Item>
+                </NextLink>
+              </Box>
+              <Box as="li" mb={1}>
                 <Item>
                   <Plus />
                   <Text as="span" ml={2}>
                     New wallet
                   </Text>
                 </Item>
-              </li>
+              </Box>
             </ul>
           </Box>
         </Box>
-        <Box p={3}>Footer</Box>
+        <Box p={3}>
+          <Button as="a" scale="sm" width={1}>
+            <LogOut />
+            Sign out
+          </Button>
+        </Box>
       </Flex>
     </Flex>
   );

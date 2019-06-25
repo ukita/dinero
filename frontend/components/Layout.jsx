@@ -70,20 +70,11 @@ Footer.propTypes = {
   ...Flex.propTypes
 };
 
-export const Relative = styled(Box)`
+export const Positioner = styled(Box)`
   position: relative;
   ${position}
 `;
-Relative.propTypes = {
-  ...Box.propTypes,
-  ...propTypes.position
-};
-
-export const Absolute = styled(Box)`
-  position: absolute;
-  ${position}
-`;
-Absolute.propTypes = {
+Positioner.propTypes = {
   ...Box.propTypes,
   ...propTypes.position
 };

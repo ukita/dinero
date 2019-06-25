@@ -16,9 +16,7 @@ function Dashboard() {
             <Main as="main">
               <Sidebar />
               <Container>
-                <Card px={3} py={4} boxShadow="md">
-                  User logged
-                </Card>
+                <Card px={3} py={4} boxShadow="md"></Card>
               </Container>
             </Main>
           </Layout>

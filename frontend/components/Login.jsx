@@ -69,7 +69,7 @@ function Login() {
                   await login();
                 }}
               >
-                <Fieldset disabled={loading}>
+                <Fieldset disabled={loading || message}>
                   <Label id="email" htmlFor="email" my={3}>
                     Your email
                     <Input

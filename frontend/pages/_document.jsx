@@ -30,6 +30,7 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <div data-react-portal />
         </body>
       </Html>
     );
