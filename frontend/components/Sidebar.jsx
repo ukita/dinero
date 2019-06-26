@@ -7,10 +7,20 @@ import NextLink from "next/link";
 import { Box, Flex } from "@components/Layout";
 import { Text } from "@components/Typography";
 import Button from "@components/Button";
+import CreateWalletDialog, {
+  useCreateWalletDialog
+} from "@components/CreateWalletDialog";
+import Wallets from "@components/Wallets";
+import { getProp, stringToColour } from "@lib/utils";
 
 import Logo from "../assets/svg/logo.svg";
 
 const Item = styled(Flex)`
+  font-size: inherit;
+  appearance: none;
+  background: transparent;
+  border: none;
+  width: 100%;
   color: ${themeGet("colors.gray")};
   border-radius: ${themeGet("radii.3")}px;
 
@@ -27,6 +37,8 @@ Item.defaultProps = {
 };
 
 function Sidebar() {
+  const [props, openDialog] = useCreateWalletDialog(false);
+
   return (
     <Flex
       as="section"
@@ -35,6 +47,7 @@ function Sidebar() {
       minWidth={250}
       flexDirection="column"
     >
+      <CreateWalletDialog {...props} />
       <Flex as="header" pt={3}>
         <Logo width="40px" style={{ margin: "0 auto" }} />
       </Flex>
@@ -45,34 +58,32 @@ function Sidebar() {
               <Text as="b">Wallets</Text>
             </Box>
             <ul>
+              <Wallets>
+                {({ data }) => {
+                  const wallets = getProp(data, "viewer.me.wallets", []);
+
+                  return wallets.map(wallet => (
+                    <Box key={wallet.id} as="li" mb={1}>
+                      <NextLink
+                        href={{ pathname: "/", query: { wallet: wallet.id } }}
+                        passHref
+                      >
+                        <Item as="a">
+                          <Square
+                            color={stringToColour(wallet.id)}
+                            fill={stringToColour(wallet.id)}
+                          />
+                          <Text as="span" ml={2}>
+                            {wallet.name}
+                          </Text>
+                        </Item>
+                      </NextLink>
+                    </Box>
+                  ));
+                }}
+              </Wallets>
               <Box as="li" mb={1}>
-                <NextLink
-                  href={{ pathname: "/", query: { wallet: "1" } }}
-                  passHref
-                >
-                  <Item as="a">
-                    <Square color="#D64545" fill="#D64545" />
-                    <Text as="span" ml={2}>
-                      Wallet 1
-                    </Text>
-                  </Item>
-                </NextLink>
-              </Box>
-              <Box as="li" mb={1}>
-                <NextLink
-                  href={{ pathname: "/", query: { wallet: "2" } }}
-                  passHref
-                >
-                  <Item as="a">
-                    <Square color="#724BB7" fill="#724BB7" />
-                    <Text as="span" ml={2}>
-                      Wallet 2
-                    </Text>
-                  </Item>
-                </NextLink>
-              </Box>
-              <Box as="li" mb={1}>
-                <Item>
+                <Item as="button" onClick={openDialog}>
                   <Plus />
                   <Text as="span" ml={2}>
                     New wallet

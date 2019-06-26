@@ -9,7 +9,7 @@ import Sidebar from "@components/Sidebar";
 function Dashboard() {
   return (
     <CurrentUser>
-      {({ data }) => {
+      {() => {
         return (
           <Layout>
             <Meta title="Dashboard - Dinero" />

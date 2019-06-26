@@ -13,7 +13,7 @@ const AnimatedOverlay = styled(animated.div)`
   display: block;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(50, 50, 50, 0.75);
   position: fixed;
   z-index: 20;
   top: 0px;
@@ -28,7 +28,8 @@ function Overlay({
   isShown = false,
   shouldCloseOnClick = true,
   shouldCloseOnEscapePress = true,
-  onBeforeClose = () => {}
+  onBeforeClose = () => {},
+  onExited = () => {}
 }) {
   const [exiting, setExiting] = useState(false);
   const [exited, setExited] = useState(!isShown);
@@ -68,17 +69,20 @@ function Overlay({
     document.addEventListener("keydown", onEsc, false);
   };
 
-  const handleTransitionDestroyed = () => {
-    setExiting(false);
-    setExited(true);
-    document.removeEventListener("keydown", onEsc, false);
+  const handleTransitionDestroyed = isActive => {
+    if (isActive) {
+      setExiting(false);
+      setExited(true);
+      onExited();
+      document.removeEventListener("keydown", onEsc, false);
+    }
   };
 
   const transitions = useTransition(isShown && !exiting, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
-    config: { duration: 230 },
+    config: { duration: 240 },
     onRest: handleTransitionRest,
     onDestroyed: handleTransitionDestroyed
   });
@@ -111,7 +115,8 @@ Overlay.propTypes = {
   isShown: PropTypes.bool,
   shouldCloseOnClick: PropTypes.bool,
   shouldCloseOnEscapePress: PropTypes.bool,
-  onBeforeClose: PropTypes.func
+  onBeforeClose: PropTypes.func,
+  onExited: PropTypes.func
 };
 
 export default Overlay;
