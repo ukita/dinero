@@ -140,7 +140,7 @@ const Button = styled("button")`
     vertical-align: middle;
     width: 1.25em;
     height: 1.25em;
-    margin: 0 0.625em;
+    margin: 0 0.45em;
   }
 
   ${scale}

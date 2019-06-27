@@ -52,7 +52,7 @@ function Signup() {
                 </span>
               </Text>
 
-              <Heading fontSize={6} textAlign="center">
+              <Heading fontSize={{ _: 4, sm: 6 }} textAlign="center">
                 Create your free account
               </Heading>
               <Paragraph my={3} mx="auto" textAlign="center">

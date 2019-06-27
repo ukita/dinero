@@ -50,7 +50,7 @@ function Login() {
                 </span>
               </Text>
 
-              <Heading fontSize={6} textAlign="center">
+              <Heading fontSize={{ _: 4, sm: 6 }} textAlign="center">
                 Welcome back!
               </Heading>
               <Paragraph my={3} mx="auto" textAlign="center">
@@ -62,8 +62,10 @@ function Login() {
                 </span>
               </Paragraph>
 
-              <form
+              <Box
+                as="form"
                 method="post"
+                pb={5}
                 onSubmit={async e => {
                   e.preventDefault();
                   await login();
@@ -87,7 +89,7 @@ function Login() {
                     Log in
                   </Button>
                 </Fieldset>
-              </form>
+              </Box>
             </SessionBox>
             <Box mt={4} mx="auto">
               <Text textAlign="center">

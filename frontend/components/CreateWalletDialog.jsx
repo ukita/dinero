@@ -52,12 +52,17 @@ function CreateWalletDialog({ isShown = false, onCloseFinished = () => {} }) {
     >
       {(createWallet, { loading }) => {
         return (
-          <Dialog isShown={isShown} onCloseFinished={onCloseFinished} p={2}>
+          <Dialog
+            isShown={isShown}
+            onCloseFinished={onCloseFinished}
+            p={2}
+            width={500}
+          >
             {({ close }) => (
               <Box>
                 <Flex alignItems="center" mb={2}>
                   <Flex
-                    size="50px"
+                    size={{ _: 35, sm: 50 }}
                     alignItems="center"
                     justifyContent="center"
                     bg="primary.3"
@@ -65,9 +70,9 @@ function CreateWalletDialog({ isShown = false, onCloseFinished = () => {} }) {
                       borderRadius: "100%"
                     }}
                   >
-                    <CreditCard width="32px" height="32px" />
+                    <CreditCard width="50%" height="50%" />
                   </Flex>
-                  <Heading ml={2} textAlign="center">
+                  <Heading fontSize={{ _: 4, sm: 6 }} ml={2} textAlign="center">
                     New wallet
                   </Heading>
                 </Flex>
@@ -87,7 +92,7 @@ function CreateWalletDialog({ isShown = false, onCloseFinished = () => {} }) {
                     });
                   }}
                 >
-                  <Fieldset px={4} disabled={loading}>
+                  <Fieldset disabled={loading}>
                     <Label id="name" htmlFor="name" my={3}>
                       Wallet
                       <Input
@@ -114,16 +119,20 @@ function CreateWalletDialog({ isShown = false, onCloseFinished = () => {} }) {
                       />
                     </Label>
 
-                    <Flex mt={3} justifyContent="flex-end">
+                    <Flex mt={4} justifyContent="flex-end" flexWrap="wrap">
                       <Button
                         type="button"
-                        variant="tertiary"
-                        mr={2}
+                        variant="secondary"
+                        mr={{ _: 0, sm: 2 }}
+                        mb={{ _: 2, sm: 0 }}
+                        width={{ _: 1, sm: "auto" }}
                         onClick={close}
                       >
-                        Cancel
+                        Close
                       </Button>
-                      <Button type="submit">Add wallet</Button>
+                      <Button type="submit" width={{ _: 1, sm: "auto" }}>
+                        Add wallet
+                      </Button>
                     </Flex>
                   </Fieldset>
                 </Box>

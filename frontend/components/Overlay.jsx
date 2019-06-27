@@ -13,7 +13,7 @@ const AnimatedOverlay = styled(animated.div)`
 
   width: 100%;
   height: 100%;
-  background-color: rgba(50, 50, 50, 0.75);
+  background-color: rgba(125, 125, 125, 0.75);
   position: fixed;
   z-index: 20;
   top: 0px;
@@ -98,12 +98,12 @@ function Overlay({
       {transitions.map(
         ({ item, key, props }) =>
           item && (
-            <FocusLock
-              key={key}
-              as={AnimatedOverlay}
-              lockProps={{ key, style: props, onClick: handleBackdropClick }}
-            >
-              {typeof children === "function" ? children({ close }) : children}
+            <FocusLock key={key}>
+              <AnimatedOverlay style={props} onClick={handleBackdropClick}>
+                {typeof children === "function"
+                  ? children({ close })
+                  : children}
+              </AnimatedOverlay>
             </FocusLock>
           )
       )}

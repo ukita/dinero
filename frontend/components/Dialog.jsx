@@ -40,7 +40,7 @@ function Dialog({
                 style={animatedProps}
                 {...props}
                 role="dialog"
-                boxShadowSize="lg"
+                boxShadowSize="xl"
                 width={width}
                 maxWidth={maxWidth}
                 maxHeight={maxHeight}

@@ -8,7 +8,7 @@ import { getProp } from "@lib/utils";
 import Spinner from "@components/Spinner";
 import Dashboard from "@components/Dashboard";
 
-function Index(props) {
+function Index() {
   return (
     <CurrentUser>
       {({ data, loading }) => {
@@ -23,7 +23,7 @@ function Index(props) {
 
         const user = getProp(data, "viewer.me", null);
         if (user) {
-          return <Dashboard {...props} />;
+          return <Dashboard />;
         }
 
         return <Home />;

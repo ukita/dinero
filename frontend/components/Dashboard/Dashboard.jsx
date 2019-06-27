@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "next/router";
 
 import Meta from "@components/Meta";
 import { Layout, Container, Main } from "@components/Layout";
@@ -8,8 +9,10 @@ import CurrentUser from "@components/CurrentUser";
 import Sidebar from "@components/Sidebar";
 import Wallet from "./Wallet";
 
-function Dashboard({ query }) {
-  const { walletId } = query;
+function Dashboard({ router }) {
+  const {
+    query: { walletId }
+  } = router;
 
   return (
     <CurrentUser>
@@ -19,7 +22,7 @@ function Dashboard({ query }) {
             <Meta title="Dashboard - Dinero" />
             <Main as="main">
               <Sidebar />
-              <Container>
+              <Container maxWidth="890px">
                 <Wallet walletId={walletId} />
               </Container>
             </Main>
@@ -30,9 +33,11 @@ function Dashboard({ query }) {
   );
 }
 Dashboard.propTypes = {
-  query: PropTypes.shape({
-    walletId: PropTypes.string
-  }).isRequired
+  router: PropTypes.shape({
+    query: PropTypes.shape({
+      walletId: PropTypes.string
+    })
+  })
 };
 
-export default Dashboard;
+export default withRouter(Dashboard);

@@ -58,7 +58,8 @@ export const Container = ({ maxWidth = 1280, ...props }) => (
     minWidth={0}
     maxWidth={maxWidth}
     mx="auto"
-    p={4}
+    px={{ _: 2, sm: 4 }}
+    py={4}
   />
 );
 Container.propTypes = {

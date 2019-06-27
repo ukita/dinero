@@ -14,7 +14,11 @@ function WalletItem({ id, name }) {
 
   return (
     <Box key={id} as="li" mb={1}>
-      <NextLink href={{ pathname: "/", query: { walletId: id } }} passHref>
+      <NextLink
+        href={{ pathname: "/", query: { walletId: id } }}
+        shallow
+        passHref
+      >
         <Item as="a">
           <Square color={color} fill={color} />
           <Text as="span" ml={2}>
