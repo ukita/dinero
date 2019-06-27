@@ -1,12 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import Meta from "@components/Meta";
 import { Layout, Container, Main } from "@components/Layout";
-import Card from "@components/Card";
+
 import CurrentUser from "@components/CurrentUser";
 import Sidebar from "@components/Sidebar";
+import Wallet from "./Wallet";
 
-function Dashboard() {
+function Dashboard({ query }) {
+  const { walletId } = query;
+
   return (
     <CurrentUser>
       {() => {
@@ -16,7 +20,7 @@ function Dashboard() {
             <Main as="main">
               <Sidebar />
               <Container>
-                <Card px={3} py={4} boxShadow="md"></Card>
+                <Wallet walletId={walletId} />
               </Container>
             </Main>
           </Layout>
@@ -25,5 +29,10 @@ function Dashboard() {
     </CurrentUser>
   );
 }
+Dashboard.propTypes = {
+  query: PropTypes.shape({
+    walletId: PropTypes.string
+  }).isRequired
+};
 
 export default Dashboard;

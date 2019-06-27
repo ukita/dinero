@@ -10,7 +10,7 @@ const AnimatedOverlay = styled(animated.div)`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  display: block;
+
   width: 100%;
   height: 100%;
   background-color: rgba(50, 50, 50, 0.75);
@@ -65,8 +65,10 @@ function Overlay({
     close();
   };
 
-  const handleTransitionRest = () => {
-    document.addEventListener("keydown", onEsc, false);
+  const handleTransitionRest = isActive => {
+    if (isActive) {
+      document.addEventListener("keydown", onEsc, false);
+    }
   };
 
   const handleTransitionDestroyed = isActive => {
@@ -87,24 +89,22 @@ function Overlay({
     onDestroyed: handleTransitionDestroyed
   });
 
-  if (exited) return null;
+  if (exited) {
+    return null;
+  }
 
   return (
     <Portal>
       {transitions.map(
         ({ item, key, props }) =>
           item && (
-            <AnimatedOverlay
+            <FocusLock
               key={key}
-              style={props}
-              onClick={handleBackdropClick}
+              as={AnimatedOverlay}
+              lockProps={{ key, style: props, onClick: handleBackdropClick }}
             >
-              <FocusLock>
-                {typeof children === "function"
-                  ? children({ close })
-                  : children}
-              </FocusLock>
-            </AnimatedOverlay>
+              {typeof children === "function" ? children({ close }) : children}
+            </FocusLock>
           )
       )}
     </Portal>

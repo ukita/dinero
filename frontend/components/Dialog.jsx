@@ -6,11 +6,14 @@ import Card from "@components/Card";
 import Overlay from "@components/Overlay";
 import { Flex } from "@components/Layout";
 
+const AnimatedCard = animated(Card);
+
 function Dialog({
   children,
   isShown = false,
   width = "750px",
-  onCloseFinished = () => {}
+  onCloseFinished = () => {},
+  ...props
 }) {
   const transitions = useTransition(isShown, null, {
     from: { transform: "scale(0.8)", opacity: 0 },
@@ -30,27 +33,27 @@ function Dialog({
     <Overlay isShown={isShown} onExited={onCloseFinished}>
       {({ close }) =>
         transitions.map(
-          ({ item, key, props }) =>
+          ({ item, key, props: animatedProps }) =>
             item && (
-              <animated.div key={key} style={props}>
-                <Card
-                  role="dialog"
-                  boxShadowSize="lg"
-                  width={width}
-                  maxWidth={maxWidth}
-                  maxHeight={maxHeight}
-                  mx="auto"
-                  my={topOffset}
-                  display="flex"
-                  flexDirection="column"
-                >
-                  <Flex p={3} flexDirection="column" overflow="auto">
-                    {typeof children === "function"
-                      ? children({ close })
-                      : children}
-                  </Flex>
-                </Card>
-              </animated.div>
+              <AnimatedCard
+                key={key}
+                style={animatedProps}
+                {...props}
+                role="dialog"
+                boxShadowSize="lg"
+                width={width}
+                maxWidth={maxWidth}
+                maxHeight={maxHeight}
+                my={topOffset}
+                display="flex"
+                flexDirection="column"
+              >
+                <Flex p={3} flexDirection="column" overflow="auto">
+                  {typeof children === "function"
+                    ? children({ close })
+                    : children}
+                </Flex>
+              </AnimatedCard>
             )
         )
       }

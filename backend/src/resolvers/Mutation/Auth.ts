@@ -98,5 +98,11 @@ export const Auth = {
     });
 
     return user;
+  },
+
+  signout: async (_parent, _args, ctx: Context): Promise<AuthMessage> => {
+    ctx.response.clearCookie("token");
+
+    return { message: `Come back soon! We're already missing you.` };
   }
 };
