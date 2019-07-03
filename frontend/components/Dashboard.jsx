@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled, { css } from "styled-components";
 import { Plus } from "react-feather";
 import NextLink from "next/link";
 import { themeGet } from "@styled-system/theme-get";
+import { useTransition, useSpring, useChain, animated } from "react-spring";
 
 import Meta from "@components/Meta";
 import Header from "@components/Header";
@@ -27,6 +28,81 @@ const DashedCard = styled(Card)`
   }
 `;
 
+function WalletList({ wallets, openDialog }) {
+  const springRef = useRef();
+  const spring = useSpring({
+    ref: springRef,
+    from: { opacity: 0, transform: "translateY(15px)" },
+    to: { opacity: 1, transform: "translateY(0)" }
+  });
+
+  const transitionsRef = useRef();
+  const transitions = useTransition(wallets, wallet => wallet.id, {
+    unique: true,
+    ref: transitionsRef,
+    trail: 350 / wallets.length,
+    from: { opacity: 0, transform: "translateY(15px)" },
+    enter: { opacity: 1, transform: "translateY(0)" },
+    leave: { opacity: 0, transform: "translateY(15px)" }
+  });
+
+  useChain([transitionsRef, springRef], [0, 0.35]);
+
+  return (
+    <React.Fragment>
+      {transitions.map(({ item, key, props }) => {
+        return (
+          <animated.div key={key} style={{ ...props }}>
+            <Card
+              height="100%"
+              boxShadowSize="md"
+              css={css`
+                transition: box-shadow ease-in-out 0.2s;
+
+                :hover,
+                :focus {
+                  box-shadow: ${themeGet("boxShadows.lg")};
+                }
+              `}
+            >
+              <NextLink
+                href={{
+                  pathname: "/wallets",
+                  query: { id: item.id }
+                }}
+                passHref
+              >
+                <BlockLink p={3}>
+                  <Truncate as={Heading} fontSize={3} mb={1}>
+                    {item.name}
+                  </Truncate>
+                  <Truncate as={Paragraph} title={item.description}>
+                    {item.description}
+                  </Truncate>
+                </BlockLink>
+              </NextLink>
+            </Card>
+          </animated.div>
+        );
+      })}
+      <animated.div style={spring}>
+        <DashedCard
+          as="button"
+          p={3}
+          bg="transparent"
+          height="100%"
+          width={1}
+          onClick={openDialog}
+        >
+          <Flex justifyContent="center" alignItems="center" height="100%">
+            <Plus height={35} width={35} />
+          </Flex>
+        </DashedCard>
+      </animated.div>
+    </React.Fragment>
+  );
+}
+
 function Dashboard() {
   const [props, openDialog] = useCreateWalletDialog(false);
 
@@ -37,7 +113,7 @@ function Dashboard() {
       <Header />
       <Flex bg="background" px={4} py={3} justifyContent="center">
         <Flex justifyContent="center" width={1} maxWidth={1000}>
-          <Heading fontSize={5}>My Wallets</Heading>
+          <Heading fontSize={{ _: 4, sm: 5 }}>My Wallets</Heading>
         </Flex>
       </Flex>
       <Main as="main">
@@ -54,7 +130,6 @@ function Dashboard() {
                 }
 
                 const wallets = getProp(data, "viewer.me.wallets", []);
-
                 return (
                   <Grid
                     justifyContent="center"
@@ -64,52 +139,7 @@ function Dashboard() {
                     gridAutoRows="175px"
                     flexGrow={1}
                   >
-                    {wallets.map(wallet => (
-                      <Card
-                        key={wallet.id}
-                        boxShadowSize="md"
-                        css={css`
-                          transition: box-shadow ease-in-out 0.2s;
-
-                          :hover,
-                          :focus {
-                            box-shadow: ${themeGet("boxShadows.lg")};
-                          }
-                        `}
-                      >
-                        <NextLink
-                          href={{
-                            pathname: "/wallets",
-                            query: { id: wallet.id }
-                          }}
-                          passHref
-                          shallow
-                        >
-                          <BlockLink p={3}>
-                            <Truncate as={Heading} fontSize={3} mb={1}>
-                              {wallet.name}
-                            </Truncate>
-                            <Truncate as={Paragraph} title={wallet.description}>
-                              {wallet.description}
-                            </Truncate>
-                          </BlockLink>
-                        </NextLink>
-                      </Card>
-                    ))}
-                    <DashedCard
-                      as="button"
-                      onClick={openDialog}
-                      p={3}
-                      bg="transparent"
-                    >
-                      <Flex
-                        justifyContent="center"
-                        alignItems="center"
-                        height="100%"
-                      >
-                        <Plus height={35} width={35} />
-                      </Flex>
-                    </DashedCard>
+                    <WalletList wallets={wallets} openDialog={openDialog} />
                   </Grid>
                 );
               }}

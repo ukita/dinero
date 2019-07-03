@@ -42,8 +42,8 @@ function Dialog({
                 role="dialog"
                 boxShadowSize="xl"
                 width={width}
-                maxWidth={maxWidth}
-                maxHeight={maxHeight}
+                maxWidth={{ _: "none", sm: maxWidth }}
+                maxHeight={{ _: "none", sm: maxHeight }}
                 my={topOffset}
                 display="flex"
                 flexDirection="column"
