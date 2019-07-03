@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { CreditCard } from "react-feather";
 import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
-import Router from "next/router";
 
 import Dialog from "@components/Dialog";
 import Button from "@components/Button";
@@ -12,7 +11,6 @@ import { Flex, Box } from "@components/Layout";
 import { Heading } from "@components/Typography";
 import { WALLETS_QUERY, WalletsPage } from "@components/Wallets";
 import { useInput } from "@lib/hooks";
-import { getProp } from "@lib/utils";
 
 export const CREATE_WALLET_MUTATION = gql`
   ${WalletsPage.fragments.partial}
@@ -24,7 +22,7 @@ export const CREATE_WALLET_MUTATION = gql`
   }
 `;
 
-function CreateWalletDialog({ isShown = false, onCloseFinished = () => {} }) {
+function CreateWalletDialog({ isShown = false, onRequestClose = () => {} }) {
   const [name, setName, resetName] = useInput("");
   const [description, setDescription, resetDescription] = useInput("");
 
@@ -54,25 +52,27 @@ function CreateWalletDialog({ isShown = false, onCloseFinished = () => {} }) {
         return (
           <Dialog
             isShown={isShown}
-            onCloseFinished={onCloseFinished}
+            onRequestClose={onRequestClose}
             p={2}
-            width={500}
+            width={{ _: 1, sm: 500 }}
           >
             {({ close }) => (
               <Box>
-                <Flex alignItems="center" mb={2}>
+                <Flex alignItems="center" mb={2} flexDirection="column">
                   <Flex
-                    size={{ _: 35, sm: 50 }}
+                    size={60}
+                    mt={"-5rem"}
                     alignItems="center"
                     justifyContent="center"
-                    bg="primary.3"
+                    bg="primary.5"
+                    color="primary.9"
                     css={{
                       borderRadius: "100%"
                     }}
                   >
                     <CreditCard width="50%" height="50%" />
                   </Flex>
-                  <Heading fontSize={{ _: 4, sm: 6 }} ml={2} textAlign="center">
+                  <Heading fontSize={{ _: 5, sm: 6 }} textAlign="center">
                     New wallet
                   </Heading>
                 </Flex>
@@ -81,15 +81,10 @@ function CreateWalletDialog({ isShown = false, onCloseFinished = () => {} }) {
                   method="post"
                   onSubmit={async e => {
                     e.preventDefault();
-                    const res = await createWallet();
+                    await createWallet();
 
                     resetForm();
                     close();
-
-                    Router.push({
-                      pathname: "/",
-                      query: { walletId: getProp(res, "data.addWallet.id", "") }
-                    });
                   }}
                 >
                   <Fieldset disabled={loading}>
@@ -146,16 +141,16 @@ function CreateWalletDialog({ isShown = false, onCloseFinished = () => {} }) {
 }
 CreateWalletDialog.propTypes = {
   isShown: PropTypes.bool,
-  onCloseFinished: PropTypes.func
+  onRequestClose: PropTypes.func
 };
 
 export function useCreateWalletDialog(initialState = false) {
   const [isShown, setIsShown] = useState(initialState);
 
   const toggle = () => setIsShown(prev => !prev);
-  const onCloseFinished = () => setIsShown(false);
+  const onRequestClose = () => setIsShown(false);
 
-  return [{ isShown, onCloseFinished }, toggle];
+  return [{ isShown, onRequestClose }, toggle];
 }
 
 export default CreateWalletDialog;

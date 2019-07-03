@@ -19,7 +19,7 @@ const Signout = () => (
       if (called && !loading && !error) client.resetStore();
 
       return (
-        <Button scale="sm" width={1} onClick={signout}>
+        <Button scale="sm" onClick={signout}>
           <LogOut />
           Sign out
         </Button>

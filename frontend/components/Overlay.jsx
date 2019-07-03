@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useTransition, animated } from "react-spring";
@@ -13,7 +13,7 @@ const AnimatedOverlay = styled(animated.div)`
 
   width: 100%;
   height: 100%;
-  background-color: rgba(125, 125, 125, 0.75);
+  background-color: rgba(225, 225, 225, 0.5);
   position: fixed;
   z-index: 20;
   top: 0px;
@@ -28,70 +28,42 @@ function Overlay({
   isShown = false,
   shouldCloseOnClick = true,
   shouldCloseOnEscapePress = true,
-  onBeforeClose = () => {},
-  onExited = () => {}
+  onRequestClose = () => {}
 }) {
-  const [exiting, setExiting] = useState(false);
-  const [exited, setExited] = useState(!isShown);
-  const [prevIsShown, setPrevIsShown] = useState(null);
+  useEffect(() => {
+    function listener(event) {
+      if (event.key === "Escape") {
+        onRequestClose();
+      }
+    }
 
-  if (isShown !== prevIsShown) {
-    setPrevIsShown(isShown);
-  }
+    if (shouldCloseOnEscapePress) {
+      window.addEventListener("keyup", listener, false);
+    }
 
-  if (!prevIsShown && isShown) {
-    setExited(false);
-  }
+    return () => {
+      if (shouldCloseOnEscapePress) {
+        window.removeEventListener("keyup", listener, false);
+      }
+    };
+  }, [onRequestClose, shouldCloseOnEscapePress]);
 
   const close = () => {
-    const shouldClose = onBeforeClose();
-    if (shouldClose !== false) {
-      setExiting(true);
-    }
-  };
-
-  const onEsc = e => {
-    // Esc key
-    if (e.keyCode === 27 && shouldCloseOnEscapePress) {
-      close();
-    }
+    onRequestClose();
   };
 
   const handleBackdropClick = e => {
-    if (e.target !== e.currentTarget || !shouldCloseOnClick) {
-      return;
-    }
+    if (e.target !== e.currentTarget || !shouldCloseOnClick) return;
 
-    close();
+    onRequestClose();
   };
 
-  const handleTransitionRest = isActive => {
-    if (isActive) {
-      document.addEventListener("keydown", onEsc, false);
-    }
-  };
-
-  const handleTransitionDestroyed = isActive => {
-    if (isActive) {
-      setExiting(false);
-      setExited(true);
-      onExited();
-      document.removeEventListener("keydown", onEsc, false);
-    }
-  };
-
-  const transitions = useTransition(isShown && !exiting, null, {
+  const transitions = useTransition(isShown, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    config: { duration: 240 },
-    onRest: handleTransitionRest,
-    onDestroyed: handleTransitionDestroyed
+    leave: { opacity: 0, pointerEvents: "none" },
+    config: { duration: 240 }
   });
-
-  if (exited) {
-    return null;
-  }
 
   return (
     <Portal>
@@ -112,11 +84,10 @@ function Overlay({
 }
 Overlay.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  onRequestClose: PropTypes.func.isRequired,
   isShown: PropTypes.bool,
   shouldCloseOnClick: PropTypes.bool,
-  shouldCloseOnEscapePress: PropTypes.bool,
-  onBeforeClose: PropTypes.func,
-  onExited: PropTypes.func
+  shouldCloseOnEscapePress: PropTypes.bool
 };
 
 export default Overlay;

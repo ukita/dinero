@@ -1,7 +1,8 @@
 {
   "parser": "babel-eslint",
   "env": {
-    "browser": true
+    "browser": true,
+    "node": true
   },
   "plugins": ["jsx-a11y", "react-hooks"],
   "extends": [
@@ -23,10 +24,5 @@
   "parserOptions": {
     "ecmaVersion": 10,
     "sourceType": "module"
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
   }
 }

@@ -21,6 +21,15 @@ Paragraph.propTypes = {
   ...Text.propTypes
 };
 
+export const Truncate = styled(Text)`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+Truncate.propTypes = {
+  ...Text.propTypes
+};
+
 export const Heading = ({
   fontSize = 5,
   fontWeight = "bold",
@@ -42,5 +51,20 @@ Heading.propTypes = {
 
 export const Link = ({ ...props }) => <Text {...props} as="a" />;
 Link.propTypes = {
+  ...Link.propTypes
+};
+
+export const BlockLink = styled(Link)`
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+
+  :hover {
+    text-decoration: none;
+  }
+`;
+BlockLink.propTypes = {
   ...Link.propTypes
 };

@@ -5,7 +5,7 @@ import NextLink from "next/link";
 
 import { Header as LayoutHeader, Flex } from "@components/Layout";
 import { Link } from "@components/Typography";
-import Button from "@components/Button";
+import Signout from "@components/Signout";
 
 import Logo from "../assets/svg/logo.svg";
 
@@ -14,25 +14,12 @@ const BorderHeader = styled(LayoutHeader)`
   border-top-width: 4px;
   border-top-style: solid;
   border-image: ${themeGet("gradients.primary")} 5 stretch;
-  box-shadow: ${themeGet("boxShadows.md")};
-
-  :after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    width: 80%;
-  }
+  box-shadow: ${themeGet("boxShadows.default")};
 `;
 
 function Header() {
   return (
-    <BorderHeader
-      bg="background"
-      boxShadow="lg"
-      alignItems="center"
-      py={2}
-      px={3}
-    >
+    <BorderHeader bg="background" alignItems="center" py={2} px={3}>
       <Flex
         flexGrow={1}
         alignItems="center"
@@ -40,23 +27,12 @@ function Header() {
         mx="auto"
         maxWidth={1280}
       >
-        <NextLink href="/">
-          <Link href="/" title="Dinero" aria-label="Dinero">
+        <NextLink href="/" passHref>
+          <Link title="Dinero" aria-label="Dinero">
             <Logo width="50px" style={{ verticalAlign: "middle" }} />
           </Link>
         </NextLink>
-        <Flex alignItems="center">
-          <NextLink href="/login" passHref>
-            <Button as="a" scale="sm" variant="tertiary" mx={1}>
-              Login
-            </Button>
-          </NextLink>
-          <NextLink href="/signup" passHref>
-            <Button as="a" scale="sm" mx={1}>
-              Signup
-            </Button>
-          </NextLink>
-        </Flex>
+        <Signout />
       </Flex>
     </BorderHeader>
   );

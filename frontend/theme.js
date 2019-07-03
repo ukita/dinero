@@ -166,7 +166,7 @@ const colors = {
 const gradients = {
   primary: `linear-gradient(120deg, ${colors.primaryColor} 0%, ${
     colors.primary[8]
-  } 100%)`
+  } 50%,  ${colors.primaryColor} 100%)`
 };
 
 // Buttons colors

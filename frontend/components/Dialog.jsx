@@ -12,7 +12,7 @@ function Dialog({
   children,
   isShown = false,
   width = "750px",
-  onCloseFinished = () => {},
+  onRequestClose = () => {},
   ...props
 }) {
   const transitions = useTransition(isShown, null, {
@@ -21,7 +21,7 @@ function Dialog({
       transform: "scale(1)",
       opacity: 1
     },
-    leave: { transform: "scale(0.8)", opacity: 0 },
+    leave: { transform: "scale(0.8)", opacity: 0, pointerEvents: "none" },
     config: { duration: 200 }
   });
 
@@ -30,7 +30,7 @@ function Dialog({
   const maxHeight = `calc(100% - ${topOffset} * 2)`;
 
   return (
-    <Overlay isShown={isShown} onExited={onCloseFinished}>
+    <Overlay isShown={isShown} onRequestClose={onRequestClose}>
       {({ close }) =>
         transitions.map(
           ({ item, key, props: animatedProps }) =>
@@ -48,7 +48,7 @@ function Dialog({
                 display="flex"
                 flexDirection="column"
               >
-                <Flex p={3} flexDirection="column" overflow="auto">
+                <Flex p={3} flexDirection="column">
                   {typeof children === "function"
                     ? children({ close })
                     : children}
@@ -62,9 +62,13 @@ function Dialog({
 }
 Dialog.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  onRequestClose: PropTypes.func.isRequired,
   isShown: PropTypes.bool,
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onCloseFinished: PropTypes.func
+  width: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object
+  ])
 };
 
 export default Dialog;
