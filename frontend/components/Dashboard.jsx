@@ -35,7 +35,7 @@ function Dashboard() {
       <CreateWalletDialog {...props} />
       <Meta title="Dinero" />
       <Header />
-      <Flex bg="white" px={4} py={3} justifyContent="center">
+      <Flex bg="background" px={4} py={3} justifyContent="center">
         <Flex justifyContent="center" width={1} maxWidth={1000}>
           <Heading fontSize={5}>My Wallets</Heading>
         </Flex>
