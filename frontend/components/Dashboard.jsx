@@ -16,7 +16,6 @@ import CreateWalletDialog, {
   useCreateWalletDialog
 } from "@components/CreateWalletDialog";
 import { Paragraph } from "./Typography";
-import Button from "./Button";
 
 const DashedCard = styled(Card)`
   color: ${themeGet("colors.gray")};
