@@ -41,11 +41,18 @@ type User {
   wallets: [Wallet!]
 }
 
+type BalanceAggregation {
+  date: DateTime!
+  value: Int!
+}
+
 type Wallet {
   id: ID!
   name: String!
   description: String
   income: Int!
   expense: Int!
+  balance: Int!
+  balanceAggregations: [BalanceAggregation]
   transactions: [Transaction!]
 }

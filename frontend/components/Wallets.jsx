@@ -10,6 +10,7 @@ export const WalletsPage = {
         id
         name
         description
+        balance
         income
         expense
         transactions {
@@ -26,6 +27,7 @@ export const WalletsPage = {
         id
         name
         description
+        balance
         income
         expense
       }

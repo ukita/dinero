@@ -208,6 +208,8 @@ export type TransactionOrderByInput =
   | "description_DESC"
   | "performedAt_ASC"
   | "performedAt_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
@@ -262,6 +264,7 @@ export interface TransactionUpdateManyMutationInput {
   type?: Maybe<TRANSACTION_TYPE>;
   description?: Maybe<String>;
   tags?: Maybe<TransactionUpdatetagsInput>;
+  performedAt?: Maybe<DateTimeInput>;
 }
 
 export interface UserCreateOneWithoutWalletsInput {
@@ -319,6 +322,14 @@ export interface TransactionWhereInput {
   performedAt_lte?: Maybe<DateTimeInput>;
   performedAt_gt?: Maybe<DateTimeInput>;
   performedAt_gte?: Maybe<DateTimeInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
   updatedAt?: Maybe<DateTimeInput>;
   updatedAt_not?: Maybe<DateTimeInput>;
   updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -366,6 +377,7 @@ export interface TransactionUpdateInput {
   type?: Maybe<TRANSACTION_TYPE>;
   description?: Maybe<String>;
   tags?: Maybe<TransactionUpdatetagsInput>;
+  performedAt?: Maybe<DateTimeInput>;
 }
 
 export interface WalletCreateInput {
@@ -477,6 +489,14 @@ export interface TransactionScalarWhereInput {
   performedAt_lte?: Maybe<DateTimeInput>;
   performedAt_gt?: Maybe<DateTimeInput>;
   performedAt_gte?: Maybe<DateTimeInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
   updatedAt?: Maybe<DateTimeInput>;
   updatedAt_not?: Maybe<DateTimeInput>;
   updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -500,6 +520,7 @@ export interface TransactionUpdateWithoutWalletDataInput {
   type?: Maybe<TRANSACTION_TYPE>;
   description?: Maybe<String>;
   tags?: Maybe<TransactionUpdatetagsInput>;
+  performedAt?: Maybe<DateTimeInput>;
 }
 
 export interface TransactionUpdatetagsInput {
@@ -513,6 +534,7 @@ export interface TransactionCreateInput {
   type: TRANSACTION_TYPE;
   description?: Maybe<String>;
   tags?: Maybe<TransactionCreatetagsInput>;
+  performedAt: DateTimeInput;
 }
 
 export interface WalletWhereInput {
@@ -653,6 +675,7 @@ export interface TransactionUpdateManyDataInput {
   type?: Maybe<TRANSACTION_TYPE>;
   description?: Maybe<String>;
   tags?: Maybe<TransactionUpdatetagsInput>;
+  performedAt?: Maybe<DateTimeInput>;
 }
 
 export interface WalletCreateManyWithoutUserInput {
@@ -804,6 +827,7 @@ export interface TransactionCreateWithoutWalletInput {
   type: TRANSACTION_TYPE;
   description?: Maybe<String>;
   tags?: Maybe<TransactionCreatetagsInput>;
+  performedAt: DateTimeInput;
 }
 
 export interface TransactionCreateManyWithoutWalletInput {
@@ -953,6 +977,7 @@ export interface TransactionPreviousValues {
   description?: String;
   tags: String[];
   performedAt: DateTimeOutput;
+  createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
 
@@ -965,6 +990,7 @@ export interface TransactionPreviousValuesPromise
   description: () => Promise<String>;
   tags: () => Promise<String[]>;
   performedAt: () => Promise<DateTimeOutput>;
+  createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
@@ -977,6 +1003,7 @@ export interface TransactionPreviousValuesSubscription
   description: () => Promise<AsyncIterator<String>>;
   tags: () => Promise<AsyncIterator<String[]>>;
   performedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
@@ -1245,6 +1272,7 @@ export interface Transaction {
   description?: String;
   tags: String[];
   performedAt: DateTimeOutput;
+  createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
 
@@ -1256,6 +1284,7 @@ export interface TransactionPromise extends Promise<Transaction>, Fragmentable {
   description: () => Promise<String>;
   tags: () => Promise<String[]>;
   performedAt: () => Promise<DateTimeOutput>;
+  createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
@@ -1269,6 +1298,7 @@ export interface TransactionSubscription
   description: () => Promise<AsyncIterator<String>>;
   tags: () => Promise<AsyncIterator<String[]>>;
   performedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
@@ -1282,6 +1312,7 @@ export interface TransactionNullablePromise
   description: () => Promise<String>;
   tags: () => Promise<String[]>;
   performedAt: () => Promise<DateTimeOutput>;
+  createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
 

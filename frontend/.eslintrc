@@ -24,5 +24,10 @@
   "parserOptions": {
     "ecmaVersion": 10,
     "sourceType": "module"
+  },
+  "settings": {
+    "react": {
+      "version": "16"
+    }
   }
 }

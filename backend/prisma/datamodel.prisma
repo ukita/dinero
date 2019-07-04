@@ -26,7 +26,8 @@ type Transaction {
   type: TRANSACTION_TYPE!
   description: String
   tags: [String!] @scalarList(strategy: RELATION)
-  performedAt: DateTime! @createdAt
+  performedAt: DateTime!
+  createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
 
