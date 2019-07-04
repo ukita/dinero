@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { css } from "styled-components";
 import PropTypes from "prop-types";
 import { CreditCard } from "react-feather";
 import { gql } from "apollo-boost";
@@ -11,6 +12,7 @@ import { Flex, Box } from "@components/Layout";
 import { Heading } from "@components/Typography";
 import { WALLETS_QUERY, WalletsPage } from "@components/Wallets";
 import { useInput } from "@lib/hooks";
+import { themeGet } from "@styled-system/theme-get";
 
 export const CREATE_WALLET_MUTATION = gql`
   ${WalletsPage.fragments.partial}
@@ -34,11 +36,17 @@ function CreateWalletDialog({ isShown = false, onRequestClose = () => {} }) {
   const updateCache = (proxy, { data: { addWallet } }) => {
     const data = proxy.readQuery({ query: WALLETS_QUERY });
 
-    data.viewer.me.wallets = [...data.viewer.me.wallets, addWallet];
-
     proxy.writeQuery({
       query: WALLETS_QUERY,
-      data
+      data: {
+        viewer: {
+          ...data.viewer,
+          me: {
+            ...data.viewer.me,
+            wallets: [...data.viewer.me.wallets, addWallet]
+          }
+        }
+      }
     });
   };
 
@@ -66,9 +74,10 @@ function CreateWalletDialog({ isShown = false, onRequestClose = () => {} }) {
                     justifyContent="center"
                     bg="primary.5"
                     color="primary.9"
-                    css={{
-                      borderRadius: "100%"
-                    }}
+                    css={css`
+                      border-radius: 100%;
+                      border: 3px solid ${themeGet("colors.background")};
+                    `}
                   >
                     <CreditCard width="50%" height="50%" />
                   </Flex>

@@ -6,12 +6,8 @@ import NextLink from "next/link";
 import { Plus } from "react-feather";
 import { themeGet } from "@styled-system/theme-get";
 
-import {
-  Heading,
-  Paragraph,
-  BlockLink,
-  Truncate
-} from "@components/Typography";
+import { Heading, BlockLink, Truncate } from "@components/Typography";
+import MoneyText from "@components/MoneyText";
 import { Flex } from "@components/Layout";
 import Card from "@components/Card";
 import CreateWalletDialog, {
@@ -68,9 +64,7 @@ function WalletList({ wallets = [] }) {
                   <Truncate as={Heading} fontSize={3} mb={1}>
                     {item.name}
                   </Truncate>
-                  <Truncate as={Paragraph} title={item.description}>
-                    {item.description}
-                  </Truncate>
+                  <MoneyText fontSize={5} amount={item.balance} />
                 </BlockLink>
               </NextLink>
             </Card>

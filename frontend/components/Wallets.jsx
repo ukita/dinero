@@ -30,6 +30,10 @@ export const WalletsPage = {
         balance
         income
         expense
+        balanceAggregations {
+          date
+          value
+        }
       }
     `
   }

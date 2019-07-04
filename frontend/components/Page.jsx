@@ -8,8 +8,6 @@ import baseTheme from "../theme";
 import FocusVisible from "./FocusVisible";
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://rsms.me/inter/inter.css');
-
   :root {
     --primary-color: ${themeGet("colors.primaryColor")};
   }
