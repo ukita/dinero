@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useTransition, useSpring, useChain, animated } from "react-spring";
 import NextLink from "next/link";
+import dynamic from "next/dynamic";
 import { Plus } from "react-feather";
 import { themeGet } from "@styled-system/theme-get";
 
@@ -13,7 +14,8 @@ import Card from "@components/Card";
 import CreateWalletDialog, {
   useCreateWalletDialog
 } from "@components/CreateWalletDialog";
-import WalletSparkline from "./WalletSparkline";
+
+const WalletSparkline = dynamic(() => import("./WalletSparkline"));
 
 const DashedCard = styled(Card)`
   color: ${themeGet("colors.gray")};

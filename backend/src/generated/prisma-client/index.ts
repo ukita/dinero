@@ -231,311 +231,9 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface UserUpdateWithoutWalletsDataInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  token?: Maybe<String>;
-  tokenExpiry?: Maybe<Float>;
-}
-
 export type TransactionWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
-
-export interface WalletCreateOneWithoutTransactionsInput {
-  create?: Maybe<WalletCreateWithoutTransactionsInput>;
-  connect?: Maybe<WalletWhereUniqueInput>;
-}
-
-export interface WalletUpdateWithWhereUniqueWithoutUserInput {
-  where: WalletWhereUniqueInput;
-  data: WalletUpdateWithoutUserDataInput;
-}
-
-export interface WalletCreateWithoutTransactionsInput {
-  id?: Maybe<ID_Input>;
-  user: UserCreateOneWithoutWalletsInput;
-  name: String;
-  description?: Maybe<String>;
-}
-
-export interface TransactionUpdateManyMutationInput {
-  value?: Maybe<Int>;
-  type?: Maybe<TRANSACTION_TYPE>;
-  description?: Maybe<String>;
-  tags?: Maybe<TransactionUpdatetagsInput>;
-  performedAt?: Maybe<DateTimeInput>;
-}
-
-export interface UserCreateOneWithoutWalletsInput {
-  create?: Maybe<UserCreateWithoutWalletsInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface TransactionWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  wallet?: Maybe<WalletWhereInput>;
-  value?: Maybe<Int>;
-  value_not?: Maybe<Int>;
-  value_in?: Maybe<Int[] | Int>;
-  value_not_in?: Maybe<Int[] | Int>;
-  value_lt?: Maybe<Int>;
-  value_lte?: Maybe<Int>;
-  value_gt?: Maybe<Int>;
-  value_gte?: Maybe<Int>;
-  type?: Maybe<TRANSACTION_TYPE>;
-  type_not?: Maybe<TRANSACTION_TYPE>;
-  type_in?: Maybe<TRANSACTION_TYPE[] | TRANSACTION_TYPE>;
-  type_not_in?: Maybe<TRANSACTION_TYPE[] | TRANSACTION_TYPE>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  performedAt?: Maybe<DateTimeInput>;
-  performedAt_not?: Maybe<DateTimeInput>;
-  performedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  performedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  performedAt_lt?: Maybe<DateTimeInput>;
-  performedAt_lte?: Maybe<DateTimeInput>;
-  performedAt_gt?: Maybe<DateTimeInput>;
-  performedAt_gte?: Maybe<DateTimeInput>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<TransactionWhereInput[] | TransactionWhereInput>;
-  OR?: Maybe<TransactionWhereInput[] | TransactionWhereInput>;
-  NOT?: Maybe<TransactionWhereInput[] | TransactionWhereInput>;
-}
-
-export interface UserCreateWithoutWalletsInput {
-  id?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  email: String;
-  token?: Maybe<String>;
-  tokenExpiry?: Maybe<Float>;
-}
-
-export interface UserSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-}
-
-export interface TransactionCreatetagsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface WalletUpdateManyMutationInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-}
-
-export interface TransactionUpdateInput {
-  wallet?: Maybe<WalletUpdateOneRequiredWithoutTransactionsInput>;
-  value?: Maybe<Int>;
-  type?: Maybe<TRANSACTION_TYPE>;
-  description?: Maybe<String>;
-  tags?: Maybe<TransactionUpdatetagsInput>;
-  performedAt?: Maybe<DateTimeInput>;
-}
-
-export interface WalletCreateInput {
-  id?: Maybe<ID_Input>;
-  user: UserCreateOneWithoutWalletsInput;
-  name: String;
-  description?: Maybe<String>;
-  transactions?: Maybe<TransactionCreateManyWithoutWalletInput>;
-}
-
-export interface WalletUpdateOneRequiredWithoutTransactionsInput {
-  create?: Maybe<WalletCreateWithoutTransactionsInput>;
-  update?: Maybe<WalletUpdateWithoutTransactionsDataInput>;
-  upsert?: Maybe<WalletUpsertWithoutTransactionsInput>;
-  connect?: Maybe<WalletWhereUniqueInput>;
-}
-
-export interface WalletUpdateManyDataInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-}
-
-export interface WalletUpdateWithoutTransactionsDataInput {
-  user?: Maybe<UserUpdateOneRequiredWithoutWalletsInput>;
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  email?: Maybe<String>;
-  token?: Maybe<String>;
-}>;
-
-export interface UserUpdateOneRequiredWithoutWalletsInput {
-  create?: Maybe<UserCreateWithoutWalletsInput>;
-  update?: Maybe<UserUpdateWithoutWalletsDataInput>;
-  upsert?: Maybe<UserUpsertWithoutWalletsInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface WalletUpsertWithWhereUniqueWithoutUserInput {
-  where: WalletWhereUniqueInput;
-  update: WalletUpdateWithoutUserDataInput;
-  create: WalletCreateWithoutUserInput;
-}
-
-export interface TransactionUpdateWithWhereUniqueWithoutWalletInput {
-  where: TransactionWhereUniqueInput;
-  data: TransactionUpdateWithoutWalletDataInput;
-}
-
-export interface TransactionUpdateManyWithWhereNestedInput {
-  where: TransactionScalarWhereInput;
-  data: TransactionUpdateManyDataInput;
-}
-
-export interface UserUpsertWithoutWalletsInput {
-  update: UserUpdateWithoutWalletsDataInput;
-  create: UserCreateWithoutWalletsInput;
-}
-
-export interface TransactionScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  value?: Maybe<Int>;
-  value_not?: Maybe<Int>;
-  value_in?: Maybe<Int[] | Int>;
-  value_not_in?: Maybe<Int[] | Int>;
-  value_lt?: Maybe<Int>;
-  value_lte?: Maybe<Int>;
-  value_gt?: Maybe<Int>;
-  value_gte?: Maybe<Int>;
-  type?: Maybe<TRANSACTION_TYPE>;
-  type_not?: Maybe<TRANSACTION_TYPE>;
-  type_in?: Maybe<TRANSACTION_TYPE[] | TRANSACTION_TYPE>;
-  type_not_in?: Maybe<TRANSACTION_TYPE[] | TRANSACTION_TYPE>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  performedAt?: Maybe<DateTimeInput>;
-  performedAt_not?: Maybe<DateTimeInput>;
-  performedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  performedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  performedAt_lt?: Maybe<DateTimeInput>;
-  performedAt_lte?: Maybe<DateTimeInput>;
-  performedAt_gt?: Maybe<DateTimeInput>;
-  performedAt_gte?: Maybe<DateTimeInput>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<TransactionScalarWhereInput[] | TransactionScalarWhereInput>;
-  OR?: Maybe<TransactionScalarWhereInput[] | TransactionScalarWhereInput>;
-  NOT?: Maybe<TransactionScalarWhereInput[] | TransactionScalarWhereInput>;
-}
-
-export interface WalletUpsertWithoutTransactionsInput {
-  update: WalletUpdateWithoutTransactionsDataInput;
-  create: WalletCreateWithoutTransactionsInput;
-}
-
-export interface TransactionUpdateWithoutWalletDataInput {
-  value?: Maybe<Int>;
-  type?: Maybe<TRANSACTION_TYPE>;
-  description?: Maybe<String>;
-  tags?: Maybe<TransactionUpdatetagsInput>;
-  performedAt?: Maybe<DateTimeInput>;
-}
-
-export interface TransactionUpdatetagsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface TransactionCreateInput {
-  id?: Maybe<ID_Input>;
-  wallet: WalletCreateOneWithoutTransactionsInput;
-  value: Int;
-  type: TRANSACTION_TYPE;
-  description?: Maybe<String>;
-  tags?: Maybe<TransactionCreatetagsInput>;
-  performedAt: DateTimeInput;
-}
 
 export interface WalletWhereInput {
   id?: Maybe<ID_Input>;
@@ -603,97 +301,6 @@ export interface WalletWhereInput {
   AND?: Maybe<WalletWhereInput[] | WalletWhereInput>;
   OR?: Maybe<WalletWhereInput[] | WalletWhereInput>;
   NOT?: Maybe<WalletWhereInput[] | WalletWhereInput>;
-}
-
-export interface WalletSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<WalletWhereInput>;
-  AND?: Maybe<WalletSubscriptionWhereInput[] | WalletSubscriptionWhereInput>;
-  OR?: Maybe<WalletSubscriptionWhereInput[] | WalletSubscriptionWhereInput>;
-  NOT?: Maybe<WalletSubscriptionWhereInput[] | WalletSubscriptionWhereInput>;
-}
-
-export interface TransactionUpdateManyWithoutWalletInput {
-  create?: Maybe<
-    TransactionCreateWithoutWalletInput[] | TransactionCreateWithoutWalletInput
-  >;
-  delete?: Maybe<TransactionWhereUniqueInput[] | TransactionWhereUniqueInput>;
-  connect?: Maybe<TransactionWhereUniqueInput[] | TransactionWhereUniqueInput>;
-  set?: Maybe<TransactionWhereUniqueInput[] | TransactionWhereUniqueInput>;
-  disconnect?: Maybe<
-    TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
-  >;
-  update?: Maybe<
-    | TransactionUpdateWithWhereUniqueWithoutWalletInput[]
-    | TransactionUpdateWithWhereUniqueWithoutWalletInput
-  >;
-  upsert?: Maybe<
-    | TransactionUpsertWithWhereUniqueWithoutWalletInput[]
-    | TransactionUpsertWithWhereUniqueWithoutWalletInput
-  >;
-  deleteMany?: Maybe<
-    TransactionScalarWhereInput[] | TransactionScalarWhereInput
-  >;
-  updateMany?: Maybe<
-    | TransactionUpdateManyWithWhereNestedInput[]
-    | TransactionUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface WalletUpdateInput {
-  user?: Maybe<UserUpdateOneRequiredWithoutWalletsInput>;
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  transactions?: Maybe<TransactionUpdateManyWithoutWalletInput>;
-}
-
-export interface WalletUpdateWithoutUserDataInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  transactions?: Maybe<TransactionUpdateManyWithoutWalletInput>;
-}
-
-export interface WalletUpdateManyWithWhereNestedInput {
-  where: WalletScalarWhereInput;
-  data: WalletUpdateManyDataInput;
-}
-
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  email: String;
-  token?: Maybe<String>;
-  tokenExpiry?: Maybe<Float>;
-  wallets?: Maybe<WalletCreateManyWithoutUserInput>;
-}
-
-export interface TransactionUpdateManyDataInput {
-  value?: Maybe<Int>;
-  type?: Maybe<TRANSACTION_TYPE>;
-  description?: Maybe<String>;
-  tags?: Maybe<TransactionUpdatetagsInput>;
-  performedAt?: Maybe<DateTimeInput>;
-}
-
-export interface WalletCreateManyWithoutUserInput {
-  create?: Maybe<WalletCreateWithoutUserInput[] | WalletCreateWithoutUserInput>;
-  connect?: Maybe<WalletWhereUniqueInput[] | WalletWhereUniqueInput>;
-}
-
-export interface TransactionUpsertWithWhereUniqueWithoutWalletInput {
-  where: TransactionWhereUniqueInput;
-  update: TransactionUpdateWithoutWalletDataInput;
-  create: TransactionCreateWithoutWalletInput;
-}
-
-export interface WalletCreateWithoutUserInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  description?: Maybe<String>;
-  transactions?: Maybe<TransactionCreateManyWithoutWalletInput>;
 }
 
 export interface UserWhereInput {
@@ -785,11 +392,227 @@ export interface UserWhereInput {
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
-export interface UserUpdateManyMutationInput {
+export interface TransactionWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  wallet?: Maybe<WalletWhereInput>;
+  value?: Maybe<Int>;
+  value_not?: Maybe<Int>;
+  value_in?: Maybe<Int[] | Int>;
+  value_not_in?: Maybe<Int[] | Int>;
+  value_lt?: Maybe<Int>;
+  value_lte?: Maybe<Int>;
+  value_gt?: Maybe<Int>;
+  value_gte?: Maybe<Int>;
+  type?: Maybe<TRANSACTION_TYPE>;
+  type_not?: Maybe<TRANSACTION_TYPE>;
+  type_in?: Maybe<TRANSACTION_TYPE[] | TRANSACTION_TYPE>;
+  type_not_in?: Maybe<TRANSACTION_TYPE[] | TRANSACTION_TYPE>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  performedAt?: Maybe<DateTimeInput>;
+  performedAt_not?: Maybe<DateTimeInput>;
+  performedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  performedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  performedAt_lt?: Maybe<DateTimeInput>;
+  performedAt_lte?: Maybe<DateTimeInput>;
+  performedAt_gt?: Maybe<DateTimeInput>;
+  performedAt_gte?: Maybe<DateTimeInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<TransactionWhereInput[] | TransactionWhereInput>;
+  OR?: Maybe<TransactionWhereInput[] | TransactionWhereInput>;
+  NOT?: Maybe<TransactionWhereInput[] | TransactionWhereInput>;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+  token?: Maybe<String>;
+}>;
+
+export type WalletWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface TransactionCreateInput {
+  id?: Maybe<ID_Input>;
+  wallet: WalletCreateOneWithoutTransactionsInput;
+  value: Int;
+  type: TRANSACTION_TYPE;
+  description?: Maybe<String>;
+  tags?: Maybe<TransactionCreatetagsInput>;
+  performedAt: DateTimeInput;
+}
+
+export interface WalletCreateOneWithoutTransactionsInput {
+  create?: Maybe<WalletCreateWithoutTransactionsInput>;
+  connect?: Maybe<WalletWhereUniqueInput>;
+}
+
+export interface WalletCreateWithoutTransactionsInput {
+  id?: Maybe<ID_Input>;
+  user: UserCreateOneWithoutWalletsInput;
+  name: String;
+  description?: Maybe<String>;
+}
+
+export interface UserCreateOneWithoutWalletsInput {
+  create?: Maybe<UserCreateWithoutWalletsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserCreateWithoutWalletsInput {
+  id?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  email: String;
+  token?: Maybe<String>;
+  tokenExpiry?: Maybe<Float>;
+}
+
+export interface TransactionCreatetagsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface TransactionUpdateInput {
+  wallet?: Maybe<WalletUpdateOneRequiredWithoutTransactionsInput>;
+  value?: Maybe<Int>;
+  type?: Maybe<TRANSACTION_TYPE>;
+  description?: Maybe<String>;
+  tags?: Maybe<TransactionUpdatetagsInput>;
+  performedAt?: Maybe<DateTimeInput>;
+}
+
+export interface WalletUpdateOneRequiredWithoutTransactionsInput {
+  create?: Maybe<WalletCreateWithoutTransactionsInput>;
+  update?: Maybe<WalletUpdateWithoutTransactionsDataInput>;
+  upsert?: Maybe<WalletUpsertWithoutTransactionsInput>;
+  connect?: Maybe<WalletWhereUniqueInput>;
+}
+
+export interface WalletUpdateWithoutTransactionsDataInput {
+  user?: Maybe<UserUpdateOneRequiredWithoutWalletsInput>;
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+}
+
+export interface UserUpdateOneRequiredWithoutWalletsInput {
+  create?: Maybe<UserCreateWithoutWalletsInput>;
+  update?: Maybe<UserUpdateWithoutWalletsDataInput>;
+  upsert?: Maybe<UserUpsertWithoutWalletsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateWithoutWalletsDataInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   token?: Maybe<String>;
   tokenExpiry?: Maybe<Float>;
+}
+
+export interface UserUpsertWithoutWalletsInput {
+  update: UserUpdateWithoutWalletsDataInput;
+  create: UserCreateWithoutWalletsInput;
+}
+
+export interface WalletUpsertWithoutTransactionsInput {
+  update: WalletUpdateWithoutTransactionsDataInput;
+  create: WalletCreateWithoutTransactionsInput;
+}
+
+export interface TransactionUpdatetagsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface TransactionUpdateManyMutationInput {
+  value?: Maybe<Int>;
+  type?: Maybe<TRANSACTION_TYPE>;
+  description?: Maybe<String>;
+  tags?: Maybe<TransactionUpdatetagsInput>;
+  performedAt?: Maybe<DateTimeInput>;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  email: String;
+  token?: Maybe<String>;
+  tokenExpiry?: Maybe<Float>;
+  wallets?: Maybe<WalletCreateManyWithoutUserInput>;
+}
+
+export interface WalletCreateManyWithoutUserInput {
+  create?: Maybe<WalletCreateWithoutUserInput[] | WalletCreateWithoutUserInput>;
+  connect?: Maybe<WalletWhereUniqueInput[] | WalletWhereUniqueInput>;
+}
+
+export interface WalletCreateWithoutUserInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  description?: Maybe<String>;
+  transactions?: Maybe<TransactionCreateManyWithoutWalletInput>;
+}
+
+export interface TransactionCreateManyWithoutWalletInput {
+  create?: Maybe<
+    TransactionCreateWithoutWalletInput[] | TransactionCreateWithoutWalletInput
+  >;
+  connect?: Maybe<TransactionWhereUniqueInput[] | TransactionWhereUniqueInput>;
+}
+
+export interface TransactionCreateWithoutWalletInput {
+  id?: Maybe<ID_Input>;
+  value: Int;
+  type: TRANSACTION_TYPE;
+  description?: Maybe<String>;
+  tags?: Maybe<TransactionCreatetagsInput>;
+  performedAt: DateTimeInput;
+}
+
+export interface UserUpdateInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  token?: Maybe<String>;
+  tokenExpiry?: Maybe<Float>;
+  wallets?: Maybe<WalletUpdateManyWithoutUserInput>;
 }
 
 export interface WalletUpdateManyWithoutUserInput {
@@ -813,28 +636,150 @@ export interface WalletUpdateManyWithoutUserInput {
   >;
 }
 
-export interface UserUpdateInput {
+export interface WalletUpdateWithWhereUniqueWithoutUserInput {
+  where: WalletWhereUniqueInput;
+  data: WalletUpdateWithoutUserDataInput;
+}
+
+export interface WalletUpdateWithoutUserDataInput {
   name?: Maybe<String>;
-  email?: Maybe<String>;
-  token?: Maybe<String>;
-  tokenExpiry?: Maybe<Float>;
-  wallets?: Maybe<WalletUpdateManyWithoutUserInput>;
-}
-
-export interface TransactionCreateWithoutWalletInput {
-  id?: Maybe<ID_Input>;
-  value: Int;
-  type: TRANSACTION_TYPE;
   description?: Maybe<String>;
-  tags?: Maybe<TransactionCreatetagsInput>;
-  performedAt: DateTimeInput;
+  transactions?: Maybe<TransactionUpdateManyWithoutWalletInput>;
 }
 
-export interface TransactionCreateManyWithoutWalletInput {
+export interface TransactionUpdateManyWithoutWalletInput {
   create?: Maybe<
     TransactionCreateWithoutWalletInput[] | TransactionCreateWithoutWalletInput
   >;
+  delete?: Maybe<TransactionWhereUniqueInput[] | TransactionWhereUniqueInput>;
   connect?: Maybe<TransactionWhereUniqueInput[] | TransactionWhereUniqueInput>;
+  set?: Maybe<TransactionWhereUniqueInput[] | TransactionWhereUniqueInput>;
+  disconnect?: Maybe<
+    TransactionWhereUniqueInput[] | TransactionWhereUniqueInput
+  >;
+  update?: Maybe<
+    | TransactionUpdateWithWhereUniqueWithoutWalletInput[]
+    | TransactionUpdateWithWhereUniqueWithoutWalletInput
+  >;
+  upsert?: Maybe<
+    | TransactionUpsertWithWhereUniqueWithoutWalletInput[]
+    | TransactionUpsertWithWhereUniqueWithoutWalletInput
+  >;
+  deleteMany?: Maybe<
+    TransactionScalarWhereInput[] | TransactionScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | TransactionUpdateManyWithWhereNestedInput[]
+    | TransactionUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface TransactionUpdateWithWhereUniqueWithoutWalletInput {
+  where: TransactionWhereUniqueInput;
+  data: TransactionUpdateWithoutWalletDataInput;
+}
+
+export interface TransactionUpdateWithoutWalletDataInput {
+  value?: Maybe<Int>;
+  type?: Maybe<TRANSACTION_TYPE>;
+  description?: Maybe<String>;
+  tags?: Maybe<TransactionUpdatetagsInput>;
+  performedAt?: Maybe<DateTimeInput>;
+}
+
+export interface TransactionUpsertWithWhereUniqueWithoutWalletInput {
+  where: TransactionWhereUniqueInput;
+  update: TransactionUpdateWithoutWalletDataInput;
+  create: TransactionCreateWithoutWalletInput;
+}
+
+export interface TransactionScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  value?: Maybe<Int>;
+  value_not?: Maybe<Int>;
+  value_in?: Maybe<Int[] | Int>;
+  value_not_in?: Maybe<Int[] | Int>;
+  value_lt?: Maybe<Int>;
+  value_lte?: Maybe<Int>;
+  value_gt?: Maybe<Int>;
+  value_gte?: Maybe<Int>;
+  type?: Maybe<TRANSACTION_TYPE>;
+  type_not?: Maybe<TRANSACTION_TYPE>;
+  type_in?: Maybe<TRANSACTION_TYPE[] | TRANSACTION_TYPE>;
+  type_not_in?: Maybe<TRANSACTION_TYPE[] | TRANSACTION_TYPE>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  performedAt?: Maybe<DateTimeInput>;
+  performedAt_not?: Maybe<DateTimeInput>;
+  performedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  performedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  performedAt_lt?: Maybe<DateTimeInput>;
+  performedAt_lte?: Maybe<DateTimeInput>;
+  performedAt_gt?: Maybe<DateTimeInput>;
+  performedAt_gte?: Maybe<DateTimeInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<TransactionScalarWhereInput[] | TransactionScalarWhereInput>;
+  OR?: Maybe<TransactionScalarWhereInput[] | TransactionScalarWhereInput>;
+  NOT?: Maybe<TransactionScalarWhereInput[] | TransactionScalarWhereInput>;
+}
+
+export interface TransactionUpdateManyWithWhereNestedInput {
+  where: TransactionScalarWhereInput;
+  data: TransactionUpdateManyDataInput;
+}
+
+export interface TransactionUpdateManyDataInput {
+  value?: Maybe<Int>;
+  type?: Maybe<TRANSACTION_TYPE>;
+  description?: Maybe<String>;
+  tags?: Maybe<TransactionUpdatetagsInput>;
+  performedAt?: Maybe<DateTimeInput>;
+}
+
+export interface WalletUpsertWithWhereUniqueWithoutUserInput {
+  where: WalletWhereUniqueInput;
+  update: WalletUpdateWithoutUserDataInput;
+  create: WalletCreateWithoutUserInput;
 }
 
 export interface WalletScalarWhereInput {
@@ -901,6 +846,43 @@ export interface WalletScalarWhereInput {
   NOT?: Maybe<WalletScalarWhereInput[] | WalletScalarWhereInput>;
 }
 
+export interface WalletUpdateManyWithWhereNestedInput {
+  where: WalletScalarWhereInput;
+  data: WalletUpdateManyDataInput;
+}
+
+export interface WalletUpdateManyDataInput {
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+}
+
+export interface UserUpdateManyMutationInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  token?: Maybe<String>;
+  tokenExpiry?: Maybe<Float>;
+}
+
+export interface WalletCreateInput {
+  id?: Maybe<ID_Input>;
+  user: UserCreateOneWithoutWalletsInput;
+  name: String;
+  description?: Maybe<String>;
+  transactions?: Maybe<TransactionCreateManyWithoutWalletInput>;
+}
+
+export interface WalletUpdateInput {
+  user?: Maybe<UserUpdateOneRequiredWithoutWalletsInput>;
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  transactions?: Maybe<TransactionUpdateManyWithoutWalletInput>;
+}
+
+export interface WalletUpdateManyMutationInput {
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+}
+
 export interface TransactionSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -918,59 +900,33 @@ export interface TransactionSubscriptionWhereInput {
   >;
 }
 
-export type WalletWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface UserSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+}
+
+export interface WalletSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<WalletWhereInput>;
+  AND?: Maybe<WalletSubscriptionWhereInput[] | WalletSubscriptionWhereInput>;
+  OR?: Maybe<WalletSubscriptionWhereInput[] | WalletSubscriptionWhereInput>;
+  NOT?: Maybe<WalletSubscriptionWhereInput[] | WalletSubscriptionWhereInput>;
+}
 
 export interface NodeNode {
   id: ID_Output;
 }
 
-export interface WalletPreviousValues {
-  id: ID_Output;
-  name: String;
-  description?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface WalletPreviousValuesPromise
-  extends Promise<WalletPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  description: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface WalletPreviousValuesSubscription
-  extends Promise<AsyncIterator<WalletPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface AggregateTransaction {
-  count: Int;
-}
-
-export interface AggregateTransactionPromise
-  extends Promise<AggregateTransaction>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateTransactionSubscription
-  extends Promise<AsyncIterator<AggregateTransaction>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface TransactionPreviousValues {
+export interface Transaction {
   id: ID_Output;
   value: Int;
   type: TRANSACTION_TYPE;
@@ -981,10 +937,9 @@ export interface TransactionPreviousValues {
   updatedAt: DateTimeOutput;
 }
 
-export interface TransactionPreviousValuesPromise
-  extends Promise<TransactionPreviousValues>,
-    Fragmentable {
+export interface TransactionPromise extends Promise<Transaction>, Fragmentable {
   id: () => Promise<ID_Output>;
+  wallet: <T = WalletPromise>() => T;
   value: () => Promise<Int>;
   type: () => Promise<TRANSACTION_TYPE>;
   description: () => Promise<String>;
@@ -994,10 +949,11 @@ export interface TransactionPreviousValuesPromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface TransactionPreviousValuesSubscription
-  extends Promise<AsyncIterator<TransactionPreviousValues>>,
+export interface TransactionSubscription
+  extends Promise<AsyncIterator<Transaction>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  wallet: <T = WalletSubscription>() => T;
   value: () => Promise<AsyncIterator<Int>>;
   type: () => Promise<AsyncIterator<TRANSACTION_TYPE>>;
   description: () => Promise<AsyncIterator<String>>;
@@ -1007,171 +963,18 @@ export interface TransactionPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface TransactionEdge {
-  node: Transaction;
-  cursor: String;
-}
-
-export interface TransactionEdgePromise
-  extends Promise<TransactionEdge>,
-    Fragmentable {
-  node: <T = TransactionPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface TransactionEdgeSubscription
-  extends Promise<AsyncIterator<TransactionEdge>>,
-    Fragmentable {
-  node: <T = TransactionSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface UserPreviousValues {
-  id: ID_Output;
-  name?: String;
-  email: String;
-  token?: String;
-  tokenExpiry?: Float;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface UserPreviousValuesPromise
-  extends Promise<UserPreviousValues>,
+export interface TransactionNullablePromise
+  extends Promise<Transaction | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  token: () => Promise<String>;
-  tokenExpiry: () => Promise<Float>;
+  wallet: <T = WalletPromise>() => T;
+  value: () => Promise<Int>;
+  type: () => Promise<TRANSACTION_TYPE>;
+  description: () => Promise<String>;
+  tags: () => Promise<String[]>;
+  performedAt: () => Promise<DateTimeOutput>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface UserPreviousValuesSubscription
-  extends Promise<AsyncIterator<UserPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  token: () => Promise<AsyncIterator<String>>;
-  tokenExpiry: () => Promise<AsyncIterator<Float>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface AggregateWallet {
-  count: Int;
-}
-
-export interface AggregateWalletPromise
-  extends Promise<AggregateWallet>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateWalletSubscription
-  extends Promise<AsyncIterator<AggregateWallet>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface WalletConnection {
-  pageInfo: PageInfo;
-  edges: WalletEdge[];
-}
-
-export interface WalletConnectionPromise
-  extends Promise<WalletConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<WalletEdge>>() => T;
-  aggregate: <T = AggregateWalletPromise>() => T;
-}
-
-export interface WalletConnectionSubscription
-  extends Promise<AsyncIterator<WalletConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<WalletEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateWalletSubscription>() => T;
-}
-
-export interface TransactionConnection {
-  pageInfo: PageInfo;
-  edges: TransactionEdge[];
-}
-
-export interface TransactionConnectionPromise
-  extends Promise<TransactionConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<TransactionEdge>>() => T;
-  aggregate: <T = AggregateTransactionPromise>() => T;
-}
-
-export interface TransactionConnectionSubscription
-  extends Promise<AsyncIterator<TransactionConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<TransactionEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateTransactionSubscription>() => T;
-}
-
-export interface UserEdge {
-  node: User;
-  cursor: String;
-}
-
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
-    Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface Wallet {
@@ -1238,107 +1041,6 @@ export interface WalletNullablePromise
   }) => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface TransactionSubscriptionPayload {
-  mutation: MutationType;
-  node: Transaction;
-  updatedFields: String[];
-  previousValues: TransactionPreviousValues;
-}
-
-export interface TransactionSubscriptionPayloadPromise
-  extends Promise<TransactionSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = TransactionPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = TransactionPreviousValuesPromise>() => T;
-}
-
-export interface TransactionSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<TransactionSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = TransactionSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = TransactionPreviousValuesSubscription>() => T;
-}
-
-export interface Transaction {
-  id: ID_Output;
-  value: Int;
-  type: TRANSACTION_TYPE;
-  description?: String;
-  tags: String[];
-  performedAt: DateTimeOutput;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface TransactionPromise extends Promise<Transaction>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  wallet: <T = WalletPromise>() => T;
-  value: () => Promise<Int>;
-  type: () => Promise<TRANSACTION_TYPE>;
-  description: () => Promise<String>;
-  tags: () => Promise<String[]>;
-  performedAt: () => Promise<DateTimeOutput>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface TransactionSubscription
-  extends Promise<AsyncIterator<Transaction>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  wallet: <T = WalletSubscription>() => T;
-  value: () => Promise<AsyncIterator<Int>>;
-  type: () => Promise<AsyncIterator<TRANSACTION_TYPE>>;
-  description: () => Promise<AsyncIterator<String>>;
-  tags: () => Promise<AsyncIterator<String[]>>;
-  performedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface TransactionNullablePromise
-  extends Promise<Transaction | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  wallet: <T = WalletPromise>() => T;
-  value: () => Promise<Int>;
-  type: () => Promise<TRANSACTION_TYPE>;
-  description: () => Promise<String>;
-  tags: () => Promise<String[]>;
-  performedAt: () => Promise<DateTimeOutput>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface UserSubscriptionPayload {
-  mutation: MutationType;
-  node: User;
-  updatedFields: String[];
-  previousValues: UserPreviousValues;
-}
-
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = UserPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
-}
-
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
 export interface User {
@@ -1412,6 +1114,330 @@ export interface UserNullablePromise
   }) => T;
 }
 
+export interface TransactionConnection {
+  pageInfo: PageInfo;
+  edges: TransactionEdge[];
+}
+
+export interface TransactionConnectionPromise
+  extends Promise<TransactionConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<TransactionEdge>>() => T;
+  aggregate: <T = AggregateTransactionPromise>() => T;
+}
+
+export interface TransactionConnectionSubscription
+  extends Promise<AsyncIterator<TransactionConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TransactionEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTransactionSubscription>() => T;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface TransactionEdge {
+  node: Transaction;
+  cursor: String;
+}
+
+export interface TransactionEdgePromise
+  extends Promise<TransactionEdge>,
+    Fragmentable {
+  node: <T = TransactionPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface TransactionEdgeSubscription
+  extends Promise<AsyncIterator<TransactionEdge>>,
+    Fragmentable {
+  node: <T = TransactionSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateTransaction {
+  count: Int;
+}
+
+export interface AggregateTransactionPromise
+  extends Promise<AggregateTransaction>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateTransactionSubscription
+  extends Promise<AsyncIterator<AggregateTransaction>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface WalletConnection {
+  pageInfo: PageInfo;
+  edges: WalletEdge[];
+}
+
+export interface WalletConnectionPromise
+  extends Promise<WalletConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<WalletEdge>>() => T;
+  aggregate: <T = AggregateWalletPromise>() => T;
+}
+
+export interface WalletConnectionSubscription
+  extends Promise<AsyncIterator<WalletConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<WalletEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateWalletSubscription>() => T;
+}
+
+export interface WalletEdge {
+  node: Wallet;
+  cursor: String;
+}
+
+export interface WalletEdgePromise extends Promise<WalletEdge>, Fragmentable {
+  node: <T = WalletPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface WalletEdgeSubscription
+  extends Promise<AsyncIterator<WalletEdge>>,
+    Fragmentable {
+  node: <T = WalletSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateWallet {
+  count: Int;
+}
+
+export interface AggregateWalletPromise
+  extends Promise<AggregateWallet>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateWalletSubscription
+  extends Promise<AsyncIterator<AggregateWallet>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface TransactionSubscriptionPayload {
+  mutation: MutationType;
+  node: Transaction;
+  updatedFields: String[];
+  previousValues: TransactionPreviousValues;
+}
+
+export interface TransactionSubscriptionPayloadPromise
+  extends Promise<TransactionSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = TransactionPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = TransactionPreviousValuesPromise>() => T;
+}
+
+export interface TransactionSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<TransactionSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = TransactionSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = TransactionPreviousValuesSubscription>() => T;
+}
+
+export interface TransactionPreviousValues {
+  id: ID_Output;
+  value: Int;
+  type: TRANSACTION_TYPE;
+  description?: String;
+  tags: String[];
+  performedAt: DateTimeOutput;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface TransactionPreviousValuesPromise
+  extends Promise<TransactionPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  value: () => Promise<Int>;
+  type: () => Promise<TRANSACTION_TYPE>;
+  description: () => Promise<String>;
+  tags: () => Promise<String[]>;
+  performedAt: () => Promise<DateTimeOutput>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface TransactionPreviousValuesSubscription
+  extends Promise<AsyncIterator<TransactionPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  value: () => Promise<AsyncIterator<Int>>;
+  type: () => Promise<AsyncIterator<TRANSACTION_TYPE>>;
+  description: () => Promise<AsyncIterator<String>>;
+  tags: () => Promise<AsyncIterator<String[]>>;
+  performedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  node: User;
+  updatedFields: String[];
+  previousValues: UserPreviousValues;
+}
+
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
+}
+
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
+}
+
+export interface UserPreviousValues {
+  id: ID_Output;
+  name?: String;
+  email: String;
+  token?: String;
+  tokenExpiry?: Float;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface UserPreviousValuesPromise
+  extends Promise<UserPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  token: () => Promise<String>;
+  tokenExpiry: () => Promise<Float>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface UserPreviousValuesSubscription
+  extends Promise<AsyncIterator<UserPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  token: () => Promise<AsyncIterator<String>>;
+  tokenExpiry: () => Promise<AsyncIterator<Float>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
 export interface WalletSubscriptionPayload {
   mutation: MutationType;
   node: Wallet;
@@ -1437,59 +1463,49 @@ export interface WalletSubscriptionPayloadSubscription
   previousValues: <T = WalletPreviousValuesSubscription>() => T;
 }
 
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
+export interface WalletPreviousValues {
+  id: ID_Output;
+  name: String;
+  description?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface WalletPreviousValuesPromise
+  extends Promise<WalletPreviousValues>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  description: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface WalletPreviousValuesSubscription
+  extends Promise<AsyncIterator<WalletPreviousValues>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface AggregateUser {
-  count: Int;
-}
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
 
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface WalletEdge {
-  node: Wallet;
-  cursor: String;
-}
-
-export interface WalletEdgePromise extends Promise<WalletEdge>, Fragmentable {
-  node: <T = WalletPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface WalletEdgeSubscription
-  extends Promise<AsyncIterator<WalletEdge>>,
-    Fragmentable {
-  node: <T = WalletSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+*/
+export type Float = number;
 
 /*
 DateTime scalar input type, allowing Date
@@ -1501,16 +1517,8 @@ DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
 
-export type Long = string;
-
 /*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
 
@@ -1519,15 +1527,7 @@ The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
 
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
-
-/*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). 
-*/
-export type Float = number;
+export type Long = string;
 
 /**
  * Model Metadata
