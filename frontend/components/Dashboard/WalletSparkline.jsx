@@ -1,12 +1,13 @@
 import React from "react";
 import { useSpring, animated } from "react-spring";
-
+import PropTypes from "prop-types";
 import {
   Sparkline,
   LineSeries,
   VerticalReferenceLine,
   PointSeries,
   WithTooltip,
+  withTooltipPropTypes,
   withParentSize
 } from "@data-ui/sparkline";
 import MoneyText from "@components/MoneyText";
@@ -16,6 +17,11 @@ const AnimatedBox = animated(Box);
 
 function WalletSparkline({ data = [], ...props }) {
   const spring = useSpring({ opacity: 1, from: { opacity: 0 } });
+
+  let values = data;
+  if (values.length) {
+    values = [{ value: 0 }, ...data];
+  }
 
   return (
     <AnimatedBox style={spring}>
@@ -27,7 +33,7 @@ function WalletSparkline({ data = [], ...props }) {
             ariaLabel="Wallet Balance Chart"
             height={100}
             width={props.parentWidth}
-            data={[{ value: 0 }, ...data]}
+            data={values}
             valueAccessor={d => d.value}
             onMouseLeave={onMouseLeave}
             onMouseMove={onMouseMove}
@@ -63,5 +69,14 @@ function WalletSparkline({ data = [], ...props }) {
     </AnimatedBox>
   );
 }
+WalletSparkline.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      date: PropTypes.string,
+      value: PropTypes.number
+    })
+  ),
+  ...withTooltipPropTypes
+};
 
 export default withParentSize(WalletSparkline);
