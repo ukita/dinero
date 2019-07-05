@@ -14,6 +14,7 @@
     "analyze": "ANALYZE=true yarn build"
   },
   "dependencies": {
+    "@data-ui/sparkline": "^0.0.79",
     "@next/bundle-analyzer": "^8.1.0",
     "@styled-system/prop-types": "^5.0.8",
     "@styled-system/theme-get": "^5.0.6",
@@ -44,7 +45,7 @@
     "docz": "^1.2.0",
     "docz-theme-default": "^1.2.0",
     "dotenv-webpack": "^1.7.0",
-    "eslint": "^6.0.1",
+    "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-node": "^9.1.0",

@@ -12,7 +12,10 @@ const Formatter = new Intl.NumberFormat(undefined, {
 });
 
 function MoneyText({ amount = 0, ...props }) {
-  const spring = useSpring({ amount: amount / 100, from: { amount: 0 } });
+  const spring = useSpring({
+    amount: amount / 100,
+    from: { amount: 0 }
+  });
 
   return (
     <AnimatedText {...props}>

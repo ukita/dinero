@@ -8,11 +8,12 @@ import { themeGet } from "@styled-system/theme-get";
 
 import { Heading, BlockLink, Truncate } from "@components/Typography";
 import MoneyText from "@components/MoneyText";
-import { Flex } from "@components/Layout";
+import { Flex, Positioner } from "@components/Layout";
 import Card from "@components/Card";
 import CreateWalletDialog, {
   useCreateWalletDialog
 } from "@components/CreateWalletDialog";
+import WalletSparkline from "./WalletSparkline";
 
 const DashedCard = styled(Card)`
   color: ${themeGet("colors.gray")};
@@ -65,6 +66,9 @@ function WalletList({ wallets = [] }) {
                     {item.name}
                   </Truncate>
                   <MoneyText fontSize={5} amount={item.balance} />
+                  <Positioner position="absolute" bottom={0} left={0} right={0}>
+                    <WalletSparkline data={item.balanceAggregations} />
+                  </Positioner>
                 </BlockLink>
               </NextLink>
             </Card>
