@@ -15,16 +15,17 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^6.3.1",
-    "bcryptjs": "2.4.3",
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.4",
+    "dayjs": "^1.8.14",
     "graphql-shield": "^5.3.4",
-    "graphql-yoga": "1.17.4",
-    "jsonwebtoken": "8.5.1",
+    "graphql-yoga": "^1.17.4",
+    "jsonwebtoken": "^8.5.1",
     "prisma-client-lib": "^1.32.0"
   },
   "devDependencies": {
-    "@types/bcryptjs": "2.4.2",
-    "@types/node": "10.14.6",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/node": "^10.14.6",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
     "dotenv-cli": "1.4.0",
@@ -32,12 +33,12 @@
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.0",
     "ncc": "^0.3.6",
-    "nodemon": "1.19.0",
+    "nodemon": "^1.19.0",
     "prettier": "^1.17.1",
-    "prisma": "1.32.0",
-    "rimraf": "2.6.3",
+    "prisma": "1.34.0",
+    "rimraf": "^2.6.3",
     "ts-graphql-plugin": "^1.1.2",
-    "ts-node": "7.0.1",
-    "typescript": "3.2.2"
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
   }
 }

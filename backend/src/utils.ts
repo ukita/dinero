@@ -21,9 +21,13 @@ export function getUserId(ctx: Context): string | null {
 }
 
 export function getApplicationHost(ctx: Context): string {
-  const proto = ctx.request.headers["x-forwarded-proto"] || "http";
-  const host =
-    ctx.request.headers["host"] || ctx.request.headers["x-now-deployment-url"];
+  const proto = (ctx.request.headers["x-forwarded-proto"] || "http") as string;
+  const host = (ctx.request.headers["origin"] ||
+    ctx.request.headers["x-now-deployment-url"]) as string;
+
+  if (host.startsWith(proto)) {
+    return host;
+  }
 
   return `${proto}://${host}`;
 }

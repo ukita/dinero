@@ -7,6 +7,7 @@ type Query {
 type Mutation {
   signup(name: String!, email: String!): SuccessMessage
   signin(email: String!): SuccessMessage
+  signout: SuccessMessage
   confirmToken(token: ID!): User!
   addWallet(name: String!, description: String): Wallet!
   addTransaction(
@@ -21,7 +22,7 @@ type Mutation {
 
 type Viewer {
   me: User!
-  wallets(id: String): [Wallet!]!
+  wallet(id: String): Wallet
 }
 
 type SuccessMessage {
@@ -37,7 +38,12 @@ type User {
   id: ID!
   name: String
   email: String!
-  wallets: [Wallet!]!
+  wallets: [Wallet!]
+}
+
+type BalanceAggregation {
+  date: DateTime!
+  value: Int!
 }
 
 type Wallet {
@@ -46,5 +52,7 @@ type Wallet {
   description: String
   income: Int!
   expense: Int!
-  transactions: [Transaction!]!
+  balance: Int!
+  balanceAggregations: [BalanceAggregation]
+  transactions: [Transaction!]
 }

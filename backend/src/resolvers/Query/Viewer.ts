@@ -1,8 +1,8 @@
 import { getUserId, Context } from "../../utils";
 import {
   UserNullablePromise,
-  Wallet,
-  FragmentableArray
+  WalletWhereInput,
+  Wallet
 } from "../../generated/prisma-client";
 
 export interface ViewerWalletsArguments {
@@ -16,15 +16,20 @@ export const Viewer = {
     return ctx.prisma.user({ id: userId });
   },
 
-  wallets: (
+  wallet: async (
     _parent,
     { id }: ViewerWalletsArguments,
     ctx: Context
-  ): FragmentableArray<Wallet> => {
+  ): Promise<Wallet> => {
     const userId = getUserId(ctx);
 
-    return ctx.prisma.wallets({
-      where: { user: { id: userId }, id: id }
-    });
+    let query: WalletWhereInput = { user: { id: userId } };
+    if (id) {
+      query = { ...query, id };
+    }
+
+    const [wallet] = await ctx.prisma.wallets({ where: query, first: 1 });
+
+    return wallet;
   }
 };

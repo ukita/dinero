@@ -58,7 +58,8 @@ export const Container = ({ maxWidth = 1280, ...props }) => (
     minWidth={0}
     maxWidth={maxWidth}
     mx="auto"
-    p={4}
+    px={{ _: 2, sm: 4 }}
+    py={4}
   />
 );
 Container.propTypes = {
@@ -70,20 +71,11 @@ Footer.propTypes = {
   ...Flex.propTypes
 };
 
-export const Relative = styled(Box)`
+export const Positioner = styled(Box)`
   position: relative;
   ${position}
 `;
-Relative.propTypes = {
-  ...Box.propTypes,
-  ...propTypes.position
-};
-
-export const Absolute = styled(Box)`
-  position: absolute;
-  ${position}
-`;
-Absolute.propTypes = {
+Positioner.propTypes = {
   ...Box.propTypes,
   ...propTypes.position
 };

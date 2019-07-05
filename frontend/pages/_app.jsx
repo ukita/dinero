@@ -1,6 +1,7 @@
 import React from "react";
 import App, { Container } from "next/app";
 import Router from "next/router";
+import nextCookie from "next-cookies";
 import NProgress from "nprogress";
 import { ApolloProvider } from "react-apollo";
 import Page from "@components/Page";
@@ -28,18 +29,21 @@ class MyApp extends App {
         pageProps.error = error;
       }
     }
+
+    const { theme } = nextCookie(ctx);
+
     // this exposes the query to the user
     pageProps.query = ctx.query;
-    return { pageProps };
+    return { pageProps, theme };
   }
 
   render() {
-    const { Component, pageProps, apollo } = this.props;
+    const { Component, pageProps, apollo, theme } = this.props;
 
     return (
       <Container>
         <ApolloProvider client={apollo}>
-          <Page>
+          <Page theme={theme}>
             <Component {...pageProps} />
           </Page>
         </ApolloProvider>

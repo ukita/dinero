@@ -112,8 +112,10 @@ const buttonStyle = ({ variant, color }) => {
 };
 
 const Button = styled("button")`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  vertical-align: middle;
   text-align: center;
   text-decoration: none;
   font-family: inherit;
@@ -131,6 +133,14 @@ const Button = styled("button")`
 
   :hover {
     text-decoration: none;
+  }
+
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.45em;
   }
 
   ${scale}

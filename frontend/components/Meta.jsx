@@ -19,6 +19,11 @@ const Meta = props => (
     <link rel="apple-touch-icon" href="/static/touch-icon.png" />
     <link rel="icon" href="/static/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://rsms.me/inter/inter.css"
+    />
     <meta property="og:url" content={props.url || defaultOGURL} />
     <meta property="og:title" content={props.title || ""} />
     <meta

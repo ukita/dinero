@@ -6,7 +6,7 @@ import { getApplicationHost } from "./utils";
 const getGraphqlURL = (headers = {}) => {
   const GRAPHQL_URL = process.env.GRAPHQL_URL;
 
-  if (process.browser) {
+  if (process.browser || !GRAPHQL_URL.startsWith("/")) {
     return GRAPHQL_URL;
   }
 

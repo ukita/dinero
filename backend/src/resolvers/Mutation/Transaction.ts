@@ -1,3 +1,5 @@
+import * as dayjs from "dayjs";
+
 import { Context, getUserId } from "../../utils";
 import {
   TRANSACTION_TYPE,
@@ -10,6 +12,7 @@ export interface AddTransactionArguments {
   value: number;
   description: string;
   tags: string[];
+  performedAt: string;
 }
 
 export const Transaction = {
@@ -25,12 +28,15 @@ export const Transaction = {
       where: { id: walletId, user: { id: userId } }
     });
 
+    const performedAt = dayjs(args.performedAt).toISOString();
+
     return ctx.prisma.createTransaction({
       type: args.type,
       value: args.value * 100,
       description: args.description,
       tags: { set: args.tags },
-      wallet: { connect: { id: wallet.id } }
+      wallet: { connect: { id: wallet.id } },
+      performedAt
     });
   }
 };
