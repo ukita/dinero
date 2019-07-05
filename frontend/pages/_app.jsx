@@ -6,6 +6,7 @@ import NProgress from "nprogress";
 import { ApolloProvider } from "react-apollo";
 import Page from "@components/Page";
 import withApollo from "@lib/withApollo";
+import ColorModeProvider from "@components/ColorModeProvider";
 
 Router.onRouteChangeStart = () => {
   NProgress.start();
@@ -43,9 +44,11 @@ class MyApp extends App {
     return (
       <Container>
         <ApolloProvider client={apollo}>
-          <Page theme={theme}>
-            <Component {...pageProps} />
-          </Page>
+          <ColorModeProvider theme={theme}>
+            <Page>
+              <Component {...pageProps} />
+            </Page>
+          </ColorModeProvider>
         </ApolloProvider>
       </Container>
     );

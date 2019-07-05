@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { themeGet } from "@styled-system/theme-get";
 
 import { getProp } from "@lib/utils";
 import baseTheme from "../theme";
-import FocusVisible from "./FocusVisible";
+import FocusVisible from "@components/FocusVisible";
+import { ColorModeContext } from "@components/ColorModeProvider";
 
 const GlobalStyle = createGlobalStyle`
   :root {
@@ -29,6 +30,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: ${themeGet("lineHeights.body")};
     color: ${themeGet("colors.text")};
     background: ${themeGet("colors.body")};
+    transition: background 0.2s ease-in;
   }
 
   input, textarea, select, button {
@@ -109,9 +111,11 @@ const getTheme = mode => ({
   colors: { ...baseTheme.colors, ...getProp(baseTheme.colors.modes, mode, {}) }
 });
 
-function Page({ children = "", theme = "" }) {
+function Page({ children = "" }) {
+  const { color } = useContext(ColorModeContext);
+
   return (
-    <ThemeProvider theme={getTheme(theme)}>
+    <ThemeProvider theme={getTheme(color)}>
       <>
         <FocusVisible />
         <GlobalStyle />
