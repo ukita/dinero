@@ -18,7 +18,7 @@
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.4",
     "dayjs": "^1.8.14",
-    "graphql-shield": "^5.3.4",
+    "graphql-shield": "^6.0.6",
     "graphql-yoga": "^1.17.4",
     "jsonwebtoken": "^8.5.1",
     "prisma-client-lib": "^1.32.0"
