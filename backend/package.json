@@ -20,7 +20,7 @@
     "dayjs": "^1.8.14",
     "graphql-shield": "^5.3.4",
     "graphql-yoga": "^1.17.4",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "prisma-client-lib": "^1.32.0"
   },
   "devDependencies": {
